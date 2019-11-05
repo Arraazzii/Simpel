@@ -6,6 +6,14 @@ class Dashboard extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model("M_Dashboard");
+
+		if ($this->session->userdata('username') != true) {
+            $this->session->set_flashdata('notif_login', '<script>toastr.warning("Anda Tidak Memiliki Akses !", "Warning !", {"timeOut": "2000","extendedTImeout": "0"});</script>');
+            redirect('');
+        } else if ($this->session->userdata('level') != "Admin") {
+        	$this->session->set_flashdata('notif_login', '<script>toastr.warning("Anda Tidak Memiliki Akses !", "Warning !", {"timeOut": "2000","extendedTImeout": "0"});</script>');
+            redirect('DashboardLPK');
+        }
 	}
 
 	private function load($title = '', $datapath = '')

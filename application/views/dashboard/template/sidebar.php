@@ -261,7 +261,7 @@
 												<h4 class="text-white mb-0">Alice Williams</h4>
 												<small class="text-white">Henry@example.com</small>
 											</div>
-											<a href="#" class="text-white font-20 tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Logout"> <i
+											<a href="#" class="text-white font-20 tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Logout" id="logout"> <i
 												class="zmdi zmdi-power"></i></a>
 											</div>
 										</div>
@@ -336,4 +336,26 @@
 						</div>
 						<!-- end sidebar-nav -->
 					</aside>
-                <!-- end app-navbar -->
+					<!-- end app-navbar -->
+
+					<script type="text/javascript">
+						$(document).ready(function() {
+							$('#logout').on('click', function () {
+								var id =  $(this).data('id');
+								swal({
+									title: "Logout!",
+									text: "Apakah anda yakin ingin logout?",
+									icon: "warning",
+									buttons: true,
+									dangerMode: true,
+								}).then((result) => {
+									if (result) {
+										window.location = "<?= base_url(); ?>logout";
+                // $.ajax({
+                //     url: "",  
+                // });
+            }
+        })
+							});
+						});
+					</script>

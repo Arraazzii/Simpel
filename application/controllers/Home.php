@@ -96,26 +96,6 @@ class Home extends CI_Controller {
 		$this->load->view('home/template/default_template', $data);
 	}
 
-	public function pendaftaran()
-	{
-		$path = "";
-		$data = array(
-			"page" => $this->load("Pelatihan Kota Depok - Pendaftaran", $path),
-			"content" => $this->load->view('daftar', false, true),
-		);
-		$this->load->view('daftar', $data);
-	}
-
-	public function login()
-	{
-		$path = "";
-		$data = array(
-			"page" => $this->load("Pelatihan Kota Depok - Login", $path),
-			"content" => $this->load->view('login', false, true),
-		);
-		$this->load->view('login', $data);
-	}
-
 	public function notfound()
 	{
 		$path = "";
