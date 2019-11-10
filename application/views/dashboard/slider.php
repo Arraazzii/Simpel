@@ -1,4 +1,5 @@
 <div class="row">
+    <?= $this->session->flashdata('notif');?>
     <div class="col-lg-12">
         <div class="card card-statistics">
             <div class="card-header d-flex align-items-center justify-content-between">
@@ -23,124 +24,102 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>2019/01/02</td>
-                                <td>example@gmail.com</td>
-                                <td>LPK</td>
-                                <td><img src="<?php echo base_url(); ?>assets/dashboard/img/bg/coming-soon-bg.svg" class="col-lg-6 img-fluid"></td>
-                                <td><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit">Edit</button> <button class="btn btn-danger btn-sm" type="button" onclick="hapus()">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2019/01/02</td>
-                                <td>example@gmail.com</td>
-                                <td>LPK</td>
-                                <td><img src="<?php echo base_url(); ?>assets/dashboard/img/bg/coming-soon-bg.svg" class="col-lg-6 img-fluid"></td>
-                                <td><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit">Edit</button> <button class="btn btn-danger btn-sm" type="button" onclick="hapus()">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2019/01/02</td>
-                                <td>example@gmail.com</td>
-                                <td>LPK</td>
-                                <td><img src="<?php echo base_url(); ?>assets/dashboard/img/bg/coming-soon-bg.svg" class="col-lg-6 img-fluid"></td>
-                                <td><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit">Edit</button> <button class="btn btn-danger btn-sm" type="button" onclick="hapus()">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2019/01/02</td>
-                                <td>example@gmail.com</td>
-                                <td>LPK</td>
-                                <td><img src="<?php echo base_url(); ?>assets/dashboard/img/bg/coming-soon-bg.svg" class="col-lg-6 img-fluid"></td>
-                                <td><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit">Edit</button> <button class="btn btn-danger btn-sm" type="button" onclick="hapus()">Delete</button></td>
-                            </tr>
+                            <?php
+                            $no = 1; 
+                            foreach ($slider as $row) { ?>
+                                <tr>
+                                    <td><?= $no++; ?></td>
+                                    <td><?= tanggal_indo($row->tanggal, true); ?></td>
+                                    <td><?= $row->judul; ?></td>
+                                    <td><?= $row->detail; ?></td>
+                                    <td><img src="<?= base_url(); ?>assets/upload/slider/<?= $row->photo; ?>" class="col-lg-6 img-fluid"></td>
+                                    <td>
+                                        <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit<?= $row->id; ?>">Edit</button>
+                                        <button class="btn btn-danger btn-sm" type="button" onclick="hapus('<?= $row->id; ?>')">Delete</button>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
-                    <!-- The Modal -->
-                    <div class="modal" id="myModalEdit">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-
-                          <!-- Modal Header -->
-                          <div class="modal-header">
-                            <h4 class="modal-title">Modal Edit</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Tanggal</label>
-                                <input type="date" name="" class="form-control" placeholder="Username">
-                            </div>
-                            <div class="form-group">
-                                <label>Judul</label>
-                                <input type="text" name="" class="form-control" placeholder="Judul">
-                            </div>
-                            <div class="form-group">
-                                <label>Detail</label>
-                                <textarea class="form-control"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Judul</label>
-                                <input type="file" name="" class="form-control" placeholder="Judul">
-                            </div>
-                        </div>
-
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success">Simpan</button>
-                        </div>
-
-                    </div>
                 </div>
-            </div>
-
-            <!-- The Modal -->
-            <div class="modal" id="myModalTambah">
-              <div class="modal-dialog">
-                <div class="modal-content">
-
-                  <!-- Modal Header -->
-                  <div class="modal-header">
-                    <h4 class="modal-title">Modal Tambah Slider</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Tanggal</label>
-                        <input type="date" name="" class="form-control" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <label>Judul</label>
-                        <input type="text" name="" class="form-control" placeholder="Judul">
-                    </div>
-                    <div class="form-group">
-                        <label>Detail</label>
-                        <textarea class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Judul</label>
-                        <input type="file" name="" class="form-control" placeholder="Judul">
-                    </div>
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Simpan</button>
-                </div>
-
             </div>
         </div>
     </div>
+</div>
 
+<?php
+$no = 1; 
+foreach ($slider as $row) { ?>
+    <!-- The Modal -->
+
+    <div class="modal" id="myModalEdit<?= $row->id; ?>">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Edit Slider</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form action="<?= base_url('Dashboard/editSlider');?>" method="POST" enctype="multipart/form-data">
+                <!-- Modal body -->
+                <div class="modal-body">
+                     <center><img src="<?= base_url(); ?>assets/upload/slider/<?= $row->photo; ?>" class="col-lg-6 img-fluid" style="padding:20px"></center>
+                    <div class="form-group">
+                        <label>Judul</label>
+                        <input type="hidden" name="id" value="<?= $row->id; ?>">
+                        <input type="text" name="judul" class="form-control" value="<?= $row->judul; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi</label>
+                        <textarea class="form-control" name="deskripsi"><?= $row->detail; ?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Foto</label>
+                        <input type="file" name="foto" class="form-control" required="">
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-</div>
-</div>
-</div>
+<?php } ?>
+
+<!-- The Modal -->
+<div class="modal" id="myModalTambah">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Tambah Slider</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form action="<?= base_url('Dashboard/tambahSlider');?>" method="POST" enctype="multipart/form-data">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Judul</label>
+                        <input type="text" name="judul" class="form-control" placeholder="Judul" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi</label>
+                        <textarea class="form-control" name="deskripsi"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Foto</label>
+                        <input type="file" name="foto" class="form-control" required="">
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

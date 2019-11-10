@@ -19,3 +19,43 @@
     <script src="<?php echo base_url(); ?>assets/dashboard/js/app.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
+
+<?php 
+function tanggal_indo($tanggal, $cetak_hari = false)
+{
+    $hari = array ( 
+        1 => 'Senin',
+        2 => 'Selasa',
+        3 => 'Rabu',
+        4 => 'Kamis',
+        5 => 'Jumat',
+        6 => 'Sabtu',
+        7 => 'Minggu'
+    );
+
+    $bulan = array (
+        1 => 'Januari',
+        2 => 'Februari',
+        3 => 'Maret',
+        4 => 'April',
+        5 => 'Mei',
+        6 => 'Juni',
+        7 => 'Juli',
+        8 => 'Agustus',
+        9 => 'September',
+        10 => 'Oktober',
+        11 => 'November',
+        12 => 'Desember'
+    );
+    $split = explode('-', $tanggal);
+    $waktu = explode(' ', $split[2]);
+    $tgl_indo = $waktu[0] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+    
+    
+    if ($cetak_hari) {
+        $num = date('N', strtotime($tanggal));
+        return $hari[$num] . '<br>' . $tgl_indo . ' '. $waktu[1];
+    }
+    return $tgl_indo;
+}
+?>  

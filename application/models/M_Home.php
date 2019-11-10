@@ -7,4 +7,12 @@ class M_Home extends CI_Model{
         $this->load->database();
     }
 
+    public function dataSlider(){
+        $this->db->select('*');
+        $this->db->from('table_slider');
+        $this->db->where('kode_user', 'ADMIN');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }

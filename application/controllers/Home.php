@@ -5,6 +5,7 @@ class Home extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model("M_Home", "model");
 	}
 
 	private function load($title = '', $datapath = '')
@@ -18,10 +19,15 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+		$slider = array(
+            'slider' => $this
+            ->model
+            ->dataSlider(),
+        );
 		$path = "";
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok", $path),
-			"content" => $this->load->view('home/index', false, true),
+			"content" => $this->load->view('home/index', $slider, true),
 		);
 		$this->load->view('home/template/default_template', $data);
 	}
@@ -104,6 +110,21 @@ class Home extends CI_Controller {
 			"content" => $this->load->view('404', false, true),
 		);
 		$this->load->view('404', $data);
+	}
+
+	public function tambahHelpDesk()
+	{
+		$email = $this->input->post('email');
+		$masukan = $this->input->post('masukan');
+
+		$data = array(
+			"email" => $email,
+			"pesan" => $masukan
+		);
+
+		$this->db->insert("table_helpdesk", $data);
+		$this->session->set_flashdata('notif', '<div class="alert alert-success" role="alert">Berhasil Dikirim!</div>');
+		redirect('', 'refresh');
 	}
 	
 }

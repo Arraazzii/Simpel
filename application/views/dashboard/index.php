@@ -1,4 +1,5 @@
 <!-- Notification -->
+<?= $this->session->flashdata('notif');?>
 <div class="row">
     <div class="col-md-12">
         <div class="alert border-0 alert-primary bg-gradient m-b-30 alert-dismissible fade show border-radius-none" role="alert">
@@ -22,7 +23,7 @@
                         </div>
                         <div class="d-block d-sm-flex h-100 align-items-center">
                             <div class="statistics mt-3 text-center">
-                                <h3 class="mb-0 text-white"><i class="icon-arrow-up-circle"></i> 15,640</h3>
+                                <h3 class="mb-0 text-white"><i class="icon-arrow-up-circle"></i><?= $jumlahLPK[0]['total']; ?></h3>
                             </div>
                         </div>
                     </div>
@@ -34,7 +35,7 @@
                         </div>
                         <div class="d-block d-sm-flex h-100 align-items-center">
                             <div class="statistics mt-3 text-center">
-                                <h3 class="mb-0 text-white"><i class="icon-arrow-up-circle"></i> 16,656</h3>
+                                <h3 class="mb-0 text-white"><i class="icon-arrow-up-circle"></i><?= $jumlahBLKLN[0]['total']; ?></h3>
                             </div>
                         </div>
                     </div>
@@ -46,7 +47,7 @@
                         </div>
                         <div class="d-block d-sm-flex h-100 align-items-center">
                             <div class="statistics mt-3 text-center">
-                                <h3 class="mb-0 text-white"><i class="icon-arrow-up-circle"></i>569</h3>
+                                <h3 class="mb-0 text-white"><i class="icon-arrow-up-circle"></i><?= $jumlahKegiatan[0]['total']; ?></h3>
                             </div>
                         </div>
                     </div>
@@ -58,7 +59,7 @@
                         </div>
                         <div class="d-block d-sm-flex h-100 align-items-center">
                             <div class="statistics mt-3 text-center">
-                                <h3 class="mb-0 text-white"><i class="icon-arrow-up-circle"></i>569</h3>
+                                <h3 class="mb-0 text-white"><i class="icon-arrow-up-circle"></i><?= $jumlahPeserta[0]['total']; ?></h3>
                             </div>
                         </div>
                     </div>

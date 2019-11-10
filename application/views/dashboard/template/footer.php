@@ -11,7 +11,7 @@
 		.then((willDelete) => {
 			if (willDelete) {
 				// $.ajax({
-				// 	url: '<?php echo base_url();?>pengurus/addNew',
+				// 	url: '<?= base_url();?>pengurus/addNew',
 				// 	type: 'POST',
 				// 	data: {
 				// 		"kode" : kode, "nama" : nama, "bank" : bank, "cicilan" : cicilan, "level" : lv, "fase" : fase
@@ -39,7 +39,7 @@
 			<p>&copy; Copyright 2019. All rights reserved.</p>
 		</div>
 		<div class="col  col-sm-6 ml-sm-auto text-center text-sm-right">
-			<p>Copy Right by Frais Mediatech</p>
+			<p>Powered by <a href="https://fraismediatech.com" target="_blank">Frais Mediatech</a></p>
 		</div>
 	</div>
 </footer>

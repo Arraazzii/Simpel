@@ -11,32 +11,23 @@
                     <table id="datatable" class="table table-borderless crypto-table w-100">
                         <thead class="bg-light">
                             <tr>
-                                <th>Email</th>
+                                <th width="2%">No.</th>
+                                <th width="30%">Email</th>
                                 <th>Pesan</th>
-                                <th>Aksi</th>
+                                <!-- <th>Aksi</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>example@mail.com</td>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
-                                <td><button class="btn btn-success btn-sm">Balas</button></td>
-                            </tr>
-                            <tr>
-                                <td>example@mail.com</td>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
-                                <td><button class="btn btn-success btn-sm">Balas</button></td>
-                            </tr>
+                            <?php 
+                            $no = 1;
+                            foreach ($helpdesk as $row) { ?>
+                                <tr>
+                                    <td><?= $no++; ?>.</td>
+                                    <td><?= $row->email; ?></td>
+                                    <td><?= $row->pesan; ?></td>
+                                    <!-- <td><button class="btn btn-success btn-sm">Balas</button></td> -->
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

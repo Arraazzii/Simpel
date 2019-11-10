@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/dashboard/css/vendors.css" />
     <!-- app style -->
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/dashboard/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/home/toastr/build/toastr.css">
 </head>
 <style type="text/css">
     @media(max-width: 767px){
@@ -47,7 +48,6 @@
                                 <div class="d-flex align-items-center h-100-vh">
                                     <div class="login p-50">
                                         <h1 class="mb-2">Silahkan Masuk</h1>
-                                        <?= $this->session->flashdata('notif_login');?>
                                         <p>Selamat Datang Di Website Pelatihan Kota Depok</p>
                                         <form method="post" action="<?= base_url('Login/login'); ?>" class="mt-3 mt-sm-5">
                                             <div class="row">
@@ -95,5 +95,25 @@
     <script src="<?= base_url(); ?>assets/dashboard/js/vendors.js"></script>
     <!-- custom app -->
     <script src="<?= base_url(); ?>assets/dashboard/js/app.js"></script>
+    <script src="<?php echo base_url();?>assets/home/js/jquery.min.js"></script>
+    <script src="<?php echo base_url();?>assets/home/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="<?= base_url();?>assets/home/toastr/build/toastr.min.js"></script>
+    <!-- <script>
+      $(function () { //ready
+          toastr.info('If all three of these are referenced correctly, then this should toast should pop-up.');
+      });
+    </script> -->
+    <?php if ($this->session->flashdata('notif')): ?>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        swal({
+          title: "Login Failed !",
+          icon: "error",
+          text: "<?= $this->session->flashdata('notif'); ?>",
+          timer: 2000
+        });
+      });
+    </script>
+  <?php endif; ?>
 </body>
 </html>
