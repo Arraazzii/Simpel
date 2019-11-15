@@ -6,7 +6,7 @@
                     <h4 class="card-title">User</h4>
                 </div>
                 <div class="float-right">
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalTambah">Tambah</button>
+                    <!-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalTambah">Tambah</button> -->
                 </div>
             </div>
             <div class="card-body">
@@ -17,44 +17,37 @@
                                 <th>No</th>
                                 <th>Username</th>
                                 <th>Email</th>
+                                <th>LPK/BLKLN</th>
                                 <th>Tipe User</th>
                                 <th>Status</th>
-                                <th>Aksi</th>
+                                <!-- <th>Aksi</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>System Architect</td>
-                                <td>example@gmail.com</td>
-                                <td><span class="badge badge-success">LPK</span></td>
-                                <td><span class="badge badge-success">Aktif</span></td>
-                                <td><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit">Edit</button> <button class="btn btn-danger btn-sm" type="button" onclick="hapus()">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>System Architect</td>
-                                <td>example@gmail.com</td>
-                                <td><span class="badge badge-success">LPK</span></td>
-                                <td><span class="badge badge-success">Aktif</span></td>
-                                <td><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit">Edit</button> <button class="btn btn-danger btn-sm" type="button" onclick="hapus()">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>System Architect</td>
-                                <td>example@gmail.com</td>
-                                <td><span class="badge badge-success">LPK</span></td>
-                                <td><span class="badge badge-success">Aktif</span></td>
-                                <td><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit">Edit</button> <button class="btn btn-danger btn-sm" type="button" onclick="hapus()">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>System Architect</td>
-                                <td>example@gmail.com</td>
-                                <td><span class="badge badge-success">LPK</span></td>
-                                <td><span class="badge badge-success">Aktif</span></td>
-                                <td><button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit">Edit</button> <button class="btn btn-danger btn-sm" type="button" onclick="hapus()">Delete</button></td>
-                            </tr>
+                            <?php 
+                            $no = 1;
+                            foreach ($lpkblkln as $row) { ?>
+                                <tr>
+                                    <td><?= $no++; ?></td>
+                                    <td><?= $row->username; ?></td>
+                                    <td><?= $row->email; ?></td>
+                                    <td><?= $row->nama; ?></td>
+                                    <td><span class="badge badge-success"><?= $row->tipe; ?></span></td>
+                                    <td>
+                                        <?php if ($row->status == 'Aktif') { ?>
+                                            <span class="badge badge-success"><?= $row->status; ?></span>
+                                        <?php } elseif ($row->status == 'Pending') { ?>
+                                            <span class="badge badge-warning">Menunggu Persetujuan</span>
+                                        <?php } else { ?>
+                                            <span class="badge badge-danger">Suspend</span>
+                                        <?php } ?>
+                                    </td>
+                                    <!-- <td>
+                                        <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit">Edit</button>
+                                        <button class="btn btn-danger btn-sm" type="button" onclick="hapus()">Delete</button>
+                                    </td> -->
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                     <!-- The Modal -->

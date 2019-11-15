@@ -77,4 +77,76 @@ class M_Tools extends CI_Model{
        }
        return "USER".$kode;
     }
+
+    public function get_kode_jenis() {
+    $kode = "";
+    $this->db->select("REPLACE(kode_jenis, 'JENIS', '') as kode", FALSE);
+    $this->db->order_by('(0 + kode)','DESC');
+    $this->db->limit(1);
+        $query = $this->db->get('table_jenis');//cek dulu apakah ada sudah ada kode di tabel.
+        if($query->num_rows() <> 0){
+           //jika kode ternyata sudah ada.
+         $data = $query->row();
+         $kode = intval($data->kode) + 1;
+       }
+       else {
+           //jika kode belum ada
+         $kode = 1;
+       }
+       return "JENIS".$kode;
+    }
+
+    public function get_kode_kategori() {
+    $kode = "";
+    $this->db->select("REPLACE(kode_kategori, 'KTG', '') as kode", FALSE);
+    $this->db->order_by('(0 + kode)','DESC');
+    $this->db->limit(1);
+        $query = $this->db->get('table_kategori');//cek dulu apakah ada sudah ada kode di tabel.
+        if($query->num_rows() <> 0){
+           //jika kode ternyata sudah ada.
+         $data = $query->row();
+         $kode = intval($data->kode) + 1;
+       }
+       else {
+           //jika kode belum ada
+         $kode = 1;
+       }
+       return "KTG".$kode;
+    }
+
+    public function get_kode_pelatihan() {
+    $kode = "";
+    $this->db->select("REPLACE(kode_pelatihan, 'PLT', '') as kode", FALSE);
+    $this->db->order_by('(0 + kode)','DESC');
+    $this->db->limit(1);
+        $query = $this->db->get('table_pelatihan');//cek dulu apakah ada sudah ada kode di tabel.
+        if($query->num_rows() <> 0){
+           //jika kode ternyata sudah ada.
+         $data = $query->row();
+         $kode = intval($data->kode) + 1;
+       }
+       else {
+           //jika kode belum ada
+         $kode = 1;
+       }
+       return "PLT".$kode;
+    }
+
+    public function cek_nik($id){
+        $this->db->select('*');
+        $this->db->from('table_peserta');
+        $this->db->where('nik', $id);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function cek_periode($id){
+        $this->db->select('tanggal_daftar');
+        $this->db->from('table_peserta_pelatihan');
+        $this->db->where('nik', $id);
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

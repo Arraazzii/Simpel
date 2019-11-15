@@ -205,471 +205,425 @@ foreach ($lpkblkln as $row) {
                                                     <label>No. Akreditasi</label>
                                                     <input type="text" value="<?= $row->no_akreditas; ?>" class="form-control">
                                                 </div>
-                                                                    <!-- <div class="form-group">
-                                                                        <label>Uji Kompetensi Lembaga</label>
-                                                                        <input type="text" name="" class="form-control">
-                                                                    </div> -->
-                                                                </div>
-                                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-2 acd-group">
+                                        <div class="card-header bg-primary rounded-0">
+                                            <h5 class="mb-0">
+                                                <a href="#collapse1" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Karyawan</a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapse1" class="collapse" data-parent="#accordionsimplefill">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Laki - Laki</label>
+                                                            <input type="number" value="<?= $query1[0]['jumlah']; ?>" class="form-control">
                                                         </div>
-                                                        <div class="mb-2 acd-group">
-                                                            <div class="card-header bg-primary rounded-0">
-                                                                <h5 class="mb-0">
-                                                                    <a href="#collapse1" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Karyawan</a>
-                                                                </h5>
-                                                            </div>
-                                                            <div id="collapse1" class="collapse" data-parent="#accordionsimplefill">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Laki - Laki</label>
-                                                                                <input type="number" value="<?= $query1[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Perempuan</label>
-                                                                                <input type="number" value="<?= $query2[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- <div class="col-lg-12">
-                                                                            <div class="form-group">
-                                                                                <label>Keterangan</label>
-                                                                                <textarea class="form-control"></textarea>
-                                                                            </div>
-                                                                        </div> -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-2 acd-group">
-                                                            <div class="card-header rounded-0 bg-primary">
-                                                                <h5 class="mb-0">
-                                                                    <a href="#collapse2" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Tenaga Kerja Tetap</a>
-                                                                </h5>
-                                                            </div>
-                                                            <div id="collapse2" class="collapse" data-parent="#accordionsimplefill">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Laki - Laki</label>
-                                                                                <input type="number" value="<?= $query3[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Perempuan</label>
-                                                                                <input type="number" value="<?= $query4[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- <div class="col-lg-12">
-                                                                            <div class="form-group">
-                                                                                <label>Keterangan</label>
-                                                                                <textarea class="form-control"></textarea>
-                                                                            </div>
-                                                                        </div> -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-2 acd-group border-bottom-0">
-                                                            <div class="card-header rounded-0 bg-primary">
-                                                                <h5 class="mb-0">
-                                                                    <a href="#collapse3" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Tenaga Kerja Tidak Tetap</a>
-                                                                </h5>
-                                                            </div>
-                                                            <div id="collapse3" class="collapse" data-parent="#accordionsimplefill">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Laki - Laki</label>
-                                                                                <input type="number" value="<?= $query5[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Perempuan</label>
-                                                                                <input type="number" value="<?= $query6[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- <div class="col-lg-12">
-                                                                            <div class="form-group">
-                                                                                <label>Keterangan</label>
-                                                                                <textarea class="form-control"></textarea>
-                                                                            </div>
-                                                                        </div> -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-2 acd-group border-bottom-0">
-                                                            <div class="card-header rounded-0 bg-primary">
-                                                                <h5 class="mb-0">
-                                                                    <a href="#collapse4" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Instruktur Tetap</a>
-                                                                </h5>
-                                                            </div>
-                                                            <div id="collapse4" class="collapse" data-parent="#accordionsimplefill">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Laki - Laki</label>
-                                                                                <input type="number" value="<?= $query7[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Perempuan</label>
-                                                                                <input type="number" value="<?= $query8[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- <div class="col-lg-12">
-                                                                            <div class="form-group">
-                                                                                <label>Keterangan</label>
-                                                                                <textarea class="form-control"></textarea>
-                                                                            </div>
-                                                                        </div> -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-2 acd-group border-bottom-0">
-                                                            <div class="card-header rounded-0 bg-primary">
-                                                                <h5 class="mb-0">
-                                                                    <a href="#collapse5" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Instruktur Tidak Tetap</a>
-                                                                </h5>
-                                                            </div>
-                                                            <div id="collapse5" class="collapse" data-parent="#accordionsimplefill">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Laki - Laki</label>
-                                                                                <input type="number" value="<?= $query9[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Perempuan</label>
-                                                                                <input type="number" value="<?= $query10[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- <div class="col-lg-12">
-                                                                            <div class="form-group">
-                                                                                <label>Keterangan</label>
-                                                                                <textarea class="form-control"></textarea>
-                                                                            </div>
-                                                                        </div> -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-2 acd-group border-bottom-0">
-                                                            <div class="card-header rounded-0 bg-primary">
-                                                                <h5 class="mb-0">
-                                                                    <a href="#collapse6" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Asesor Kompetensi</a>
-                                                                </h5>
-                                                            </div>
-                                                            <div id="collapse6" class="collapse" data-parent="#accordionsimplefill">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Laki - Laki</label>
-                                                                                <input type="number" value="<?= $query11[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Perempuan</label>
-                                                                                <input type="number" value="<?= $query12[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- <div class="col-lg-12">
-                                                                            <div class="form-group">
-                                                                                <label>Keterangan</label>
-                                                                                <textarea class="form-control"></textarea>
-                                                                            </div>
-                                                                        </div> -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-2 acd-group border-bottom-0">
-                                                            <div class="card-header rounded-0 bg-primary">
-                                                                <h5 class="mb-0">
-                                                                    <a href="#collapse7" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Asesor Instruksi Asing</a>
-                                                                </h5>
-                                                            </div>
-                                                            <div id="collapse7" class="collapse" data-parent="#accordionsimplefill">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Laki - Laki</label>
-                                                                                <input type="number" value="<?= $query13[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label>Perempuan</label>
-                                                                                <input type="number" value="<?= $query14[0]['jumlah']; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- <div class="col-lg-12">
-                                                                            <div class="form-group">
-                                                                                <label>Keterangan</label>
-                                                                                <textarea class="form-control"></textarea>
-                                                                            </div>
-                                                                        </div> -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Perempuan</label>
+                                                            <input type="number" value="<?= $query2[0]['jumlah']; ?>" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <?php if ($row->status == 'Pending') { ?>
-                                            <button type="button" class="btn btn-danger" onclick="blokir('<?= $row->kode_user; ?>')">Blokir</button>
-                                            <button type="button" class="btn btn-success" onclick="aktivasi('<?= $row->kode_user; ?>')">Aktivasi</button>
-                                        <?php } elseif ($row->status == 'Suspend') { ?>
-                                           <button type="button" class="btn btn-danger" onclick="aktivasi('<?= $row->kode_user; ?>')">Buka Blokir</button>
-                                       <?php } else { ?>
-                                        <button type="button" class="btn btn-danger" onclick="blokir('<?= $row->kode_user; ?>')">Blokir</button>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <!-- The Modal -->
-                <div class="modal" id="myModalTambah">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Tambah LPK / BLKLN</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                            <!-- Modal body -->
-                            <form action="<?= base_url('Dashboard/buatAkunLPK'); ?>" method="POST" enctype="multipart/form-data">
-                                <div class="modal-body">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="control-label">Type Akun <span style="color:red" title="Wajib Diisi">*</span></label><br>
-                                            <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="customRadioInline1" name="tipe" class="custom-control-input" value="LPK" required>
-                                                <label class="custom-control-label" for="customRadioInline1">LPK</label>
-                                            </div>
-                                            <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="customRadioInline2" name="tipe" class="custom-control-input" value="BLKLN" required>
-                                                <label class="custom-control-label" for="customRadioInline2">BLKLN</label>
+                                    <div class="mb-2 acd-group">
+                                        <div class="card-header rounded-0 bg-primary">
+                                            <h5 class="mb-0">
+                                                <a href="#collapse2" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Tenaga Kerja Tetap</a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapse2" class="collapse" data-parent="#accordionsimplefill">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Laki - Laki</label>
+                                                            <input type="number" value="<?= $query3[0]['jumlah']; ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Perempuan</label>
+                                                            <input type="number" value="<?= $query4[0]['jumlah']; ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <fieldset class="col-md-12">
-                                        <legend>Akun Login</legend>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Username <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="text" name="username" class="form-control" placeholder="Username" required="" />
-                                            </div>
+                                    <div class="mb-2 acd-group border-bottom-0">
+                                        <div class="card-header rounded-0 bg-primary">
+                                            <h5 class="mb-0">
+                                                <a href="#collapse3" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Tenaga Kerja Tidak Tetap</a>
+                                            </h5>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Password <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="password" name="password" class="form-control" placeholder="*********" required="" />
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset class="col-md-12 mt-10">
-                                        <legend>Data LPK/BLKLN</legend>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Nama LPK/BLKLN <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="text" name="nama" class="form-control" placeholder="Nama LPK/BLKLN" required="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Alamat <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <textarea class="form-control" name="alamat"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">No. Telepon <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="text" name="no_telepon" class="form-control" placeholder="No. Telepon" required="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Email <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="email" name="email" class="form-control" placeholder="Email" required="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">No. Izin <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="text" name="no_izin" class="form-control" placeholder="No. Izin" required="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Tanggal Izin <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="date" name="tanggal_izin" class="form-control" required="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Jenis <span style="color:red" title="Wajib Diisi">*</span></label><br>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="customRadioInline3" name="jenis" class="custom-control-input" value="Pemerintah" required>
-                                                    <label class="custom-control-label" for="customRadioInline3">Pemerintah</label>
-                                                </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="customRadioInline4" name="jenis" class="custom-control-input" value="Swasta" required>
-                                                    <label class="custom-control-label" for="customRadioInline4">Swasta</label>
-                                                </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="customRadioInline5" name="jenis" class="custom-control-input" value="Perusahaan" required>
-                                                    <label class="custom-control-label" for="customRadioInline5">Perusahaan</label>
+                                        <div id="collapse3" class="collapse" data-parent="#accordionsimplefill">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Laki - Laki</label>
+                                                            <input type="number" value="<?= $query5[0]['jumlah']; ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Perempuan</label>
+                                                            <input type="number" value="<?= $query6[0]['jumlah']; ?>" class="form-control">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Status Akreditas <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="text" name="status_akreditas" class="form-control" required="" />
-                                            </div>
+                                    </div>
+                                    <div class="mb-2 acd-group border-bottom-0">
+                                        <div class="card-header rounded-0 bg-primary">
+                                            <h5 class="mb-0">
+                                                <a href="#collapse4" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Instruktur Tetap</a>
+                                            </h5>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">No. Akreditas <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="text" name="no_akreditas" class="form-control" required="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Ruang Lingkup <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="text" name="ruang_lingkup" class="form-control" required="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label>Logo Perusahaan</label>
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="customFile" name="logo">
-                                                    <label class="custom-file-label" for="customFile">Pilih File</label>
+                                        <div id="collapse4" class="collapse" data-parent="#accordionsimplefill">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Laki - Laki</label>
+                                                            <input type="number" value="<?= $query7[0]['jumlah']; ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Perempuan</label>
+                                                            <input type="number" value="<?= $query8[0]['jumlah']; ?>" class="form-control">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </fieldset>
-                                    <fieldset class="col-md-12 mt-10">
-                                        <legend>Data Pimpinan</legend>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Nama Pimpinan <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="text" name="nama_pimpinan" class="form-control" placeholder="Nama Pimpinan" required="" />
+                                    </div>
+                                    <div class="mb-2 acd-group border-bottom-0">
+                                        <div class="card-header rounded-0 bg-primary">
+                                            <h5 class="mb-0">
+                                                <a href="#collapse5" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Instruktur Tidak Tetap</a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapse5" class="collapse" data-parent="#accordionsimplefill">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Laki - Laki</label>
+                                                            <input type="number" value="<?= $query9[0]['jumlah']; ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Perempuan</label>
+                                                            <input type="number" value="<?= $query10[0]['jumlah']; ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">No. Telepon Pimpinan <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="text" name="no_telepon_pimpinan" class="form-control" placeholder="(+62) ..." required="" />
+                                    </div>
+                                    <div class="mb-2 acd-group border-bottom-0">
+                                        <div class="card-header rounded-0 bg-primary">
+                                            <h5 class="mb-0">
+                                                <a href="#collapse6" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Asesor Kompetensi</a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapse6" class="collapse" data-parent="#accordionsimplefill">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Laki - Laki</label>
+                                                            <input type="number" value="<?= $query11[0]['jumlah']; ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Perempuan</label>
+                                                            <input type="number" value="<?= $query12[0]['jumlah']; ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Nama Penanggung Jawab <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="text" name="nama_pj" class="form-control" placeholder="Nama Pimpinan" required="" />
+                                    </div>
+                                    <div class="mb-2 acd-group border-bottom-0">
+                                        <div class="card-header rounded-0 bg-primary">
+                                            <h5 class="mb-0">
+                                                <a href="#collapse7" class="btn-block text-white text-left acd-heading collapsed" data-toggle="collapse">Asesor Instruksi Asing</a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapse7" class="collapse" data-parent="#accordionsimplefill">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Laki - Laki</label>
+                                                            <input type="number" value="<?= $query13[0]['jumlah']; ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Perempuan</label>
+                                                            <input type="number" value="<?= $query14[0]['jumlah']; ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Jabatan Penanggung Jawab <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="text" name="jabatan_pj" class="form-control" placeholder="Nama Pimpinan" required="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label">No. Telepon Penanggung Jawab <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                <input type="text" name="no_telepon_pj" class="form-control" placeholder="(+62) ..." required="" />
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset class="col-md-12 mt-10">
-                                        <legend>Data Pengurus</legend>
-                                        <table class="table table-striped">
-                                            <center>
-                                                <tr>
-                                                    <!-- <th scope="col" rowspan="2">No.</th> -->
-                                                    <th scope="col" rowspan="2" class="align-middle">Tipe</th>
-                                                    <th scope="col" colspan="2">Jenis Kelamin</th>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col">Laki-laki</th>
-                                                    <th scope="col">Perempuan</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Karyawan</td>
-                                                    <td><input type="number" name="karyawan_laki" class="form-control" value="0" required="" /></td>
-                                                    <td><input type="number" name="karyawan_perempuan" class="form-control" value="0" required="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Tenaga Pelatihan Tetap</td>
-                                                    <td><input type="number" name="tpt_laki" class="form-control" value="0" required="" /></td>
-                                                    <td><input type="number" name="tpt_perempuan" class="form-control" value="0" required="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Tenaga Pelatihan Tidak Tetap</td>
-                                                    <td><input type="number" name="tptt_laki" class="form-control" value="0" required="" /></td>
-                                                    <td><input type="number" name="tptt_perempuan" class="form-control" value="0" required="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Instruktur Tetap</td>
-                                                    <td><input type="number" name="it_laki" class="form-control" value="0" required="" /></td>
-                                                    <td><input type="number" name="it_perempuan" class="form-control" value="0" required="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Instruktur Tidak Tetap</td>
-                                                    <td><input type="number" name="itt_laki" class="form-control" value="0" required="" /></td>
-                                                    <td><input type="number" name="itt_perempuan" class="form-control" value="0" required="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Asesor Kompetensi</td>
-                                                    <td><input type="number" name="ak_laki" class="form-control" value="0" required="" /></td>
-                                                    <td><input type="number" name="ak_perempuan" class="form-control" value="0" required="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Instruktur/Asesor WNA</td>
-                                                    <td><input type="number" name="aw_laki" class="form-control" value="0" required="" /></td>
-                                                    <td><input type="number" name="aw_perempuan" class="form-control" value="0" required="" /></td>
-                                                </tr>
-                                            </center>
-                                        </table>
-                                    </fieldset>
+                                    </div>
                                 </div>
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-success">Simpan</button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <script type="text/javascript">
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <?php if ($row->status == 'Pending') { ?>
+                        <button type="button" class="btn btn-danger" onclick="blokir('<?= $row->kode_user; ?>')">Blokir</button>
+                        <button type="button" class="btn btn-success" onclick="aktivasi('<?= $row->kode_user; ?>')">Aktivasi</button>
+                    <?php } elseif ($row->status == 'Suspend') { ?>
+                       <button type="button" class="btn btn-danger" onclick="aktivasi('<?= $row->kode_user; ?>')">Buka Blokir</button>
+                   <?php } else { ?>
+                    <button type="button" class="btn btn-danger" onclick="blokir('<?= $row->kode_user; ?>')">Blokir</button>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<!-- The Modal -->
+<div class="modal" id="myModalTambah">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Tambah LPK / BLKLN</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <form action="<?= base_url('Dashboard/buatAkunLPK'); ?>" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="control-label">Type Akun <span style="color:red" title="Wajib Diisi">*</span></label><br>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline1" name="tipe" class="custom-control-input" value="LPK" required>
+                                <label class="custom-control-label" for="customRadioInline1">LPK</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline2" name="tipe" class="custom-control-input" value="BLKLN" required>
+                                <label class="custom-control-label" for="customRadioInline2">BLKLN</label>
+                            </div>
+                        </div>
+                    </div>
+                    <fieldset class="col-md-12">
+                        <legend>Akun Login</legend>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Username <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="text" name="username" class="form-control" placeholder="Username" required="" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Password <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="password" name="password" class="form-control" placeholder="*********" required="" />
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-md-12 mt-10">
+                        <legend>Data LPK/BLKLN</legend>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Nama LPK/BLKLN <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="text" name="nama" class="form-control" placeholder="Nama LPK/BLKLN" required="" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Alamat <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <textarea class="form-control" name="alamat"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">No. Telepon <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="text" name="no_telepon" class="form-control" placeholder="No. Telepon" required="" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Email <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="email" name="email" class="form-control" placeholder="Email" required="" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">No. Izin <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="text" name="no_izin" class="form-control" placeholder="No. Izin" required="" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Tanggal Izin <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="date" name="tanggal_izin" class="form-control" required="" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Jenis <span style="color:red" title="Wajib Diisi">*</span></label><br>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline3" name="jenis" class="custom-control-input" value="Pemerintah" required>
+                                    <label class="custom-control-label" for="customRadioInline3">Pemerintah</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline4" name="jenis" class="custom-control-input" value="Swasta" required>
+                                    <label class="custom-control-label" for="customRadioInline4">Swasta</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline5" name="jenis" class="custom-control-input" value="Perusahaan" required>
+                                    <label class="custom-control-label" for="customRadioInline5">Perusahaan</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Status Akreditas <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="text" name="status_akreditas" class="form-control" required="" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">No. Akreditas <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="text" name="no_akreditas" class="form-control" required="" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Ruang Lingkup <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="text" name="ruang_lingkup" class="form-control" required="" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Logo Perusahaan</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="logo">
+                                    <label class="custom-file-label" for="customFile">Pilih File</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-md-12 mt-10">
+                        <legend>Data Pimpinan</legend>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Nama Pimpinan <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="text" name="nama_pimpinan" class="form-control" placeholder="Nama Pimpinan" required="" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">No. Telepon Pimpinan <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="text" name="no_telepon_pimpinan" class="form-control" placeholder="(+62) ..." required="" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Nama Penanggung Jawab <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="text" name="nama_pj" class="form-control" placeholder="Nama Pimpinan" required="" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Jabatan Penanggung Jawab <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="text" name="jabatan_pj" class="form-control" placeholder="Nama Pimpinan" required="" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">No. Telepon Penanggung Jawab <span style="color:red" title="Wajib Diisi">*</span></label>
+                                <input type="text" name="no_telepon_pj" class="form-control" placeholder="(+62) ..." required="" />
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-md-12 mt-10">
+                        <legend>Data Pengurus</legend>
+                        <table class="table table-striped">
+                            <center>
+                                <tr>
+                                    <!-- <th scope="col" rowspan="2">No.</th> -->
+                                    <th scope="col" rowspan="2" class="align-middle">Tipe</th>
+                                    <th scope="col" colspan="2">Jenis Kelamin</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Laki-laki</th>
+                                    <th scope="col">Perempuan</th>
+                                </tr>
+                                <tr>
+                                    <td>Karyawan</td>
+                                    <td><input type="number" name="karyawan_laki" class="form-control" value="0" required="" /></td>
+                                    <td><input type="number" name="karyawan_perempuan" class="form-control" value="0" required="" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Tenaga Pelatihan Tetap</td>
+                                    <td><input type="number" name="tpt_laki" class="form-control" value="0" required="" /></td>
+                                    <td><input type="number" name="tpt_perempuan" class="form-control" value="0" required="" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Tenaga Pelatihan Tidak Tetap</td>
+                                    <td><input type="number" name="tptt_laki" class="form-control" value="0" required="" /></td>
+                                    <td><input type="number" name="tptt_perempuan" class="form-control" value="0" required="" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Instruktur Tetap</td>
+                                    <td><input type="number" name="it_laki" class="form-control" value="0" required="" /></td>
+                                    <td><input type="number" name="it_perempuan" class="form-control" value="0" required="" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Instruktur Tidak Tetap</td>
+                                    <td><input type="number" name="itt_laki" class="form-control" value="0" required="" /></td>
+                                    <td><input type="number" name="itt_perempuan" class="form-control" value="0" required="" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Asesor Kompetensi</td>
+                                    <td><input type="number" name="ak_laki" class="form-control" value="0" required="" /></td>
+                                    <td><input type="number" name="ak_perempuan" class="form-control" value="0" required="" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Instruktur/Asesor WNA</td>
+                                    <td><input type="number" name="aw_laki" class="form-control" value="0" required="" /></td>
+                                    <td><input type="number" name="aw_perempuan" class="form-control" value="0" required="" /></td>
+                                </tr>
+                            </center>
+                        </table>
+                    </fieldset>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
     // $(document).ready(function(){
         // $("#postingBtn").click(function(){
                 // $("#postingBtn").attr("disabled", "disabled");
@@ -748,7 +702,7 @@ foreach ($lpkblkln as $row) {
         .then((willDelete) => {
             if (willDelete) {
                 $.ajax({
-                    url: '<?php echo base_url();?>Dashboard/hapusAkun',
+                    url: '<?= base_url();?>Dashboard/hapusAkun',
                     type: 'POST',
                     data: {
                         "id" : id

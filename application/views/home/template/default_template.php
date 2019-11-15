@@ -25,9 +25,9 @@
 								Data
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="<?php echo base_url(); ?>Home/lpk">LPK</a>
+								<a class="dropdown-item" href="<?php echo base_url(); ?>Home/lpk">LPK/BLKLN</a><!-- 
 								<a class="dropdown-item" href="<?php echo base_url(); ?>Home/pelatihan">Jadwal</a>
-								<a class="dropdown-item" href="<?php echo base_url(); ?>Home/info">Informasi</a>
+								<a class="dropdown-item" href="<?php echo base_url(); ?>Home/info">Informasi</a> -->
 							</div>
 						</li>
 

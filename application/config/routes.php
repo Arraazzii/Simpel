@@ -55,3 +55,5 @@ $route['translate_uri_dashes'] = FALSE;
 $route['pendaftaran'] = 'Login/pendaftaran';
 $route['login'] = 'Login';
 $route['logout'] = 'Login/logout';
+$route['Home/pelatihanDetail/(:any)'] = 'Home/pelatihanDetail/$1';
+$route['Home/daftarPelatihan'] = 'Home/daftarPelatihan';

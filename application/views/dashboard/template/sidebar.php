@@ -6,9 +6,9 @@
 		<!-- begin navbar-header -->
 		<div class="navbar-header d-flex align-items-center">
 			<a href="javascript:void:(0)" class="mobile-toggle"><i class="ti ti-align-right"></i></a>
-			<a class="navbar-brand" href="<?php echo base_url(); ?>dashboard">
-				<img src="<?php echo base_url(); ?>assets/home/images/icon.png" class="img-fluid logo-desktop" alt="logo" />
-				<img src="<?php echo base_url(); ?>assets/home/images/icon.png" class="img-fluid logo-mobile" alt="logo" />
+			<a class="navbar-brand" href="<?= base_url(); ?>dashboard">
+				<img src="<?= base_url(); ?>assets/home/images/icon.png" class="img-fluid logo-desktop" alt="logo" />
+				<img src="<?= base_url(); ?>assets/home/images/icon.png" class="img-fluid logo-mobile" alt="logo" />
 				PELATIHAN DEPOK
 			</a>
 		</div>
@@ -49,7 +49,7 @@
 												<a href="javascript:void(0)">
 													<div class="notification d-flex flex-row align-items-center">
 														<div class="notify-icon bg-img align-self-center">
-															<img class="img-fluid" src="<?php echo base_url(); ?>assets/dashboard/img/avtar/03.jpg" alt="user3">
+															<img class="img-fluid" src="<?= base_url(); ?>assets/dashboard/img/avtar/03.jpg" alt="user3">
 														</div>
 														<div class="notify-message">
 															<p class="font-weight-bold">Brianing Leyon</p>
@@ -62,7 +62,7 @@
 												<a href="javascript:void(0)">
 													<div class="notification d-flex flex-row align-items-center">
 														<div class="notify-icon bg-img align-self-center">
-															<img class="img-fluid" src="<?php echo base_url(); ?>assets/dashboard/img/avtar/01.jpg" alt="user">
+															<img class="img-fluid" src="<?= base_url(); ?>assets/dashboard/img/avtar/01.jpg" alt="user">
 														</div>
 														<div class="notify-message">
 															<p class="font-weight-bold">Jimmyimg Leyon</p>
@@ -75,7 +75,7 @@
 												<a href="javascript:void(0)">
 													<div class="notification d-flex flex-row align-items-center">
 														<div class="notify-icon bg-img align-self-center">
-															<img class="img-fluid" src="<?php echo base_url(); ?>assets/dashboard/img/avtar/02.jpg" alt="user2">
+															<img class="img-fluid" src="<?= base_url(); ?>assets/dashboard/img/avtar/02.jpg" alt="user2">
 														</div>
 														<div class="notify-message">
 															<p class="font-weight-bold">Brainjon Leyon</p>
@@ -88,7 +88,7 @@
 												<a href="javascript:void(0)">
 													<div class="notification d-flex flex-row align-items-center">
 														<div class="notify-icon bg-img align-self-center">
-															<img class="img-fluid" src="<?php echo base_url(); ?>assets/dashboard/img/avtar/04.jpg" alt="user4">
+															<img class="img-fluid" src="<?= base_url(); ?>assets/dashboard/img/avtar/04.jpg" alt="user4">
 														</div>
 														<div class="notify-message">
 															<p class="font-weight-bold">Smithmin Leyon</p>
@@ -101,7 +101,7 @@
 												<a href="javascript:void(0)">
 													<div class="notification d-flex flex-row align-items-center">
 														<div class="notify-icon bg-img align-self-center">
-															<img class="img-fluid" src="<?php echo base_url(); ?>assets/dashboard/img/avtar/05.jpg" alt="user5">
+															<img class="img-fluid" src="<?= base_url(); ?>assets/dashboard/img/avtar/05.jpg" alt="user5">
 														</div>
 														<div class="notify-message">
 															<p class="font-weight-bold">Jennyns Leyon</p>
@@ -114,7 +114,7 @@
 												<a href="javascript:void(0)">
 													<div class="notification d-flex flex-row align-items-center">
 														<div class="notify-icon bg-img align-self-center">
-															<img class="img-fluid" src="<?php echo base_url(); ?>assets/dashboard/img/avtar/06.jpg" alt="user6">
+															<img class="img-fluid" src="<?= base_url(); ?>assets/dashboard/img/avtar/06.jpg" alt="user6">
 														</div>
 														<div class="notify-message">
 															<p class="font-weight-bold">Demian Leyon</p>
@@ -251,7 +251,7 @@
 							</li>
 							<li class="nav-item dropdown user-profile">
 								<a href="javascript:void(0)" class="nav-link dropdown-toggle " id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<img src="<?php echo base_url(); ?>assets/dashboard/img/avtar/02.jpg" alt="avtar-img">
+									<img src="<?= base_url(); ?>assets/dashboard/img/avtar/02.jpg" alt="avtar-img">
 									<span class="bg-success user-status"></span>
 								</a>
 								<div class="dropdown-menu animated fadeIn" aria-labelledby="navbarDropdown">
@@ -309,28 +309,34 @@
 							<ul class="metismenu " id="sidebarNav">
 								<?php if ($this->uri->segment(1) == "dashboardLPK") { ?>
 									<li class="nav-static-title">Dashboard</li>
-									<li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "") { echo 'class="active"';} ?> ><a href="<?php echo base_url(); ?>dashboardLPK" aria-expanded="false"><i class="nav-icon ti ti-dashboard"></i><span class="nav-title">Dashboard</span></a> </li>
-									<li class="nav-static-title">Menu</li>
-									<li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "profil") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboardLPK/profil" aria-expanded="false"><i class="nav-icon ti ti-desktop"></i><span class="nav-title">Profil</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "kegiatan") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboardLPK/kegiatan" aria-expanded="false"><i class="nav-icon ti ti-id-badge"></i><span class="nav-title">Kegiatan</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "peserta") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboardLPK/peserta" aria-expanded="false"><i class="nav-icon ti ti-package"></i><span class="nav-title">Daftar Peserta</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "kemitraan") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboardLPK/kemitraan" aria-expanded="false"><i class="nav-icon ti ti-pulse"></i><span class="nav-title">Kemitraan</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "laporan") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboardLPK/laporan" aria-expanded="false"><i class="nav-icon ti ti-clipboard"></i><span class="nav-title">Laporan</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "kendalasolusi") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboardLPK/kendalasolusi" aria-expanded="false"><i class="nav-icon ti ti-briefcase"></i><span class="nav-title">Kendala & Solusi</span></a> </li>
+									<li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "") { echo 'class="active"';} ?> ><a href="<?= base_url(); ?>dashboardLPK" aria-expanded="false"><i class="nav-icon ti ti-dashboard"></i><span class="nav-title">Dashboard</span></a> </li>
+									<!-- <li class="nav-static-title">Menu</li> -->
+									<li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "profil") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboardLPK/profil" aria-expanded="false"><i class="nav-icon ti ti-desktop"></i><span class="nav-title">Profil</span></a> </li>
+									<!-- <li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "kegiatan") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboardLPK/kegiatan" aria-expanded="false"><i class="nav-icon ti ti-id-badge"></i><span class="nav-title">Kegiatan</span></a> </li>
+									<li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "peserta") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboardLPK/peserta" aria-expanded="false"><i class="nav-icon ti ti-package"></i><span class="nav-title">Daftar Peserta</span></a> </li>
+									<li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "kemitraan") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboardLPK/kemitraan" aria-expanded="false"><i class="nav-icon ti ti-pulse"></i><span class="nav-title">Kemitraan</span></a> </li> -->
+									<li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "laporan") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboardLPK/laporan" aria-expanded="false"><i class="nav-icon ti ti-clipboard"></i><span class="nav-title">Laporan</span></a> </li>
+									<!-- <li <?php if ($this->uri->segment(1) == "dashboardLPK" && $this->uri->segment(2) == "kendalasolusi") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboardLPK/kendalasolusi" aria-expanded="false"><i class="nav-icon ti ti-briefcase"></i><span class="nav-title">Kendala & Solusi</span></a> </li> -->
 								<?php }else{ ?>
 									<li class="nav-static-title">Dashboard</li>
-									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboard" aria-expanded="false"><i class="nav-icon ti ti-dashboard"></i><span class="nav-title">Dashboard</span></a> </li>
+									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard" aria-expanded="false"><i class="nav-icon ti ti-dashboard"></i><span class="nav-title">Dashboard</span></a> </li>
 									<li class="nav-static-title">Menu</li>
 									<!-- <li><a href="<?php //echo base_url(); ?>dashboard/slider" aria-expanded="false"><i class="nav-icon ti ti-comment"></i><span class="nav-title">Slider</span></a> </li> -->
-									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "lpkblkln") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboard/lpkblkln" aria-expanded="false"><i class="nav-icon ti ti-package"></i><span class="nav-title">LPK / BLKLN</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "pelatihan") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboard/pelatihan" aria-expanded="false"><i class="nav-icon ti ti-pulse"></i><span class="nav-title">Pelatihan / Kegiatan</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "info") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboard/info" aria-expanded="false"><i class="nav-icon ti ti-clipboard"></i><span class="nav-title">Informasi / Berita</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "laporan") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboard/laporan" aria-expanded="false"><i class="nav-icon ti ti-clipboard"></i><span class="nav-title">Laporan</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "user") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboard/user" aria-expanded="false"><i class="nav-icon ti ti-headphone-alt"></i><span class="nav-title">User</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "peserta") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboard/peserta" aria-expanded="false"><i class="nav-icon ti ti-comments-smiley"></i><span class="nav-title">Daftar Peserta</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "slider") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboard/slider" aria-expanded="false"><i class="nav-icon ti ti-desktop"></i><span class="nav-title">Slider Header</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "aktivitas") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboard/aktivitas" aria-expanded="false"><i class="nav-icon ti ti-briefcase"></i><span class="nav-title">Aktivitas</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "helpdesk") { echo 'class="active"';} ?>><a href="<?php echo base_url(); ?>dashboard/helpdesk" aria-expanded="false"><i class="nav-icon ti ti-receipt"></i><span class="nav-title">Helpdesk</span></a> </li>
+									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "lpkblkln") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/lpkblkln" aria-expanded="false"><i class="nav-icon ti ti-package"></i><span class="nav-title">LPK / BLKLN</span></a> </li>
+									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "pelatihan") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/pelatihan" aria-expanded="false"><i class="nav-icon ti ti-pulse"></i><span class="nav-title">Kegiatan / Pelatihan</span></a> </li>
+									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "info") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/info" aria-expanded="false"><i class="nav-icon ti ti-clipboard"></i><span class="nav-title">Berita / Events</span></a> </li>
+									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "peserta") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/peserta" aria-expanded="false"><i class="nav-icon ti ti-comments-smiley"></i><span class="nav-title">Daftar Peserta</span></a> </li>
+									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "laporan") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/laporan" aria-expanded="false"><i class="nav-icon ti ti-clipboard"></i><span class="nav-title">Laporan</span></a> </li>
+									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "helpdesk") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/helpdesk" aria-expanded="false"><i class="nav-icon ti ti-receipt"></i><span class="nav-title">Helpdesk</span></a></li>
+									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "slider") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/slider" aria-expanded="false"><i class="nav-icon ti ti-desktop"></i><span class="nav-title">Slider</span></a> </li>
+									<!-- <li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "aktivitas") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/aktivitas" aria-expanded="false"><i class="nav-icon ti ti-briefcase"></i><span class="nav-title">Aktivitas</span></a></li> -->
+									<li <?php if ($this->uri->segment(2) == "jenisPelatihan" || $this->uri->segment(2) == "kategoriPelatihan") { echo 'class="active"';} ?>><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-notepad"></i><span class="nav-title">Master</span></a>
+										<ul aria-expanded="false">
+											<li <?php if ($this->uri->segment(2) == "jenisPelatihan") { echo 'class="active"';} ?>> <a href='<?= base_url(); ?>dashboard/jenisPelatihan'>Jenis Pelatihan</a> </li>
+											<li <?php if ($this->uri->segment(2) == "kategoriPelatihan") { echo 'class="active"';} ?>> <a href='<?= base_url(); ?>dashboard/kategoriPelatihan'>Kategori Pelatihan</a> </li>
+										</ul>
+									</li>
+									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "user") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/user" aria-expanded="false"><i class="nav-icon ti ti-headphone-alt"></i><span class="nav-title">User</span></a> </li>
 								<?php } ?>
 							</ul>
 						</div>

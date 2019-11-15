@@ -15,17 +15,17 @@
       <?php } else {
         $no = 0;
         foreach ($slider as $slide) { $no++;?>
-            <div class="carousel-item <?php if($no <= 1){echo 'active';}?>">
-              <img src="<?= base_url(); ?>assets/upload/slider/<?= $slide->photo; ?>" alt="Slider1" class="carousel-obj">
-              <div class="carousel-caption">
-                <h3 class="text-white"><?= $slide->judul; ?></h3>
-                <p><?= $slide->detail; ?></p>
-                <button class="btn btn-info" type="button">Selengkapnya</button>
-              </div>
-            </div> 
-          <?php }
-          
-        }  ?>
+          <div class="carousel-item <?php if($no <= 1){echo 'active';}?>">
+            <img src="<?= base_url(); ?>assets/upload/slider/<?= $slide->photo; ?>" alt="Slider1" class="carousel-obj">
+            <div class="carousel-caption">
+              <h3 class="text-white"><?= $slide->judul; ?></h3>
+              <p><?= $slide->detail; ?></p>
+              <button class="btn btn-info" type="button">Selengkapnya</button>
+            </div>
+          </div> 
+        <?php }
+
+      }  ?>
 
       <!-- <div class="carousel-item">
         <img src="<?= base_url(); ?>assets/home/images/bg_2.jpg" alt="Slider2" class="carousel-obj">
@@ -71,7 +71,7 @@
   <h2 class="text-center text-info ftco-animate"><b>Jadwal Pelatihan</b></h2>
   <div class="row d-block">
     <div class="col-md-12">
-      <div class="row justify-content-center ftco-animate">
+      <div class="row ftco-animate">
         <div class="col-lg-3 col-md-3 col-sm-6 col-12">
           <label>Bulan</label>
           <div class="form-group">
@@ -119,77 +119,23 @@
            <input type="text" class="form-control" placeholder="Masukan Pencarian Disini" name="">
          </div>
        </div>
-       <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <a href="<?= base_url(); ?>Home/pelatihanDetail"><h5 class="text-info">Programmer</h5></a>
-            <span class="badge badge-success">CV. Frais Mediatech</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.</p>
-            <a href="<?= base_url(); ?>Home/pelatihanDetail" class="btn btn-info float-right">Selengkapnya</a>
+       <?php foreach ($pelatihan as $row) { ?>
+         <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <a href="<?= base_url(); ?>Home/pelatihanDetail/<?= $row->kode_pelatihan; ?>"><h5 class="text-info"><?= $row->nama;?></h5></a>
+              <span class="badge badge-success"><?= $row->standar_kompetensi;?></span>
+              <p><?= $row->keterangan;?></p>
+              <a href="<?= base_url(); ?>Home/pelatihanDetail/<?= $row->kode_pelatihan; ?>" class="btn btn-info float-right">Selengkapnya</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <a href="<?= base_url(); ?>Home/pelatihanDetail"><h5 class="text-info">Programmer</h5></a>
-            <span class="badge badge-success">CV. Frais Mediatech</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.</p>
-            <a href="<?= base_url(); ?>Home/pelatihanDetail" class="btn btn-info float-right">Selengkapnya</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <a href="<?= base_url(); ?>Home/pelatihanDetail"><h5 class="text-info">Programmer</h5></a>
-            <span class="badge badge-success">CV. Frais Mediatech</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.</p>
-            <a href="<?= base_url(); ?>Home/pelatihanDetail" class="btn btn-info float-right">Selengkapnya</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <a href="<?= base_url(); ?>Home/pelatihanDetail"><h5 class="text-info">Programmer</h5></a>
-            <span class="badge badge-success">CV. Frais Mediatech</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.</p>
-            <a href="<?= base_url(); ?>Home/pelatihanDetail" class="btn btn-info float-right">Selengkapnya</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <a href="<?= base_url(); ?>Home/pelatihanDetail"><h5 class="text-info">Programmer</h5></a>
-            <span class="badge badge-success">CV. Frais Mediatech</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.</p>
-            <a href="<?= base_url(); ?>Home/pelatihanDetail" class="btn btn-info float-right">Selengkapnya</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <a href="<?= base_url(); ?>Home/pelatihanDetail"><h5 class="text-info">Programmer</h5></a>
-            <span class="badge badge-success">CV. Frais Mediatech</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.</p>
-            <a href="<?= base_url(); ?>Home/pelatihanDetail" class="btn btn-info float-right">Selengkapnya</a>
-          </div>
-        </div>
-      </div>
+      <?php } ?>
     </div>
     <br>
     <div class="row justify-content-center">
       <div class="col-lg-4 col-md-4 col-sm-12">
-        <a href="<?= base_url();?>Home/pelatihan" class="btn btn-danger w-100 ftco-animate mb-1">Lihat Semua Pelatihan</a>
+        <!-- <a href="<?= base_url();?>Home/pelatihan" class="btn btn-danger w-100 ftco-animate mb-1">Lihat Semua Pelatihan</a> -->
       </div>
     </div>
   </div>
@@ -204,72 +150,28 @@
     <div class="col-md-12">
       <div class="row justify-content-end ftco-animate">
         <div class="col-lg-5 col-md-5 col-sm-6 col-12 float-right">
-          <label>Nama Pelatihan</label>
+          <label>Pencarian</label>
           <div class="form-group">
            <input type="text" class="form-control" placeholder="Masukan Pencarian LPK Disini" name="">
          </div>
        </div>
      </div>
-     <div class="row justify-content-center">
+     <div class="row ftco-animate">
+      <?php foreach ($lpk as $row) { ?>
       <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
         <div class="card">
           <div class="card-body">
-            <a href="<?= base_url();?>Home/lpkDetail"><h5 class="text-info">Programmer</h5></a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.</p>
+            <a href="<?= base_url();?>Home/lpkDetail/<?= $row->kode_user; ?>"><h5 class="text-info"><?= $row->nama  ; ?></h5></a>
+            <p><?= $row->alamat; ?></p>
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <a href="<?= base_url();?>Home/lpkDetail"><h5 class="text-info">Programmer</h5></a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <a href="<?= base_url();?>Home/lpkDetail"><h5 class="text-info">Programmer</h5></a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <a href="<?= base_url();?>Home/lpkDetail"><h5 class="text-info">Programmer</h5></a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <a href="<?= base_url();?>Home/lpkDetail"><h5 class="text-info">Programmer</h5></a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <a href="<?= base_url();?>Home/lpkDetail"><h5 class="text-info">Programmer</h5></a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
-        </div>
-      </div>
+    <?php } ?>
     </div>
     <br>
     <div class="row justify-content-center">
       <div class="col-lg-4 col-md-4 col-sm-12">
-        <a href="<?= base_url();?>Home/lpk" class="btn btn-danger w-100 ftco-animate mb-1">Lihat Semua LPK</a>
+        <!-- <a href="<?= base_url();?>Home/lpk" class="btn btn-danger w-100 ftco-animate mb-1">Lihat Semua LPK</a> -->
       </div>
     </div>
   </div>
@@ -282,84 +184,25 @@
     <div class="row text-center d-block">
       <div class="col-md-12">
         <h2 class="text-center text-light ftco-animate"><b>Informasi</b></h2>
-        <div class="row justify-content-center ftco-animate">
+        <div class="row ftco-animate">
+          <?php foreach ($berita as $row) { ?>
           <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated">
             <div class="blog-entry justify-content-end w-100">
-              <a href="<?= base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?= base_url(); ?>assets/home/images/bg_2.jpg');">
+              <a href="<?= base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?= base_url(); ?>assets/upload/berita/<?= $row->photo; ?>');">
               </a>
               <div class="text mt-3 mb-3 float-right d-block">
-                <h3 class="heading"><a href="<?= base_url(); ?>Home/infoDetail">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h3>
-                <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.</p>
-                <a href="<?= base_url(); ?>Home/infoDetail" class="btn btn-info float-right">Selengkapnya</a>
+                <h3 class="heading"><a href="<?= base_url(); ?>Home/infoDetail/<?= $row->id; ?>"><?= $row->judul; ?></a></h3>
+                <p class="text-justify"><?= $row->detail; ?></p>
+                <a href="<?= base_url(); ?>Home/infoDetail/<?= $row->id; ?>" class="btn btn-info float-right">Selengkapnya</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated">
-            <div class="blog-entry justify-content-end w-100">
-              <a href="<?= base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?= base_url(); ?>assets/home/images/bg_2.jpg');">
-              </a>
-              <div class="text mt-3 mb-3 float-right d-block">
-                <h3 class="heading"><a href="<?= base_url(); ?>Home/infoDetail">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h3>
-                <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.</p>
-                <a href="<?= base_url(); ?>Home/infoDetail" class="btn btn-info float-right">Selengkapnya</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated">
-            <div class="blog-entry justify-content-end w-100">
-              <a href="<?= base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?= base_url(); ?>assets/home/images/bg_2.jpg');">
-              </a>
-              <div class="text mt-3 mb-3 float-right d-block">
-                <h3 class="heading"><a href="<?= base_url(); ?>Home/infoDetail">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h3>
-                <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.</p>
-                <a href="<?= base_url(); ?>Home/infoDetail" class="btn btn-info float-right">Selengkapnya</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated">
-            <div class="blog-entry justify-content-end w-100">
-              <a href="<?= base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?= base_url(); ?>assets/home/images/bg_2.jpg');">
-              </a>
-              <div class="text mt-3 mb-3 float-right d-block">
-                <h3 class="heading"><a href="<?= base_url(); ?>Home/infoDetail">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h3>
-                <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.</p>
-                <a href="<?= base_url(); ?>Home/infoDetail" class="btn btn-info float-right">Selengkapnya</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated">
-            <div class="blog-entry justify-content-end w-100">
-              <a href="<?= base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?= base_url(); ?>assets/home/images/bg_2.jpg');">
-              </a>
-              <div class="text mt-3 mb-3 float-right d-block">
-                <h3 class="heading"><a href="<?= base_url(); ?>Home/infoDetail">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h3>
-                <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.</p>
-                <a href="<?= base_url(); ?>Home/infoDetail" class="btn btn-info float-right">Selengkapnya</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated">
-            <div class="blog-entry justify-content-end w-100">
-              <a href="<?= base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?= base_url(); ?>assets/home/images/bg_2.jpg');">
-              </a>
-              <div class="text mt-3 mb-3 float-right d-block">
-                <h3 class="heading"><a href="<?= base_url(); ?>Home/infoDetail">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h3>
-                <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.</p>
-                <a href="<?= base_url(); ?>Home/infoDetail" class="btn btn-info float-right">Selengkapnya</a>
-              </div>
-            </div>
-          </div>
+          <?php } ?>
         </div>
         <br>
         <div class="row justify-content-center">
           <div class="col-lg-4 col-md-4 col-sm-12">
-            <a href="<?= base_url();?>Home/info" class="btn btn-danger w-100 ftco-animate mb-1">Lihat Semua Informasi</a>
+            <!-- <a href="<?= base_url();?>Home/info" class="btn btn-danger w-100 ftco-animate mb-1">Lihat Semua Informasi</a> -->
           </div>
         </div>
       </div>

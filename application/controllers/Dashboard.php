@@ -317,12 +317,262 @@ class Dashboard extends CI_Controller {
 
 	public function pelatihan()
 	{
+		$pelatihan = array(
+			'jenis' => $this
+            ->model
+            ->dataJenis(),
+            'kategori' => $this
+            ->model
+            ->dataKategori(),
+            'pelatihan' => $this
+            ->model
+            ->dataPelatihan(),
+            // 'pesertaPelatihan' => $this
+            // ->model
+            // ->dataPesertaPelatihan()
+		);
 		$path = "";
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - Pelatihan Dan Kegiatan", $path),
-			"content" => $this->load->view('dashboard/pelatihan', false, true),
+			"content" => $this->load->view('dashboard/pelatihan', $pelatihan, true),
 		);
 		$this->load->view('dashboard/template/default_template', $data);
+	}
+
+	public function lulusPeserta(){
+	    $idUser = $this->input->post("idUser");
+	    $idPelatihan = $this->input->post("idPelatihan");
+	    $id = $this->input->post("id");
+
+	    $data = array(
+	        'status' => 1,
+	    );
+	    
+	    $this->db->where('nik', $idUser);
+	    $this->db->where('kode_pelatihan', $idPelatihan);
+	    $this->db->where('id', $id);
+	    $update = $this->db->update('table_peserta_pelatihan', $data);
+	    if ($update) {
+	        echo json_encode('ok');
+	    }
+	}
+
+	public function batalPeserta(){
+	    $idUser = $this->input->post("idUser");
+	    $idPelatihan = $this->input->post("idPelatihan");
+	    $id = $this->input->post("id");
+
+	    $data = array(
+	        'status' => 0,
+	    );
+	    
+	    $this->db->where('nik', $idUser);
+	    $this->db->where('kode_pelatihan', $idPelatihan);
+	    $this->db->where('id', $id);
+	    $update = $this->db->update('table_peserta_pelatihan', $data);
+	    if ($update) {
+	        echo json_encode('ok');
+	    }
+	}
+
+	public function tambahPelatihan() {
+		$ss = $this->session->userdata['kode'];
+		$kode = $this->tools->get_kode_pelatihan();
+		$nama = $this->input->post('nama');
+		$jenis = $this->input->post('jenis');
+		$kuota = $this->input->post('kuota');
+		$kategori = $this->input->post('kategori');
+		$standar = $this->input->post('standar');
+		$ket = $this->input->post('ket');
+		$tgl_a = $this->input->post('tgl_mulai_daftar');
+		$tgl_b = $this->input->post('tgl_akhir_daftar');
+		$tgl_c = $this->input->post('tgl_mulai_pel');
+		$tgl_d = $this->input->post('tgl_akhir_pel');
+
+		$data = array(
+			'kode_pelatihan' => $kode,
+			'nama' => $nama,
+			'kode_jenis' => $jenis,
+			'kuota' => $kuota,
+			'kode_kategori' => $kategori,
+			'standar_kompetensi' => $standar,
+			'keterangan' => $ket,
+			'tanggal_mulai_daftar' => $tgl_a,
+			'tanggal_berakhir_daftar' => $tgl_b,
+			'tanggal_mulai_pelatihan' => $tgl_c,
+			'tanggal_berakhir_pelatihan' => $tgl_d,
+			'kode_user' => $ss
+		);
+
+		$dataHistory = array(
+			'aktivitas'  => 'Tambah Pelatihan : '.$$kode,
+			'detail' => json_encode($data),
+			'kode_user' => $ss
+		);
+
+		$this->db->insert('table_pelatihan', $data);
+		$this->db->insert('table_history', $dataHistory);
+		$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
+		redirect('Dashboard/pelatihan');
+	}
+
+	public function ubahPelatihan() {
+		$id = $this->input->post('id');
+		$ss = $this->session->userdata['kode'];
+		$nama = $this->input->post('nama');
+		$jenis = $this->input->post('jenis');
+		$kuota = $this->input->post('kuota');
+		$kategori = $this->input->post('kategori');
+		$standar = $this->input->post('standar');
+		$ket = $this->input->post('ket');
+		$tgl_a = $this->input->post('tgl_mulai_daftar');
+		$tgl_b = $this->input->post('tgl_akhir_daftar');
+		$tgl_c = $this->input->post('tgl_mulai_pel');
+		$tgl_d = $this->input->post('tgl_akhir_pel');
+
+		$data = array(
+			'nama' => $nama,
+			'kode_jenis' => $jenis,
+			'kuota' => $kuota,
+			'kode_kategori' => $kategori,
+			'standar_kompetensi' => $standar,
+			'keterangan' => $ket,
+			'tanggal_mulai_daftar' => $tgl_a,
+			'tanggal_berakhir_daftar' => $tgl_b,
+			'tanggal_mulai_pelatihan' => $tgl_c,
+			'tanggal_berakhir_pelatihan' => $tgl_d,
+			'kode_user' => $ss
+		);
+
+		$dataHistory = array(
+			'aktivitas'  => 'Ubah Pelatihan : '.$$kode,
+			'detail' => json_encode($data),
+			'kode_user' => $ss
+		);
+
+		$this->db->where('kode_pelatihan', $id);
+		$this->db->update('table_pelatihan', $data);
+		$this->db->insert('table_history', $dataHistory);
+		$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
+		redirect('Dashboard/pelatihan');
+	}
+
+	public function jenisPelatihan()
+	{
+		$jenis = array(
+			'jenis' => $this
+            ->model
+            ->dataJenis()
+		);
+		$path = "";
+		$data = array(
+			"page" => $this->load("Pelatihan Kota Depok - Pelatihan Dan Kegiatan", $path),
+			"content" => $this->load->view('dashboard/jenispelatihan', $jenis, true),
+		);
+		$this->load->view('dashboard/template/default_template', $data);
+	}
+
+	public function tambahJenisPelatihan() {
+		$jenis = $this->input->post('jenis');
+		$ss = $this->session->userdata['kode'];
+		$kode = $this->tools->get_kode_jenis();
+
+		$data = array(
+			'kode_jenis' => $kode,
+			'jenis' => $jenis
+		);
+
+		$dataHistory = array(
+			'aktivitas'  => 'Tambah Jenis Pelatihan : '.$jenis,
+			// 'detail' => json_encode($data),
+			'kode_user' => $ss
+		);
+
+		$this->db->insert('table_jenis', $data);
+		$this->db->insert('table_history', $dataHistory);
+		$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
+		redirect('Dashboard/jenisPelatihan');
+	}
+
+	public function ubahJenis() {
+		$id = $this->input->post('id');
+		$jenis = $this->input->post('jenis');
+		$ss = $this->session->userdata['kode'];
+
+		$data = array(
+			'jenis' => $jenis
+		);
+
+		$dataHistory = array(
+			'aktivitas'  => 'Ubah Jenis Pelatihan : '.$id,
+			// 'detail' => json_encode($data),
+			'kode_user' => $ss
+		);
+
+		$this->db->where('kode_jenis', $id);
+		$this->db->update('table_jenis', $data);
+		$this->db->insert('table_history', $dataHistory);
+		$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
+		redirect('Dashboard/jenisPelatihan');
+	}
+
+	public function kategoriPelatihan()
+	{
+		$kategori = array(
+			'kategori' => $this
+            ->model
+            ->dataKategori()
+		);
+		$path = "";
+		$data = array(
+			"page" => $this->load("Pelatihan Kota Depok - Pelatihan Dan Kegiatan", $path),
+			"content" => $this->load->view('dashboard/kategoripelatihan', $kategori, true),
+		);
+		$this->load->view('dashboard/template/default_template', $data);
+	}
+
+	public function tambahKategoriPelatihan() {
+		$jenis = $this->input->post('jenis');
+		$ss = $this->session->userdata['kode'];
+		$kode = $this->tools->get_kode_kategori();
+
+		$data = array(
+			'kode_kategori' => $kode,
+			'kategori' => $jenis
+		);
+
+		$dataHistory = array(
+			'aktivitas'  => 'Tambah Kategori Pelatihan : '.$jenis,
+			// 'detail' => json_encode($data),
+			'kode_user' => $ss
+		);
+
+		$this->db->insert('table_kategori', $data);
+		$this->db->insert('table_history', $dataHistory);
+		$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
+		redirect('Dashboard/kategoriPelatihan');
+	}
+
+	public function ubahKategori() {
+		$id = $this->input->post('id');
+		$jenis = $this->input->post('jenis');
+		$ss = $this->session->userdata['kode'];
+
+		$data = array(
+			'kategori' => $jenis
+		);
+
+		$dataHistory = array(
+			'aktivitas'  => 'Ubah Kategori Pelatihan : '.$id,
+			// 'detail' => json_encode($data),
+			'kode_user' => $ss
+		);
+
+		$this->db->where('kode_kategori', $id);
+		$this->db->update('table_kategori', $data);
+		$this->db->insert('table_history', $dataHistory);
+		$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
+		redirect('Dashboard/kategoriPelatihan');
 	}
 
 	public function info()
@@ -381,10 +631,15 @@ class Dashboard extends CI_Controller {
 
 	public function user()
 	{
+		$user = array(
+			'lpkblkln' => $this
+            ->model
+            ->dataLPK()
+		);
 		$path = "";
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - User", $path),
-			"content" => $this->load->view('dashboard/user', false, true),
+			"content" => $this->load->view('dashboard/user', $user, true),
 		);
 		$this->load->view('dashboard/template/default_template', $data);
 	}
@@ -460,10 +715,20 @@ class Dashboard extends CI_Controller {
 
 	public function aktivitas()
 	{
+		$kode = $this->session->userdata['kode'];
+		$aktivitas = array(
+            'history' => $this
+            ->model
+            ->dataHistory($kode),
+            'historyAdmin' => $this
+            ->model
+            ->dataHistoryAdmin($kode),
+        );
+		$kode = 
 		$path = "";
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - Aktivitas Terbaru", $path),
-			"content" => $this->load->view('dashboard/aktivitas', false, true),
+			"content" => $this->load->view('dashboard/aktivitas', $aktivitas, true),
 		);
 		$this->load->view('dashboard/template/default_template', $data);
 	}

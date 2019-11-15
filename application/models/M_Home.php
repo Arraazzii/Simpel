@@ -15,4 +15,66 @@ class M_Home extends CI_Model{
         return $query->result();
     }
 
+    public function periodeDaftar($kode){
+        $this->db->select('tanggal_daftar');
+        $this->db->from('table_peserta_pelatihan a');
+        // $this->db->join('table_pelatihan b', 'b.kode_pelatihan = a.kode_pelatihan');
+        $this->db->join('table_peserta c', 'c.nik = a.nik');
+        $this->db->where('a.nik', $kode);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function dataBerita($limit){
+        $this->db->select('*');
+        $this->db->from('table_berita');
+        $this->db->limit($limit);
+        $this->db->order_by('id', 'DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function dataPelatihan($limit){
+        $this->db->select('*');
+        $this->db->from('table_pelatihan a');
+        $this->db->join('table_jenis b', 'b.kode_jenis = a.kode_jenis');
+        $this->db->join('table_kategori c', 'c.kode_kategori = a.kode_kategori');
+        $this->db->limit($limit);
+        $this->db->order_by('a.kode_pelatihan', 'DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function dataLPK($limit){
+        $this->db->select('*');
+        $this->db->from('table_user a');
+        $this->db->join('table_login b', 'b.kode_user = a.kode_user');
+        $this->db->join('table_pengurus c', 'c.kode_user = a.kode_user');
+        $this->db->limit($limit);
+        $this->db->order_by('b.created_date', 'DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function dataPelatihanDetail($id){
+        $this->db->select('*');
+        $this->db->from('table_pelatihan a');
+        $this->db->join('table_jenis b', 'b.kode_jenis = a.kode_jenis');
+        $this->db->join('table_kategori c', 'c.kode_kategori = a.kode_kategori');
+        $this->db->where('kode_pelatihan', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function dataPelatihanLain($id){
+        $this->db->select('*');
+        $this->db->from('table_pelatihan a');
+        $this->db->join('table_jenis b', 'b.kode_jenis = a.kode_jenis');
+        $this->db->join('table_kategori c', 'c.kode_kategori = a.kode_kategori');
+        $this->db->where('kode_pelatihan !=', $id);
+        $this->db->limit(5);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }
