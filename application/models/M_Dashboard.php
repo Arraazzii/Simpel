@@ -125,4 +125,144 @@ class M_Dashboard extends CI_Model{
         $query = $this->db->query("SELECT COUNT(COALESCE(nik, 0)) as total FROM table_peserta");
         return $query->result_array();
     }
+
+    public function laporan1($tgl_awal, $tgl_akhir)
+    {
+      $where = "";
+      if (!empty($tgl_awal) && !empty($tgl_akhir)) {
+        $where .= " WHERE register_date BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
+      }
+
+      $sql = "SELECT 
+                psrt.nik, 
+                psrt.kk, 
+                psrt.nama, 
+                psrt.jenis_kelamin,
+                almt.alamat,
+                almt.kelurahan,
+                almt.tempat_lahir,
+                almt.tanggal_lahir,
+                psrt.no_telepon,
+                psrt.pendidikan_terakhir,
+                jenis.jenis,
+                psrt.no_ak1 AS no_pencaker,
+                '' AS keterangan
+              FROM table_peserta psrt
+              LEFT JOIN table_alamat almt ON psrt.kode_alamat = almt.kode_alamat
+              LEFT JOIN table_peserta_pelatihan psrtp ON psrt.nik = psrtp.nik
+              LEFT JOIN table_pelatihan plthn ON psrtp.kode_pelatihan = plthn.kode_pelatihan
+              LEFT JOIN table_jenis jenis ON plthn.kode_jenis = jenis.kode_jenis";
+
+      $prepared = $this->db->query($sql);
+      return $prepared->result();
+    }
+
+    public function laporan2($tgl_awal, $tgl_akhir)
+    {
+      $where = "";
+      if (!empty($tgl_awal) && !empty($tgl_akhir)) {
+        $where .= " WHERE register_date BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
+      }
+
+      $sql = "SELECT 
+                psrt.nik, 
+                psrt.kk, 
+                psrt.nama, 
+                psrt.jenis_kelamin,
+                almt.alamat,
+                almt.kelurahan,
+                almt.tempat_lahir,
+                almt.tanggal_lahir,
+                psrt.no_telepon,
+                psrt.pendidikan_terakhir,
+                jenis.jenis,
+                plthn.status,
+                psrt.status_pekerjaan,
+                '' AS keterangan,
+                psrt.no_ak1 AS no_pencaker
+              FROM table_peserta psrt
+              LEFT JOIN table_alamat almt ON psrt.kode_alamat = almt.kode_alamat
+              LEFT JOIN table_peserta_pelatihan psrtp ON psrt.nik = psrtp.nik
+              LEFT JOIN table_pelatihan plthn ON psrtp.kode_pelatihan = plthn.kode_pelatihan
+              LEFT JOIN table_jenis jenis ON plthn.kode_jenis = jenis.kode_jenis";
+
+      $prepared = $this->db->query($sql);
+      return $prepared->result();
+    }
+
+    public function laporan3($tgl_awal, $tgl_akhir)
+    {
+      $where = "";
+      if (!empty($tgl_awal) && !empty($tgl_akhir)) {
+        $where .= " WHERE register_date BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
+      }
+
+      $sql = "SELECT 
+                '' AS no,
+                user.nama AS nama_lpk,
+                user.no_izin AS no_reg,
+                user.no_izin,
+                user.tanggal_izin,
+                pngrs.nama_pimpinan,
+                pngrs.no_telepon_pimpinan,
+                plthn.nama AS nama_program,
+                jp.jumlah_peserta AS jumlah_peserta,
+                jp.jumlah_lulusan AS jumlah_lulusan
+              FROM table_user user
+              LEFT JOIN table_pengurus pngrs ON user.kode_user = pngrs.kode_user
+              LEFT JOIN table_pelatihan plthn ON user.kode_user = plthn.kode_user
+              LEFT JOIN (
+                  SELECT 
+                    plthn.kode_user,
+                    COUNT(psrtp.id) AS jumlah_peserta,
+                    SUM(IF(psrtp.status = 1, 1, 0)) AS jumlah_lulusan
+                  FROM table_peserta_pelatihan psrtp 
+                  LEFT JOIN table_pelatihan plthn ON psrtp.kode_pelatihan = plthn.kode_pelatihan
+                  GROUP BY psrtp.kode_pelatihan
+              ) jp ON user.kode_user = jp.kode_user";
+
+      $prepared = $this->db->query($sql);
+      return $prepared->result();
+    }
+
+    public function laporan4($tgl_awal, $tgl_akhir)
+    {
+      $where = "";
+      if (!empty($tgl_awal) && !empty($tgl_akhir)) {
+        $where .= " WHERE register_date BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
+      }
+
+      $sql = "SELECT
+                '' AS kejuruan,
+                '' AS skema,
+                '' AS kapasitas,
+                user.nama,
+                karyawan.tptp,
+                karyawan.tptl,
+                karyawan.tpttp,
+                karyawan.tpttl,
+                karyawan.itp,
+                karyawan.itl,
+                karyawan.ittp,
+                karyawan.ittl
+              FROM table_user user
+              LEFT JOIN (
+                SELECT 
+                      kode_user, 
+                      SUM(IF(tipe = 'Tenaga Pelatihan Tetap' AND jenis_kelamin = 'Laki-Laki', jumlah, 0)) AS tptl,
+                      SUM(IF(tipe = 'Tenaga Pelatihan Tetap' AND jenis_kelamin = 'Perempuan', jumlah, 0)) AS tptp,
+                      SUM(IF(tipe = 'Tenaga Pelatihan Tidak Tetap' AND jenis_kelamin = 'Laki-Laki', jumlah, 0)) AS tpttp,
+                      SUM(IF(tipe = 'Tenaga Pelatihan Tidak Tetap' AND jenis_kelamin = 'Perempuan', jumlah, 0)) AS tpttl,
+                      SUM(IF(tipe = 'Instruktur Tetap' AND jenis_kelamin = 'Laki-Laki', jumlah, 0)) AS itp,
+                      SUM(IF(tipe = 'Instruktur Tetap' AND jenis_kelamin = 'Perempuan', jumlah, 0)) AS itl,
+                      SUM(IF(tipe = 'Instruktur Tidak Tetap' AND jenis_kelamin = 'Laki-Laki', jumlah, 0)) AS ittp,
+                      SUM(IF(tipe = 'Instruktur Tidak Tetap' AND jenis_kelamin = 'Perempuan', jumlah, 0)) AS ittl
+                  FROM table_anggota 
+                  WHERE kode_user = 'USER1'
+                  GROUP BY kode_user
+              ) karyawan ON user.kode_user = karyawan.kode_user";
+
+      $prepared = $this->db->query($sql);
+      return $prepared->result();
+    }
 }

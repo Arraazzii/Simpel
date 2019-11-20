@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class Dashboard extends CI_Controller {
 	public function __construct()
 	{
@@ -815,5 +816,25 @@ class Dashboard extends CI_Controller {
 		);
 		$this->load->view('dashboard/template/default_template', $data);
 	}
+
+  public function laporan1()
+  {
+		$tgl_awal 			= $this->input->post("tgl_awal");
+		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
+		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
+		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
+
+		$dataLaporan = $this->model->laporan1($tgl_awal, $tgl_akhir);
+
+		$dataView = [
+			'dataLaporan' => $dataLaporan,
+			'tgl_awal' => date("d M Y", strtotime($tgl_awal)),
+			'tgl_akhir' => date("d M Y", strtotime($tgl_akhir))
+		];
+
+		$view = $this->load->view('dashboard/laporan/laporan1', $dataView, true);
+    // echo $view;
+		$this->pdfgenerator->generate($view, "Laporan BKK", TRUE, 'A4', 'landscape');
+  }
 	
 }
