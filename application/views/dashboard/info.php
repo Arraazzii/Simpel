@@ -64,7 +64,7 @@
                             <select class="form-control" name="tipe" required="">
                                 <option hidden value="">Silahkan Pilih</option>
                                 <option value="Berita" <?php if ($row->tipe == 'Berita') { echo 'selected'; } ?>>Berita</option>
-                                <option value="Events" <?php if ($row->tipe == 'Berita') { echo 'selected'; } ?>>Events</option>
+                                <option value="Events" <?php if ($row->tipe == 'Events') { echo 'selected'; } ?>>Events</option>
                             </select>
                         </div>
                         <div class="form-group">

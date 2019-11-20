@@ -74,15 +74,17 @@ class M_Dashboard extends CI_Model{
         return $query->result();
     }
 
-    // public function dataPesertaPelatihan(){
-    //     $this->db->select('*');
-    //     $this->db->from('table_peserta_pelatihan a');
-    //     $this->db->join('table_peserta b', 'b.nik = a.nik');
-    //     $this->db->join('table_pelatihan c', 'c.kode_pelatihan = a.kode_pelatihan');
-    //     $this->db->order_by('a.id', 'DESC');
-    //     $query = $this->db->get();
-    //     return $query->result();
-    // }
+    public function dataPesertaPelatihan(){
+        $this->db->select('b.nik nik,b.nama, b.status_pekerjaan status, b.no_telepon hp, d.kelurahan kel, d.kecamatan kec, d.alamat alamat, c.nama nama_pelatihan, b.nama_perusahaan, b.alamat_perusahaan, b.no_telp_perusahaan');
+        $this->db->from('table_peserta_pelatihan a');
+        $this->db->join('table_peserta b', 'b.nik = a.nik');
+        $this->db->join('table_pelatihan c', 'c.kode_pelatihan = a.kode_pelatihan');
+        $this->db->join('table_alamat d', 'd.kode_alamat = b.kode_alamat');
+        $this->db->order_by('a.id', 'DESC');
+        $this->db->where('a.status !=', '0');
+        $query = $this->db->get();
+        return $query->result();
+    }
 
     public function dataLPK(){
         $this->db->select('*');

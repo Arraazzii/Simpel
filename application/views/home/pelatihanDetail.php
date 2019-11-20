@@ -4,18 +4,20 @@
     <div class="row mt-5 nomargintop">
       <div class="col-lg-8 col-md-7 col-sm-12 col-12">
         <?= $this->session->flashdata('notif');?>
-        <h3><b><?= $detail[0]->nama;  ?></b></h3>
-        <p class="text-justify">Kuota : <?= $detail[0]->kuota;  ?> Peserta</p>
-        <p class="text-justify">Standar Kompetensi : <?= $detail[0]->standar_kompetensi;  ?> Peserta</p>
-        <p class="text-justify">Keterangan : <?= $detail[0]->keterangan;  ?></p>
-        <p class="text-justify">Tanggal Mulai Pelatihan : <?= tanggal_indo($detail[0]->tanggal_mulai_pelatihan, TRUE);  ?></p>
-        <p class="text-justify">Tanggal Berakhir Pelatihan : <?= tanggal_indo($detail[0]->tanggal_berakhir_pelatihan, TRUE);  ?></p>
-      </div>
-      <div class="col-lg-4 col-md-5 col-sm-12 col-12">
-        <h4 class="text-info"><b>Pelatihan Lainnya</b></h4>
-        <?php foreach ($lainnya as $row) { ?>
-          <div class="card mb-2">
-            <div class="row m-1">
+        <h3><b><?= $detail[0]->nama;  ?>
+          <small><?php $date = date('Y-m-d'); if ($date > $detail[0]->tanggal_berakhir_daftar) { ?> <span class="badge badge-danger">Expired</span><?php } ?></small>
+        </h3>
+            <p class="text-justify">Kuota : <?= $detail[0]->kuota;  ?> Peserta</p>
+            <p class="text-justify">Standar Kompetensi : <?= $detail[0]->standar_kompetensi;  ?> Peserta</p>
+            <p class="text-justify">Keterangan : <?= $detail[0]->keterangan;  ?></p>
+            <p class="text-justify">Tanggal Mulai Pelatihan : <?= tanggal_indo($detail[0]->tanggal_mulai_pelatihan, TRUE);  ?></p>
+            <p class="text-justify">Tanggal Berakhir Pelatihan : <?= tanggal_indo($detail[0]->tanggal_berakhir_pelatihan, TRUE);  ?></p>
+          </div>
+          <div class="col-lg-4 col-md-5 col-sm-12 col-12">
+            <h5 class="text-info"><b>Pelatihan Lainnya</b></h5>
+            <?php foreach ($lainnya as $row) { ?>
+              <div class="card mb-2">
+                <div class="row m-1">
             <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-4">
               <img src="<?= base_url(); ?>assets/upload/berita/<?= $row->photo; ?>" class="img-donatur2">
               <h3><b></b></h3>
@@ -29,7 +31,11 @@
       <?php } ?>
     </div>
   </div>
-  <button class="btn btn-primary"  data-toggle="modal" data-target="#myModalTambah">Daftar</button>
+  <?php
+  $date = date('Y-m-d');
+  if ($date <= $detail[0]->tanggal_berakhir_daftar) { ?>
+    <button class="btn btn-primary"  data-toggle="modal" data-target="#myModalTambah">Daftar</button>
+  <?php } ?>
 </div>
 </section>
 <?php 
@@ -146,14 +152,14 @@ function tanggal_indo($tanggal, $cetak_hari = false) {
               <option value="Perguruan Tinggi">Perguruan Tinggi</option>
             </select>
           </div>
-          <div class="form-group">
+<!--           <div class="form-group">
             <label>Status Pekerjaan</label>
             <select class="form-control" name="pekerjaan">
               <option hidden="" value="">Silahkan Pilih</option>
               <option value="Sudah Bekerja">Sudah Bekerja</option>
               <option value="Belum Bekerja">Belum Bekera</option>
             </select>
-          </div>
+          </div> -->
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">

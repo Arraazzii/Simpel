@@ -99,7 +99,7 @@ class Home extends CI_Controller {
 			'email' => $email,
 			'no_telepon' => $telepon,
 			'pendidikan_terakhir' => $pend,
-			'status_pekerjaan' => $kerja,
+			'status_pekerjaan' => 'Belum Bekerja',
 			'kode_alamat' => $kode_alm
 		);
 

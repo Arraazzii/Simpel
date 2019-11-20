@@ -22,11 +22,11 @@
         background-color: #ffffff;
     }
     .table th {
-       text-align: center;   
-   }
-   .table td {
-       text-align: center;   
-   }
+     text-align: center;   
+ }
+ .table td {
+     text-align: center;   
+ }
 </style>
 <div class="row">
     <div class="col-lg-12">
@@ -71,17 +71,25 @@
                                         <?php } ?>
                                     </td>
                                     <td>
-                                        <button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#myModalLihat<?= $row->kode_user; ?>">Detail</button>
-                                        <button class="btn btn-danger btn-sm" type="button" onclick="hapusLPK('<?= $row->kode_user; ?>')">Delete</button>
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
+                                        <?php if ($row->status == 'Pending') { ?>
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="blokir('<?= $row->kode_user; ?>')">Blokir</button>
+                                            <button type="button" class="btn btn-success btn-sm" onclick="aktivasi('<?= $row->kode_user; ?>')">Aktivasi</button>
+                                        <?php } elseif ($row->status == 'Suspend') { ?>
+                                         <button type="button" class="btn btn-success btn-sm" onclick="aktivasi('<?= $row->kode_user; ?>')">Buka Blokir</button>
+                                     <?php } else { ?>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="blokir('<?= $row->kode_user; ?>')">Blokir</button>
+                                    <?php } ?>
+                                    <button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#myModalLihat<?= $row->kode_user; ?>">Detail</button>
+                                    <button class="btn btn-danger btn-sm" type="button" onclick="hapusLPK('<?= $row->kode_user; ?>')">Delete</button>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 </div>
 <?php 
 $no = 1;
@@ -391,18 +399,10 @@ foreach ($lpkblkln as $row) {
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <?php if ($row->status == 'Pending') { ?>
-                        <button type="button" class="btn btn-danger" onclick="blokir('<?= $row->kode_user; ?>')">Blokir</button>
-                        <button type="button" class="btn btn-success" onclick="aktivasi('<?= $row->kode_user; ?>')">Aktivasi</button>
-                    <?php } elseif ($row->status == 'Suspend') { ?>
-                       <button type="button" class="btn btn-danger" onclick="aktivasi('<?= $row->kode_user; ?>')">Buka Blokir</button>
-                   <?php } else { ?>
-                    <button type="button" class="btn btn-danger" onclick="blokir('<?= $row->kode_user; ?>')">Blokir</button>
-                <?php } ?>
+                </div>
             </div>
         </div>
     </div>
-</div>
 <?php } ?>
 
 <!-- The Modal -->

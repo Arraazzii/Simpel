@@ -19,6 +19,7 @@
                                 <th>Pelatihan</th>
                                 <th>Jenis Pelatihan</th>
                                 <th>Kuota</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -31,7 +32,21 @@
                                     <td><?= $row->nama; ?></td>
                                     <td><?= $row->jenis; ?></td>
                                     <td><?= $row->kuota; ?></td>
+                                    <td id="statuspelatihan<?= $row->kode_pelatihan; ?>">
+                                        <?php if ($row->status == 'Aktif') { ?>
+                                            <span class="badge badge-success">Aktif</span>
+                                        <?php } else { ?>
+                                            <span class="badge badge-danger">Tidak Aktif</span>
+                                        <?php } ?>
+                                    </td>
                                     <td>
+                                        <?php if ($row->status == 'Aktif') { ?>
+                                            <button class="btn btn-danger btn-sm" onclick="nonaktifkan('<?= $row->kode_pelatihan; ?>')" id="nonaktif<?= $row->kode_pelatihan; ?>">Non Aktifkan</button>
+                                            <button class="btn btn-success btn-sm batalkan" onclick="aktifkan('<?= $row->kode_pelatihan; ?>')" id="aktif<?= $row->kode_pelatihan; ?>">Aktifkan</button>
+                                        <?php } else { ?>
+                                            <button class="btn btn-success btn-sm" onclick="aktifkan('<?= $row->kode_pelatihan; ?>')" id="aktif<?= $row->kode_pelatihan; ?>">Aktifkan</button>
+                                            <button class="btn btn-danger btn-sm batalkan" onclick="nonaktifkan('<?= $row->kode_pelatihan; ?>')" id="nonaktif<?= $row->kode_pelatihan; ?>">Non Aktifkan</button>
+                                        <?php } ?>
                                         <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit<?= $row->kode_pelatihan; ?>">Detail</button>
                                         <button class="btn btn-danger btn-sm" type="button" onclick="hapus()">Delete</button>
                                     </td>
@@ -54,7 +69,7 @@ foreach ($pelatihan as $row) { ?>
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Pelatihan</h4>
+                    <h4 class="modal-title">Detail Pelatihan</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal body -->
@@ -64,7 +79,7 @@ foreach ($pelatihan as $row) { ?>
                             <li class="nav-item">
                                 <a class="nav-link active show" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true"> <i class="fa fa-home"></i> Data</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" id="listpeserta<?= $row->kode_pelatihan; ?>" <?php if ($row->status != 'Aktif') { echo 'style="display:none"';};?>>
                                 <a class="nav-link" id="pengurus-tab" data-toggle="tab" href="#pengurus" role="tab" aria-controls="pengurus" aria-selected="false"><i class="fa fa-user"></i> Peserta </a>
                             </li>
                         </ul>
@@ -277,6 +292,55 @@ foreach ($pelatihan as $row) { ?>
 
 <script type="text/javascript">
     $(".batalkan").hide();
+    function aktifkan(idPelatihan){
+        $.ajax({
+            url: '<?= base_url();?>Dashboard/aktifkanPelatihan',
+            type: 'POST',
+            data: {
+                idPelatihan : idPelatihan,
+            },
+            dataType: "JSON",
+            error: function (xhr, ajaxOptions, thrownError) {
+                swal("Error!", "Please try again", "error");
+            },
+            success: function(data) {
+                if (data === 'ok') {
+                    $("#aktif" + idPelatihan).hide();
+                    $("#nonaktif" + idPelatihan).show();
+                    $("#listpeserta" + idPelatihan).show();
+                    document.getElementById("statuspelatihan" + idPelatihan).innerHTML = '<span class="badge badge-success">Aktif</span>';
+                }else{
+
+                }
+            }
+        });
+    }
+
+    function nonaktifkan(idPelatihan){
+        $.ajax({
+            url: '<?= base_url();?>Dashboard/nonAktifkanPelatihan',
+            type: 'POST',
+            data: {
+                idPelatihan : idPelatihan,
+            },
+            dataType: "JSON",
+            error: function (xhr, ajaxOptions, thrownError) {
+                swal("Error!", "Please try again", "error");
+            },
+            success: function(data) {
+                if (data === 'ok') {
+                    $("#aktif" + idPelatihan).show();
+                    $("#nonaktif" + idPelatihan).hide();
+                    $("#listpeserta" + idPelatihan).hide();
+                    document.getElementById("statuspelatihan" + idPelatihan).innerHTML = '<span class="badge badge-danger">Tidak Aktif</span>';
+                }else{
+
+                }
+            }
+        });
+    }
+
+
     function luluskan(idUser, idPelatihan, id, status){
         $.ajax({
             url: '<?= base_url();?>Dashboard/lulusPeserta',

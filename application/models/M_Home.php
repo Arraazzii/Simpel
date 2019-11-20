@@ -41,6 +41,7 @@ class M_Home extends CI_Model{
         $this->db->join('table_kategori c', 'c.kode_kategori = a.kode_kategori');
         $this->db->limit($limit);
         $this->db->order_by('a.kode_pelatihan', 'DESC');
+        $this->db->where('a.status', 'Aktif');
         $query = $this->db->get();
         return $query->result();
     }

@@ -1,4 +1,3 @@
-<!-- Notification -->
 <?= $this->session->flashdata('notif');?>
 <div class="row">
     <div class="col-md-12">
@@ -69,7 +68,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-12">
+    <!-- <div class="col-lg-12">
         <div class="card card-statistics">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <div class="card-heading">
@@ -115,6 +114,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
-<!-- end container-fluid -->
+<!-- end container-fluid

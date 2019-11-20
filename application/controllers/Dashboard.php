@@ -326,10 +326,7 @@ class Dashboard extends CI_Controller {
             ->dataKategori(),
             'pelatihan' => $this
             ->model
-            ->dataPelatihan(),
-            // 'pesertaPelatihan' => $this
-            // ->model
-            // ->dataPesertaPelatihan()
+            ->dataPelatihan()
 		);
 		$path = "";
 		$data = array(
@@ -337,6 +334,34 @@ class Dashboard extends CI_Controller {
 			"content" => $this->load->view('dashboard/pelatihan', $pelatihan, true),
 		);
 		$this->load->view('dashboard/template/default_template', $data);
+	}
+
+	public function aktifkanPelatihan(){
+	    $idPelatihan = $this->input->post("idPelatihan");
+
+	    $data = array(
+	        'status' => 'Aktif',
+	    );
+	    
+	    $this->db->where('kode_pelatihan', $idPelatihan);
+	    $update = $this->db->update('table_pelatihan', $data);
+	    if ($update) {
+	        echo json_encode('ok');
+	    }
+	}
+
+	public function nonAktifkanPelatihan(){
+	    $idPelatihan = $this->input->post("idPelatihan");
+
+	    $data = array(
+	        'status' => 'Tidak Aktif',
+	    );
+	    
+	    $this->db->where('kode_pelatihan', $idPelatihan);
+	    $update = $this->db->update('table_pelatihan', $data);
+	    if ($update) {
+	        echo json_encode('ok');
+	    }
 	}
 
 	public function lulusPeserta(){
@@ -735,12 +760,45 @@ class Dashboard extends CI_Controller {
 
 	public function peserta()
 	{
+		$peserta = array(
+			'pesertaPelatihan' => $this
+            ->model
+            ->dataPesertaPelatihan()
+		);
 		$path = "";
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - Daftar Peserta", $path),
-			"content" => $this->load->view('dashboard/peserta', false, true),
+			"content" => $this->load->view('dashboard/peserta', $peserta, true),
 		);
 		$this->load->view('dashboard/template/default_template', $data);
+	}
+
+	public function ubahPeserta() {
+		$id = $this->input->post('id');
+		$ss = $this->session->userdata['kode'];
+		$status_kerja = $this->input->post('status_pekerjaan');
+		$nama = $this->input->post('nama');
+		$alamat = $this->input->post('alamat');
+		$telpon = $this->input->post('telp');
+
+		$data = array(
+			'status_pekerjaan' => $status_kerja,
+			'nama_perusahaan' => $nama,
+			'alamat_perusahaan' => $alamat,
+			'no_telp_perusahaan' => $telpon
+		);
+
+		$dataHistory = array(
+			'aktivitas'  => 'Ubah Peserta : '.$id,
+			'detail' => json_encode($data),
+			'kode_user' => $ss
+		);
+
+		$this->db->where('nik', $id);
+		$this->db->update('table_peserta', $data);
+		$this->db->insert('table_history', $dataHistory);
+		$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
+		redirect('Dashboard/peserta');
 	}
 
 	public function helpdesk()

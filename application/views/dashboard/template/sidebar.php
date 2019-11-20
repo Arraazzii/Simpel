@@ -322,7 +322,12 @@
 									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard" aria-expanded="false"><i class="nav-icon ti ti-dashboard"></i><span class="nav-title">Dashboard</span></a> </li>
 									<li class="nav-static-title">Menu</li>
 									<!-- <li><a href="<?php //echo base_url(); ?>dashboard/slider" aria-expanded="false"><i class="nav-icon ti ti-comment"></i><span class="nav-title">Slider</span></a> </li> -->
-									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "lpkblkln") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/lpkblkln" aria-expanded="false"><i class="nav-icon ti ti-package"></i><span class="nav-title">LPK / BLKLN</span></a> </li>
+									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "lpkblkln" || $this->uri->segment(2) == "statusLpk") { echo 'class="active"';} ?>><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-package"></i><span class="nav-title">LPK / BLKLN</span></a>
+										<ul aria-expanded="false">
+											<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "lpkblkln") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/lpkblkln" aria-expanded="false"><span class="nav-title">LPK / BLKLN</span></a> </li>
+											<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "statusLpk") { echo 'class="active"';} ?>> <a href='<?= base_url(); ?>dashboard/statusLpk'>Status LPK / BLKLN</a> </li>
+										</ul>
+									</li>
 									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "pelatihan") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/pelatihan" aria-expanded="false"><i class="nav-icon ti ti-pulse"></i><span class="nav-title">Kegiatan / Pelatihan</span></a> </li>
 									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "info") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/info" aria-expanded="false"><i class="nav-icon ti ti-clipboard"></i><span class="nav-title">Berita / Events</span></a> </li>
 									<li <?php if ($this->uri->segment(1) == "dashboard" && $this->uri->segment(2) == "peserta") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>dashboard/peserta" aria-expanded="false"><i class="nav-icon ti ti-comments-smiley"></i><span class="nav-title">Daftar Peserta</span></a> </li>
