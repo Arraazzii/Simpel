@@ -5,19 +5,19 @@
 <!--[if gt IE 8]><!--> 
 <html lang="en">
 <!--<![endif]-->
-<?php echo $page["head"]; ?>
-<?php echo $page['main_js'];?>
+<?= $page["head"]; ?>
+<?= $page['main_js'];?>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="<?php echo base_url();?>">Pelatihan Kota Depok</a>
+			<a class="navbar-brand" href="<?= base_url();?>">Pelatihan Kota Depok</a>
 			<button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="fas fa-bars"></span> Menu
 			</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav nav ml-auto menusBar">
 
-					<li class="nav-item"><a href="<?php echo base_url();?>" <?php if ($this->uri->segment(1) == '') { ?>
+					<li class="nav-item"><a href="<?= base_url();?>" <?php if ($this->uri->segment(1) == '') { ?>
 						class="nav-link nav-active" <?php }else{ ?> class="nav-link" <?php } ?>><span>Beranda</span></a></li>
 
 						<li class="nav-item dropdown">
@@ -25,22 +25,22 @@
 								Data
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="<?php echo base_url(); ?>Home/lpk">LPK/BLKLN</a><!-- 
-								<a class="dropdown-item" href="<?php echo base_url(); ?>Home/pelatihan">Jadwal</a>
-								<a class="dropdown-item" href="<?php echo base_url(); ?>Home/info">Informasi</a> -->
+								<a class="dropdown-item" href="<?= base_url(); ?>Home/lpk">LPK/BLKLN</a><!-- 
+								<a class="dropdown-item" href="<?= base_url(); ?>Home/pelatihan">Jadwal</a>
+								<a class="dropdown-item" href="<?= base_url(); ?>Home/info">Informasi</a> -->
 							</div>
 						</li>
 
-						<li class="nav-item"><a href="<?php echo base_url();?>pendaftaran" <?php if ($this->uri->segment(1) == 'pendaftaran') { ?> class="nav-link nav-active" <?php }else{ ?> class="nav-link" <?php } ?>><span>Pendaftaran</span></a></li>
+						<li class="nav-item"><a href="<?= base_url();?>pendaftaran" <?php if ($this->uri->segment(1) == 'pendaftaran') { ?> class="nav-link nav-active" <?php }else{ ?> class="nav-link" <?php } ?>><span>Pendaftaran</span></a></li>
 
-						<li class="nav-item"><a href="<?php echo base_url();?>login" <?php if ($this->uri->segment(1) == 'login') { ?> class="nav-link nav-active" <?php }else{ ?> class="nav-link" <?php } ?>><span>Login</span></a></li>
+						<li class="nav-item"><a href="<?= base_url();?>login" <?php if ($this->uri->segment(1) == 'login') { ?> class="nav-link nav-active" <?php }else{ ?> class="nav-link" <?php } ?>><span>Login</span></a></li>
 
 					</ul>
 				</div>
 			</div>
 		</nav>
 
-		<?php echo $content;?>
+		<?= $content;?>
 
 		<footer class="ftco-footer ftco-section">
 			<div class="container">
@@ -107,8 +107,8 @@
 		<!-- loader -->
 		<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 	</body>
-	<script src="<?php echo base_url();?>assets/home/js/aos.js"></script>
-	<script src="<?php echo base_url();?>assets/home/js/main.js"></script>
+	<script src="<?= base_url();?>assets/home/js/aos.js"></script>
+	<script src="<?= base_url();?>assets/home/js/main.js"></script>
 
 
 	</html>

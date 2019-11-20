@@ -5,19 +5,19 @@
       <div class="col-lg-8 col-md-7 col-sm-12 col-12">
         <?= $this->session->flashdata('notif');?>
         <h3><b><?= $detail[0]->nama;  ?>
-          <small><?php $date = date('Y-m-d'); if ($date > $detail[0]->tanggal_berakhir_daftar) { ?> <span class="badge badge-danger">Expired</span><?php } ?></small>
-        </h3>
-            <p class="text-justify">Kuota : <?= $detail[0]->kuota;  ?> Peserta</p>
-            <p class="text-justify">Standar Kompetensi : <?= $detail[0]->standar_kompetensi;  ?> Peserta</p>
-            <p class="text-justify">Keterangan : <?= $detail[0]->keterangan;  ?></p>
-            <p class="text-justify">Tanggal Mulai Pelatihan : <?= tanggal_indo($detail[0]->tanggal_mulai_pelatihan, TRUE);  ?></p>
-            <p class="text-justify">Tanggal Berakhir Pelatihan : <?= tanggal_indo($detail[0]->tanggal_berakhir_pelatihan, TRUE);  ?></p>
-          </div>
-          <div class="col-lg-4 col-md-5 col-sm-12 col-12">
-            <h5 class="text-info"><b>Pelatihan Lainnya</b></h5>
-            <?php foreach ($lainnya as $row) { ?>
-              <div class="card mb-2">
-                <div class="row m-1">
+        <small><?php $date = date('Y-m-d'); if ($date > $detail[0]->tanggal_berakhir_daftar) { ?> <span class="badge badge-danger">Expired</span><?php } ?></small>
+      </h3>
+      <p class="text-justify">Kuota : <?= $detail[0]->kuota;  ?> Peserta</p>
+      <p class="text-justify">Standar Kompetensi : <?= $detail[0]->standar_kompetensi;  ?> Peserta</p>
+      <p class="text-justify">Keterangan : <?= $detail[0]->keterangan;  ?></p>
+      <p class="text-justify">Tanggal Mulai Pelatihan : <?= tanggal_indo($detail[0]->tanggal_mulai_pelatihan, TRUE);  ?></p>
+      <p class="text-justify">Tanggal Berakhir Pelatihan : <?= tanggal_indo($detail[0]->tanggal_berakhir_pelatihan, TRUE);  ?></p>
+    </div>
+    <div class="col-lg-4 col-md-5 col-sm-12 col-12">
+      <h5 class="text-info"><b>Pelatihan Lainnya</b></h5>
+      <?php foreach ($lainnya as $row) { ?>
+        <div class="card mb-2">
+          <div class="row m-1">
             <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-4">
               <img src="<?= base_url(); ?>assets/upload/berita/<?= $row->photo; ?>" class="img-donatur2">
               <h3><b></b></h3>
@@ -126,13 +126,19 @@ function tanggal_indo($tanggal, $cetak_hari = false) {
             <label>Alamat</label>
             <textarea class="form-control" name="alamat"></textarea>
           </div>
-          <div class="form-group">
-            <label>Kelurahan</label>
-            <input type="text" name="kelurahan" class="form-control" placeholder="Kelurahan" required="">
-          </div>
+          <input name="provinsi" type="hidden" class="form-control" value="JAWA BARAT" readonly>
+          <input name="kota" type="hidden" class="form-control" value="KOTA DEPOK" readonly>
           <div class="form-group">
             <label>Kecamatan</label>
-            <input type="text" name="kecamatan" class="form-control" placeholder="Kecamatan" required="">
+            <select name="kecamatan" class="form-control">
+              <option hidden>-Pilih Kecamatan-</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Kelurahan</label>
+            <select name="kelurahan" class="form-control">
+              <option hidden>-Pilih Kelurahan-</option>
+            </select>
           </div>
           <div class="form-group">
             <label>Tempat Lahir</label>
@@ -152,14 +158,6 @@ function tanggal_indo($tanggal, $cetak_hari = false) {
               <option value="Perguruan Tinggi">Perguruan Tinggi</option>
             </select>
           </div>
-<!--           <div class="form-group">
-            <label>Status Pekerjaan</label>
-            <select class="form-control" name="pekerjaan">
-              <option hidden="" value="">Silahkan Pilih</option>
-              <option value="Sudah Bekerja">Sudah Bekerja</option>
-              <option value="Belum Bekerja">Belum Bekera</option>
-            </select>
-          </div> -->
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
@@ -170,3 +168,60 @@ function tanggal_indo($tanggal, $cetak_hari = false) {
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    onChangeProvinsi();
+  });
+</script>
+<script type="text/javascript">
+
+  function onChangeProvinsi(){
+
+    var form_data = {}
+
+
+    $.ajax({
+      url: "<?= base_url() ?>Indonesia/get_kecamatan",
+      type: "POST",
+      data: "form_data",
+      dataType: "json",
+      success : function(data){
+        $("select[name='kecamatan']").empty();
+        var option = "<option value='' hidden>-Pilih Kecamatan-</option>";
+        $.each(data, function(index, value){
+          option += "<option value='"+value.name+"'>"+value.name+"</option>";
+        });
+        console.log(data, option);
+        $("select[name='kecamatan']").append(option);
+      },
+      error : function(e){
+        console.log(e);
+      },
+    });
+
+    $("select[name='kecamatan']").change(function(){
+      var form_data = {
+        districtsId : $(this).val(),
+      }
+
+      $.ajax({
+        url: "<?= base_url() ?>Indonesia/get_kelurahan",
+        type: "POST",
+        data: form_data,
+        dataType: "json",
+        success : function(data){
+          $("select[name='kelurahan']").empty();
+          var option = "<option value='' hidden>-Pilih Kelurahan-</option>";
+          $.each(data, function(index, value){
+            option += "<option value='"+value.name+"'>"+value.name+"</option>";
+          });
+          console.log(data, option);
+          $("select[name='kelurahan']").append(option);
+        },
+        error : function(e){
+          console.log(e);
+        },
+      });
+    });
+  }
+</script>

@@ -149,4 +149,52 @@ class M_Tools extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
+
+     public function get_provinsi()
+    {
+        $query = $this->db->get('provinces')->result();
+        return $query;
+    }
+
+    public function get_kota($province_id)
+    {
+        $this->db->select('*');
+        $this->db->from('provinces');
+        $this->db->where('name', $province_id);
+        $query = $this->db->get()->row();
+
+        $this->db->select('*');
+        $this->db->from('regencies');
+        $this->db->where('province_id', '32');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_kecamatan($regencies_id)
+    {
+        $this->db->select('*');
+        $this->db->from('regencies');
+        $this->db->where('name', $regencies_id);
+        $query = $this->db->get()->row();
+
+        $this->db->select('*');
+        $this->db->from('districts');
+        $this->db->where('regency_id', '3276');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_kelurahan($district_id)
+    {
+        $this->db->select('*');
+        $this->db->from('districts');
+        $this->db->where('name', $district_id);
+        $query = $this->db->get()->row();
+
+        $this->db->select('*');
+        $this->db->from('villages');
+        $this->db->where('district_id', $query->id);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
