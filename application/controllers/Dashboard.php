@@ -873,14 +873,14 @@ class Dashboard extends CI_Controller {
 		redirect('Dashboard/helpdesk');
 	}
 
-	public function laporan1()
-	{
+  public function laporanPeserta()
+  {
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
 		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
 		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
 
-		$dataLaporan = $this->model->laporan1($tgl_awal, $tgl_akhir);
+		$dataLaporan = $this->model->laporanPeserta($tgl_awal, $tgl_akhir);
 
 		$dataView = [
 			'dataLaporan' => $dataLaporan,
@@ -891,6 +891,372 @@ class Dashboard extends CI_Controller {
 		$view = $this->load->view('dashboard/laporan/laporan1', $dataView, true);
     // echo $view;
 		$this->pdfgenerator->generate($view, "Laporan BKK", TRUE, 'A4', 'landscape');
+	}
+
+  public function laporanStatusPeserta()
+  {
+		$tgl_awal 			= $this->input->post("tgl_awal");
+		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
+		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
+		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
+
+		$dataLaporan = $this->model->laporanStatusPeserta($tgl_awal, $tgl_akhir);
+
+		$dataView = [
+			'dataLaporan' => $dataLaporan,
+			'tgl_awal' => date("d M Y", strtotime($tgl_awal)),
+			'tgl_akhir' => date("d M Y", strtotime($tgl_akhir))
+		];
+
+		$view = $this->load->view('dashboard/laporan/laporan2', $dataView, true);
+    // echo $view;
+		$this->pdfgenerator->generate($view, "Laporan BKK", TRUE, 'A4', 'landscape');
+	}
+
+  public function laporanLpkBlkln()
+  {
+		$tgl_awal 			= $this->input->post("tgl_awal");
+		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
+		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
+		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
+
+		$dataLpk = $this->model->laporanLpk($tgl_awal, $tgl_akhir);
+    $dataBlkln = $this->model->laporanBlkln($tgl_awal, $tgl_akhir);
+
+		$dataView = [
+			'dataLpk' => $dataLpk,
+      'dataBlkln' => $dataBlkln,
+			'tgl_awal' => date("d M Y", strtotime($tgl_awal)),
+			'tgl_akhir' => date("d M Y", strtotime($tgl_akhir))
+		];
+
+		$view = $this->load->view('dashboard/laporan/laporan3', $dataView, true);
+    // echo $view;
+		$this->pdfgenerator->generate($view, "Laporan BKK", TRUE, 'A4', 'landscape');
+	}
+
+  public function laporanPesertaXls()
+	{
+		$tgl_awal 			= $this->input->post("tgl_awal");
+		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
+		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
+		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
+
+		$dataLaporan = $this->model->laporanPeserta($tgl_awal, $tgl_akhir);
+
+		$dirPath  = BASEPATH."../assets/template_excel/laporan_peserta.xls";
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($dirPath);
+
+		$sheet = $spreadsheet->getActiveSheet();
+    // $sheet->setCellValue('A1', 'Hello World !');
+		$styleText = [
+			'font' => [
+				'bold' => false,
+			],
+			'alignment' => [
+				'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+			],
+			'borders' => [
+				'top' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'left' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'right' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'bottom' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+			],
+		];
+
+		$styleNumber = [
+			'font' => [
+				'bold' => false,
+			],
+			'alignment' => [
+				'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+			],
+			'borders' => [
+				'top' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'left' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'right' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'bottom' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+			],
+		];
+		$tableIndex = 4;
+		for ($i=0; $i < count($dataLaporan) ; $i++) { 
+			$tableIndex++;
+			$sheet->setCellValue('A'.$tableIndex, $dataLaporan[$i]->nik);
+			$sheet->setCellValue('B'.$tableIndex, $dataLaporan[$i]->kk);
+			$sheet->setCellValue('C'.$tableIndex, $dataLaporan[$i]->nama);
+			$sheet->setCellValue('D'.$tableIndex, $dataLaporan[$i]->jenis_kelamin);
+      $sheet->setCellValue('E'.$tableIndex, $dataLaporan[$i]->alamat);
+      $sheet->setCellValue('F'.$tableIndex, $dataLaporan[$i]->kelurahan);
+      $sheet->setCellValue('G'.$tableIndex, $dataLaporan[$i]->tempat_lahir." ".$dataLaporan[$i]->tanggal_lahir);
+      $sheet->setCellValue('H'.$tableIndex, $dataLaporan[$i]->no_telepon);
+      $sheet->setCellValue('I'.$tableIndex, $dataLaporan[$i]->pendidikan_terakhir);
+      $sheet->setCellValue('J'.$tableIndex, $dataLaporan[$i]->jenis);
+      $sheet->setCellValue('K'.$tableIndex, $dataLaporan[$i]->no_pencaker);
+      $sheet->setCellValue('L'.$tableIndex, $dataLaporan[$i]->keterangan);
+
+			// $spreadsheet->getActiveSheet()->getStyle('A'.$tableIndex)->applyFromArray($styleText);
+			// $spreadsheet->getActiveSheet()->getStyle('B'.$tableIndex)->applyFromArray($styleNumber);
+			// $spreadsheet->getActiveSheet()->getStyle('C'.$tableIndex)->applyFromArray($styleNumber);
+			// $spreadsheet->getActiveSheet()->getStyle('D'.$tableIndex)->applyFromArray($styleNumber);
+		}
+
+		// if (!empty($tgl_awal)) {
+		// 	$sheet->setCellValue('B2', date("d/m/Y", strtotime($tgl_awal)));
+		// }
+
+		// if (!empty($tgl_akhir)) {
+		// 	$sheet->setCellValue('D2', date("d/m/Y", strtotime($tgl_akhir)));
+		// }
+
+		$writer = new Xlsx($spreadsheet);
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment; filename="laporan Peserta.xlsx"');
+		$writer->save("php://output");
+    // $fileName = "{$dirPath}/filename.xls";
+
+    // recursively creates all required nested directories   
+    // $writer->save($fileName);
+    // echo $fileName;
+	}
+
+  public function laporanStatusPesertaXls()
+	{
+		$tgl_awal 			= $this->input->post("tgl_awal");
+		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
+		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
+		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
+
+		$dataLaporan = $this->model->laporanStatusPeserta($tgl_awal, $tgl_akhir);
+
+		$dirPath  = BASEPATH."../assets/template_excel/laporan_status_peserta.xls";
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($dirPath);
+
+		$sheet = $spreadsheet->getActiveSheet();
+    // $sheet->setCellValue('A1', 'Hello World !');
+		$styleText = [
+			'font' => [
+				'bold' => false,
+			],
+			'alignment' => [
+				'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+			],
+			'borders' => [
+				'top' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'left' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'right' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'bottom' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+			],
+		];
+
+		$styleNumber = [
+			'font' => [
+				'bold' => false,
+			],
+			'alignment' => [
+				'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+			],
+			'borders' => [
+				'top' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'left' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'right' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'bottom' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+			],
+		];
+		$tableIndex = 5;
+		for ($i=0; $i < count($dataLaporan) ; $i++) { 
+			$tableIndex++;
+			$sheet->setCellValue('A'.$tableIndex, $dataLaporan[$i]->nik);
+			$sheet->setCellValue('B'.$tableIndex, $dataLaporan[$i]->kk);
+			$sheet->setCellValue('C'.$tableIndex, $dataLaporan[$i]->nama);
+			$sheet->setCellValue('D'.$tableIndex, $dataLaporan[$i]->jenis_kelamin);
+      $sheet->setCellValue('E'.$tableIndex, $dataLaporan[$i]->alamat);
+      $sheet->setCellValue('F'.$tableIndex, $dataLaporan[$i]->kelurahan);
+      $sheet->setCellValue('G'.$tableIndex, $dataLaporan[$i]->tempat_lahir." ".$dataLaporan[$i]->tanggal_lahir);
+      $sheet->setCellValue('H'.$tableIndex, $dataLaporan[$i]->no_telepon);
+      $sheet->setCellValue('I'.$tableIndex, $dataLaporan[$i]->pendidikan_terakhir);
+      $sheet->setCellValue('J'.$tableIndex, $dataLaporan[$i]->jenis);
+      $sheet->setCellValue('K'.$tableIndex, $dataLaporan[$i]->status);
+      $sheet->setCellValue('L'.$tableIndex, $dataLaporan[$i]->status_pekerjaan);
+      $sheet->setCellValue('M'.$tableIndex, $dataLaporan[$i]->keterangan);
+      $sheet->setCellValue('N'.$tableIndex, $dataLaporan[$i]->no_pencaker);
+
+			// $spreadsheet->getActiveSheet()->getStyle('A'.$tableIndex)->applyFromArray($styleText);
+			// $spreadsheet->getActiveSheet()->getStyle('B'.$tableIndex)->applyFromArray($styleNumber);
+			// $spreadsheet->getActiveSheet()->getStyle('C'.$tableIndex)->applyFromArray($styleNumber);
+			// $spreadsheet->getActiveSheet()->getStyle('D'.$tableIndex)->applyFromArray($styleNumber);
+		}
+
+		// if (!empty($tgl_awal)) {
+		// 	$sheet->setCellValue('B2', date("d/m/Y", strtotime($tgl_awal)));
+		// }
+
+		// if (!empty($tgl_akhir)) {
+		// 	$sheet->setCellValue('D2', date("d/m/Y", strtotime($tgl_akhir)));
+		// }
+
+		$writer = new Xlsx($spreadsheet);
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment; filename="Laporan Status Peserta.xlsx"');
+		$writer->save("php://output");
+    // $fileName = "{$dirPath}/filename.xls";
+
+    // recursively creates all required nested directories   
+    // $writer->save($fileName);
+    // echo $fileName;
+	}
+
+  public function laporanLpkBlklnXls()
+	{
+		$tgl_awal 			= $this->input->post("tgl_awal");
+		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
+		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
+		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
+
+		$dataLpk = $this->model->laporanLpk($tgl_awal, $tgl_akhir);
+    $dataBlkln = $this->model->laporanBlkln($tgl_awal, $tgl_akhir);
+
+		$dirPath  = BASEPATH."../assets/template_excel/laporan_lpk_blkln.xls";
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($dirPath);
+
+		$sheet = $spreadsheet->getActiveSheet();
+    // $sheet->setCellValue('A1', 'Hello World !');
+		$styleText = [
+			'font' => [
+				'bold' => false,
+			],
+			'alignment' => [
+				'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+			],
+			'borders' => [
+				'top' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'left' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'right' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'bottom' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+			],
+		];
+
+		$styleNumber = [
+			'font' => [
+				'bold' => false,
+			],
+			'alignment' => [
+				'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+			],
+			'borders' => [
+				'top' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'left' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'right' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'bottom' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+			],
+		];
+		$tableIndex = 6;
+		for ($i=0; $i < count($dataLpk) ; $i++) { 
+			$tableIndex++;
+      $lpk = $dataLpk[$i];
+			$sheet->setCellValue('A'.$tableIndex, $lpk->no);
+			$sheet->setCellValue('B'.$tableIndex, $lpk->nama_lpk);
+			$sheet->setCellValue('C'.$tableIndex, $lpk->no_reg);
+			$sheet->setCellValue('D'.$tableIndex, $lpk->no_reg);
+      $sheet->setCellValue('E'.$tableIndex, $lpk->no_izin." ".$lpk->tanggal_izin);
+      $sheet->setCellValue('F'.$tableIndex, $lpk->nama_pimpinan." ".$lpk->no_telepon_pimpinan);
+      $sheet->setCellValue('G'.$tableIndex, $lpk->nama_program);
+      $sheet->setCellValue('H'.$tableIndex, $lpk->jumlah_peserta);
+      $sheet->setCellValue('I'.$tableIndex, $lpk->jumlah_lulusan);
+
+			// $spreadsheet->getActiveSheet()->getStyle('A'.$tableIndex)->applyFromArray($styleText);
+			// $spreadsheet->getActiveSheet()->getStyle('B'.$tableIndex)->applyFromArray($styleNumber);
+			// $spreadsheet->getActiveSheet()->getStyle('C'.$tableIndex)->applyFromArray($styleNumber);
+			// $spreadsheet->getActiveSheet()->getStyle('D'.$tableIndex)->applyFromArray($styleNumber);
+		}
+
+    $tableIndex = 7;
+		for ($i=0; $i < count($dataBlkln) ; $i++) { 
+			$tableIndex++;
+      $blkln = $dataBlkln[$i];
+			$sheet->setCellValue('M'.$tableIndex, $blkln->kejuruan);
+			$sheet->setCellValue('N'.$tableIndex, $blkln->skema);
+			$sheet->setCellValue('O'.$tableIndex, $blkln->kapasitas);
+			$sheet->setCellValue('P'.$tableIndex, $blkln->nama);
+      $sheet->setCellValue('Q'.$tableIndex, $blkln->tptp);
+      $sheet->setCellValue('R'.$tableIndex, $blkln->tptl);
+      $sheet->setCellValue('S'.$tableIndex, $blkln->tpttp);
+      $sheet->setCellValue('T'.$tableIndex, $blkln->tpttl);
+      $sheet->setCellValue('U'.$tableIndex, $blkln->itp);
+      $sheet->setCellValue('V'.$tableIndex, $blkln->itl);
+      $sheet->setCellValue('W'.$tableIndex, $blkln->ittp);
+      $sheet->setCellValue('X'.$tableIndex, $blkln->ittl);
+
+			// $spreadsheet->getActiveSheet()->getStyle('A'.$tableIndex)->applyFromArray($styleText);
+			// $spreadsheet->getActiveSheet()->getStyle('B'.$tableIndex)->applyFromArray($styleNumber);
+			// $spreadsheet->getActiveSheet()->getStyle('C'.$tableIndex)->applyFromArray($styleNumber);
+			// $spreadsheet->getActiveSheet()->getStyle('D'.$tableIndex)->applyFromArray($styleNumber);
+		}
+
+		// if (!empty($tgl_awal)) {
+		// 	$sheet->setCellValue('B2', date("d/m/Y", strtotime($tgl_awal)));
+		// }
+
+		// if (!empty($tgl_akhir)) {
+		// 	$sheet->setCellValue('D2', date("d/m/Y", strtotime($tgl_akhir)));
+		// }
+
+		$writer = new Xlsx($spreadsheet);
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment; filename="Laporan LPK & BLKLN.xlsx"');
+		$writer->save("php://output");
+    // $fileName = "{$dirPath}/filename.xls";
+
+    // recursively creates all required nested directories   
+    // $writer->save($fileName);
+    // echo $fileName;
 	}
 
 	public function statusLpk(){

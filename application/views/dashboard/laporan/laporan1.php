@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                  <!-- <div class="datatable-wrapper table-responsive" style="margin-top:20px; margin-bottom:30px;">
+                  <div class="datatable-wrapper table-responsive" style="margin-top:20px; margin-bottom:30px;">
                       <table class="table table-condensed">
                         <thead>
                           <tr>
@@ -60,7 +60,7 @@
                             ></td>
                           </tr>
                       </table>
-                    </div> -->
+                    </div>
                     <!-- <div class="form-group">
                         <button id="btn-reset" class="btn btn-sm btn-info">Refresh Table</button>
                     </div> -->

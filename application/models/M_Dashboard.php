@@ -134,11 +134,11 @@ class M_Dashboard extends CI_Model{
         return $query->result_array();
     }
 
-    public function laporan1($tgl_awal, $tgl_akhir)
+    public function laporanPeserta($tgl_awal, $tgl_akhir)
     {
       $where = "";
       if (!empty($tgl_awal) && !empty($tgl_akhir)) {
-        $where .= " WHERE register_date BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
+        $where .= " WHERE psrtp.tanggal_daftar BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
       }
 
       $sql = "SELECT 
@@ -159,17 +159,18 @@ class M_Dashboard extends CI_Model{
               LEFT JOIN table_alamat almt ON psrt.kode_alamat = almt.kode_alamat
               LEFT JOIN table_peserta_pelatihan psrtp ON psrt.nik = psrtp.nik
               LEFT JOIN table_pelatihan plthn ON psrtp.kode_pelatihan = plthn.kode_pelatihan
-              LEFT JOIN table_jenis jenis ON plthn.kode_jenis = jenis.kode_jenis";
+              LEFT JOIN table_jenis jenis ON plthn.kode_jenis = jenis.kode_jenis
+              {$where}";
 
       $prepared = $this->db->query($sql);
       return $prepared->result();
     }
 
-    public function laporan2($tgl_awal, $tgl_akhir)
+    public function laporanStatusPeserta($tgl_awal, $tgl_akhir)
     {
       $where = "";
       if (!empty($tgl_awal) && !empty($tgl_akhir)) {
-        $where .= " WHERE register_date BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
+        $where .= " WHERE psrtp.tanggal_daftar BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
       }
 
       $sql = "SELECT 
@@ -192,17 +193,18 @@ class M_Dashboard extends CI_Model{
               LEFT JOIN table_alamat almt ON psrt.kode_alamat = almt.kode_alamat
               LEFT JOIN table_peserta_pelatihan psrtp ON psrt.nik = psrtp.nik
               LEFT JOIN table_pelatihan plthn ON psrtp.kode_pelatihan = plthn.kode_pelatihan
-              LEFT JOIN table_jenis jenis ON plthn.kode_jenis = jenis.kode_jenis";
+              LEFT JOIN table_jenis jenis ON plthn.kode_jenis = jenis.kode_jenis
+              {$where}";
 
       $prepared = $this->db->query($sql);
       return $prepared->result();
     }
 
-    public function laporan3($tgl_awal, $tgl_akhir)
+    public function laporanLpk($tgl_awal, $tgl_akhir)
     {
       $where = "";
       if (!empty($tgl_awal) && !empty($tgl_akhir)) {
-        $where .= " WHERE register_date BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
+        $where .= " WHERE user.tanggal_izin BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
       }
 
       $sql = "SELECT 
@@ -227,17 +229,18 @@ class M_Dashboard extends CI_Model{
                   FROM table_peserta_pelatihan psrtp 
                   LEFT JOIN table_pelatihan plthn ON psrtp.kode_pelatihan = plthn.kode_pelatihan
                   GROUP BY psrtp.kode_pelatihan
-              ) jp ON user.kode_user = jp.kode_user";
+              ) jp ON user.kode_user = jp.kode_user
+              {$where}";
 
       $prepared = $this->db->query($sql);
       return $prepared->result();
     }
 
-    public function laporan4($tgl_awal, $tgl_akhir)
+    public function laporanBlkln($tgl_awal, $tgl_akhir)
     {
       $where = "";
       if (!empty($tgl_awal) && !empty($tgl_akhir)) {
-        $where .= " WHERE register_date BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
+        $where .= " WHERE user.tanggal_izin BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
       }
 
       $sql = "SELECT
@@ -268,7 +271,8 @@ class M_Dashboard extends CI_Model{
                   FROM table_anggota 
                   WHERE kode_user = 'USER1'
                   GROUP BY kode_user
-              ) karyawan ON user.kode_user = karyawan.kode_user";
+              ) karyawan ON user.kode_user = karyawan.kode_user
+              {$where}";
 
       $prepared = $this->db->query($sql);
       return $prepared->result();
