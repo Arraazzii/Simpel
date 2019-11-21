@@ -7,6 +7,11 @@ class Home extends CI_Controller {
 		parent::__construct();
 		$this->load->model("M_Home", "model");
 		$this->load->model("M_Tools", "tools");
+		if ($this->session->userdata('username') == true && $this->session->userdata('level') == "Admin") {
+			redirect('Dashboard');
+		} else if ($this->session->userdata('username') == true && $this->session->userdata('level') == "User") {
+			redirect('DashboardLPK');
+		}
 	}
 
 	private function load($title = '', $datapath = '')
@@ -214,11 +219,19 @@ class Home extends CI_Controller {
 
 	public function tambahHelpDesk()
 	{
+		$tipe = $this->input->post('tipe');
+		$nik = $this->input->post('nik');
+		$nama = $this->input->post('nama');
 		$email = $this->input->post('email');
+		$status = $this->input->post('status');
 		$masukan = $this->input->post('masukan');
 
 		$data = array(
+			"tipe" => $tipe,
 			"email" => $email,
+			"nik" => $nik,
+			"nama" => $nama,
+			"status" => $status,
 			"pesan" => $masukan
 		);
 

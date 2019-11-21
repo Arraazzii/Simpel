@@ -7,4 +7,14 @@ class M_DashboardLPK extends CI_Model{
         $this->load->database();
     }
 
+    public function dataLPK($id){
+        $this->db->select('*');
+        $this->db->from('table_user a');
+        $this->db->join('table_login b', 'b.kode_user = a.kode_user');
+        $this->db->join('table_pengurus c', 'c.kode_user = a.kode_user');
+        $this->db->where('a.kode_user', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }

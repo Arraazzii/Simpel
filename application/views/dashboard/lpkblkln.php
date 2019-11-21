@@ -73,7 +73,7 @@
                                     <td>
                                         <?php if ($row->status == 'Pending') { ?>
                                             <button type="button" class="btn btn-danger btn-sm" onclick="blokir('<?= $row->kode_user; ?>')">Blokir</button>
-                                            <button type="button" class="btn btn-success btn-sm" onclick="aktivasi('<?= $row->kode_user; ?>')">Aktivasi</button>
+                                            <button type="button" class="btn btn-success btn-sm" onclick="aktivasi('<?= $row->kode_user; ?>', '<?= $row->nama; ?>', '<?= $row->alamat; ?>', '<?= $row->email; ?>')">Aktivasi</button>
                                         <?php } elseif ($row->status == 'Suspend') { ?>
                                          <button type="button" class="btn btn-success btn-sm" onclick="aktivasi('<?= $row->kode_user; ?>')">Buka Blokir</button>
                                      <?php } else { ?>
@@ -629,7 +629,7 @@ foreach ($lpkblkln as $row) {
                 // $("#postingBtn").attr("disabled", "disabled");
             // });
     // });
-    function aktivasi(id){
+    function aktivasi(id, nama, alamat, email){
         swal({
             title: "Apakah Anda Yakin Mengaktifkan Akun Ini ?",
             // text: "Data Akan Menjadi Aktif !",
@@ -642,7 +642,10 @@ foreach ($lpkblkln as $row) {
                     url: '<?= base_url();?>Dashboard/aktivasiAkun',
                     type: 'POST',
                     data: {
-                        "id" : id
+                        "id" : id,
+                        "nama" : nama,
+                        "alamat" : alamat,
+                        "email" : email
                     },
                     dataType: "HTML",
                     error: function (xhr, ajaxOptions, thrownError) {

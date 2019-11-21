@@ -31,19 +31,19 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		$index = array(
-            'jumlahLPK' => $this
-            ->model
-            ->jumlahLPK(),
-            'jumlahBLKLN' => $this
-            ->model
-            ->jumlahBLKLN(),
-            'jumlahKegiatan' => $this
-            ->model
-            ->jumlahKegiatan(),
-            'jumlahPeserta' => $this
-            ->model
-            ->jumlahPeserta(),
-        );
+			'jumlahLPK' => $this
+			->model
+			->jumlahLPK(),
+			'jumlahBLKLN' => $this
+			->model
+			->jumlahBLKLN(),
+			'jumlahKegiatan' => $this
+			->model
+			->jumlahKegiatan(),
+			'jumlahPeserta' => $this
+			->model
+			->jumlahPeserta(),
+		);
 		$path = "";
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - Dashboard", $path),
@@ -56,8 +56,8 @@ class Dashboard extends CI_Controller {
 	{
 		$lpkblkln = array(
 			'lpkblkln' => $this
-            ->model
-            ->dataLPK()
+			->model
+			->dataLPK()
 		);
 		$path = "";
 		$data = array(
@@ -67,7 +67,7 @@ class Dashboard extends CI_Controller {
 		$this->load->view('dashboard/template/default_template', $data);
 	}
 
-		public function buatAkunLPK() {
+	public function buatAkunLPK() {
 		// Kode User 
 		$kode       = $this->tools->get_kode_user();
 		// Data Login
@@ -247,22 +247,64 @@ class Dashboard extends CI_Controller {
 
 	public function aktivasiAkun() {
 		$id = $this->input->post('id');
+		$email = $this->input->post('email');
+		$nama = $this->input->post('nama');
+		$alamat = $this->input->post('alamat');
 		$ss = $this->session->userdata['kode'];
 		$dataLPK = $this->model->LPK($id);
 
-		$data = array(
-			'status' => 'Aktif'
-		);
+		$this->load->library('PHPMailer');
+		$this->load->library('SMTP');
 
-		$dataHistory = array(
-			'aktivitas'  => 'Aktivasi Akun : '.$id,
-			'detail' => json_encode($dataLPK),
-			'kode_user' => $ss
-		);
+		$email_admin = 'disnaker.depok@gmail.com';
+		$nama_admin = 'noreply-Simpel';
+		$password_admin = '2014umar';
 
-		$this->db->where('kode_user', $id);
-		$this->db->update('table_login', $data);
-		$this->db->insert('table_history', $dataHistory);
+		$mail = new PHPMailer();
+		$mail->isSMTP();  
+		$mail->SMTPKeepAlive = true;
+		$mail->Charset  = 'UTF-8';
+		$mail->IsHTML(true);
+        // $mail->SMTPDebug = 1;
+		$mail->SMTPAuth = true;
+		$mail->Host = 'smtp.gmail.com'; 
+		$mail->Port = 587;
+		$mail->SMTPSecure = 'ssl';
+		$mail->Username = $email_admin;
+		$mail->Password = $password_admin;
+		$mail->Mailer   = 'smtp';
+		$mail->WordWrap = 100;       
+
+		$mail->setFrom($email_admin);
+		$mail->FromName = $nama_admin;
+		$mail->addAddress($email);
+		// $mail->AddEmbeddedImage('assets/img-acc-pencaker.png', 'acc');
+		$mail->Subject          = 'Verifikasi Akun '.$nama;
+		$mail_data['subject']   = $nama;
+		$mail_data['nama']  = $nama;
+		$mail_data['alamat']  = $alamat;
+		$message = $this->load->view('email_temp', $mail_data, TRUE);
+		$mail->Body = $message;
+		if ($mail->send()) {
+			$data = array(
+				'status' => 'Aktif'
+			);
+
+			$dataHistory = array(
+				'aktivitas'  => 'Aktivasi Akun : '.$id,
+				'detail' => json_encode($dataLPK),
+				'kode_user' => $ss
+			);
+
+			$this->db->where('kode_user', $id);
+			$this->db->update('table_login', $data);
+			$this->db->insert('table_history', $dataHistory);
+			$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
+		redirect('Dashboard/lpkblkln');
+		} else {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		}
 	}
 
 	public function blokirAkun() {
@@ -320,14 +362,14 @@ class Dashboard extends CI_Controller {
 	{
 		$pelatihan = array(
 			'jenis' => $this
-            ->model
-            ->dataJenis(),
-            'kategori' => $this
-            ->model
-            ->dataKategori(),
-            'pelatihan' => $this
-            ->model
-            ->dataPelatihan()
+			->model
+			->dataJenis(),
+			'kategori' => $this
+			->model
+			->dataKategori(),
+			'pelatihan' => $this
+			->model
+			->dataPelatihan()
 		);
 		$path = "";
 		$data = array(
@@ -338,67 +380,67 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function aktifkanPelatihan(){
-	    $idPelatihan = $this->input->post("idPelatihan");
+		$idPelatihan = $this->input->post("idPelatihan");
 
-	    $data = array(
-	        'status' => 'Aktif',
-	    );
-	    
-	    $this->db->where('kode_pelatihan', $idPelatihan);
-	    $update = $this->db->update('table_pelatihan', $data);
-	    if ($update) {
-	        echo json_encode('ok');
-	    }
+		$data = array(
+			'status' => 'Aktif',
+		);
+
+		$this->db->where('kode_pelatihan', $idPelatihan);
+		$update = $this->db->update('table_pelatihan', $data);
+		if ($update) {
+			echo json_encode('ok');
+		}
 	}
 
 	public function nonAktifkanPelatihan(){
-	    $idPelatihan = $this->input->post("idPelatihan");
+		$idPelatihan = $this->input->post("idPelatihan");
 
-	    $data = array(
-	        'status' => 'Tidak Aktif',
-	    );
-	    
-	    $this->db->where('kode_pelatihan', $idPelatihan);
-	    $update = $this->db->update('table_pelatihan', $data);
-	    if ($update) {
-	        echo json_encode('ok');
-	    }
+		$data = array(
+			'status' => 'Tidak Aktif',
+		);
+
+		$this->db->where('kode_pelatihan', $idPelatihan);
+		$update = $this->db->update('table_pelatihan', $data);
+		if ($update) {
+			echo json_encode('ok');
+		}
 	}
 
 	public function lulusPeserta(){
-	    $idUser = $this->input->post("idUser");
-	    $idPelatihan = $this->input->post("idPelatihan");
-	    $id = $this->input->post("id");
+		$idUser = $this->input->post("idUser");
+		$idPelatihan = $this->input->post("idPelatihan");
+		$id = $this->input->post("id");
 
-	    $data = array(
-	        'status' => 1,
-	    );
-	    
-	    $this->db->where('nik', $idUser);
-	    $this->db->where('kode_pelatihan', $idPelatihan);
-	    $this->db->where('id', $id);
-	    $update = $this->db->update('table_peserta_pelatihan', $data);
-	    if ($update) {
-	        echo json_encode('ok');
-	    }
+		$data = array(
+			'status' => 1,
+		);
+
+		$this->db->where('nik', $idUser);
+		$this->db->where('kode_pelatihan', $idPelatihan);
+		$this->db->where('id', $id);
+		$update = $this->db->update('table_peserta_pelatihan', $data);
+		if ($update) {
+			echo json_encode('ok');
+		}
 	}
 
 	public function batalPeserta(){
-	    $idUser = $this->input->post("idUser");
-	    $idPelatihan = $this->input->post("idPelatihan");
-	    $id = $this->input->post("id");
+		$idUser = $this->input->post("idUser");
+		$idPelatihan = $this->input->post("idPelatihan");
+		$id = $this->input->post("id");
 
-	    $data = array(
-	        'status' => 0,
-	    );
-	    
-	    $this->db->where('nik', $idUser);
-	    $this->db->where('kode_pelatihan', $idPelatihan);
-	    $this->db->where('id', $id);
-	    $update = $this->db->update('table_peserta_pelatihan', $data);
-	    if ($update) {
-	        echo json_encode('ok');
-	    }
+		$data = array(
+			'status' => 0,
+		);
+
+		$this->db->where('nik', $idUser);
+		$this->db->where('kode_pelatihan', $idPelatihan);
+		$this->db->where('id', $id);
+		$update = $this->db->update('table_peserta_pelatihan', $data);
+		if ($update) {
+			echo json_encode('ok');
+		}
 	}
 
 	public function tambahPelatihan() {
@@ -487,8 +529,8 @@ class Dashboard extends CI_Controller {
 	{
 		$jenis = array(
 			'jenis' => $this
-            ->model
-            ->dataJenis()
+			->model
+			->dataJenis()
 		);
 		$path = "";
 		$data = array(
@@ -546,8 +588,8 @@ class Dashboard extends CI_Controller {
 	{
 		$kategori = array(
 			'kategori' => $this
-            ->model
-            ->dataKategori()
+			->model
+			->dataKategori()
 		);
 		$path = "";
 		$data = array(
@@ -605,10 +647,10 @@ class Dashboard extends CI_Controller {
 	{
 		$kode = $this->session->userdata['kode'];
 		$berita = array(
-            'berita' => $this
-            ->model
-            ->dataBerita(),
-        );
+			'berita' => $this
+			->model
+			->dataBerita(),
+		);
 		$path = "";
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - Informasi", $path),
@@ -659,8 +701,8 @@ class Dashboard extends CI_Controller {
 	{
 		$user = array(
 			'lpkblkln' => $this
-            ->model
-            ->dataLPK()
+			->model
+			->dataLPK()
 		);
 		$path = "";
 		$data = array(
@@ -674,10 +716,10 @@ class Dashboard extends CI_Controller {
 	{
 		$kode = $this->session->userdata['kode'];
 		$slider = array(
-            'slider' => $this
-            ->model
-            ->dataSlider($kode),
-        );
+			'slider' => $this
+			->model
+			->dataSlider($kode),
+		);
 		$path = "";
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - Slider", $path),
@@ -743,13 +785,13 @@ class Dashboard extends CI_Controller {
 	{
 		$kode = $this->session->userdata['kode'];
 		$aktivitas = array(
-            'history' => $this
-            ->model
-            ->dataHistory($kode),
-            'historyAdmin' => $this
-            ->model
-            ->dataHistoryAdmin($kode),
-        );
+			'history' => $this
+			->model
+			->dataHistory($kode),
+			'historyAdmin' => $this
+			->model
+			->dataHistoryAdmin($kode),
+		);
 		$kode = 
 		$path = "";
 		$data = array(
@@ -763,8 +805,8 @@ class Dashboard extends CI_Controller {
 	{
 		$peserta = array(
 			'pesertaPelatihan' => $this
-            ->model
-            ->dataPesertaPelatihan()
+			->model
+			->dataPesertaPelatihan()
 		);
 		$path = "";
 		$data = array(
@@ -805,10 +847,10 @@ class Dashboard extends CI_Controller {
 	public function helpdesk()
 	{
 		$helpdesk = array(
-            'helpdesk' => $this
-            ->model
-            ->dataHelpDesk(),
-        );
+			'helpdesk' => $this
+			->model
+			->dataHelpDesk(),
+		);
 		$path = "";
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - Helpdesk", $path),
@@ -817,8 +859,22 @@ class Dashboard extends CI_Controller {
 		$this->load->view('dashboard/template/default_template', $data);
 	}
 
-  public function laporan1()
-  {
+	public function ubahStatusHelpdesk() {
+		$id = $this->input->post('id');
+		$status = $this->input->post('status');
+
+		$data = array(
+			"status_h" => $status
+		);
+
+		$this->db->where('id', $id);
+		$this->db->update('table_helpdesk', $data);
+		$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
+		redirect('Dashboard/helpdesk');
+	}
+
+	public function laporan1()
+	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
 		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
@@ -835,6 +891,6 @@ class Dashboard extends CI_Controller {
 		$view = $this->load->view('dashboard/laporan/laporan1', $dataView, true);
     // echo $view;
 		$this->pdfgenerator->generate($view, "Laporan BKK", TRUE, 'A4', 'landscape');
-  }
+	}
 	
 }

@@ -78,17 +78,49 @@
 						<div class="ftco-footer-widget mb-4">
 							<h2 class="ftco-heading-2">Helpdesk</h2>
 							<form method="POST" action="<?= base_url('Home/tambahHelpDesk'); ?>" class="text-center justify-content-center">
+								<div class="form-group">
+									<label>Tipe</label><br>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" value="umum" name="tipe">
+										<label class="form-check-label" for="inlineCheckbox1">Umum</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" value="lpk" name="tipe">
+										<label class="form-check-label" for="inlineCheckbox2">LPK/BLKLN</label>
+									</div>
+								</div>
 								<!-- <div class="alert alert-success" role="alert">
 									Berhasil Dikirim!
 								</div> -->
 								<?= $this->session->flashdata('notif'); ?>
+								<div id="umum">
+									<div class="form-group">
+										<label>NIK</label>
+										<input type="text" name="nik" class="form-control" placeholder="NIK">
+									</div>
+									<div class="form-group">
+										<label>Status Pekerjaan</label><br>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" id="inlineCheckbox3" value="Sudah Bekerja" name="status">
+											<label class="form-check-label" for="inlineCheckbox1">Sudah Bekerja</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" id="inlineCheckbox4" value="Belum Bekerja" name="status">
+											<label class="form-check-label" for="inlineCheckbox2">Belum Bekerja</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+										<label>Nama <span id="lpk">LPK/BLKLN</span></label>
+										<input type="text" name="nama" class="form-control" placeholder="Nama">
+								</div>
 								<div class="form-group">
 									<label>Email</label>
 									<input type="email" name="email" class="form-control" placeholder="example@mail.com">
 								</div>
 								<div class="form-group">
 									<label>Masukan</label>
-									<textarea class="form-control" name="masukan" placeholder="Isi Masukan Anda Disini"></textarea>									
+									<textarea class="form-control" name="masukan" placeholder="Isi Masukan Anda Disini" rows="5"></textarea>		
 								</div>
 								<button type="submit" class="btn btn-success float-right">Kirim</button>
 							</form>
@@ -109,6 +141,17 @@
 	</body>
 	<script src="<?= base_url();?>assets/home/js/aos.js"></script>
 	<script src="<?= base_url();?>assets/home/js/main.js"></script>
-
-
+	<script type="text/javascript">
+		$("#umum").hide();
+		$("#lpk").hide();
+		$('input[type="radio"][name="tipe"]').on('click', function(){
+			if (this.value == 'umum') {
+				$("#umum").show();
+				$("#lpk").hide();
+			} else if (this.value == 'lpk') {
+				$("#umum").hide();
+				$("#lpk").show();
+			}
+		});
+	</script>
 	</html>
