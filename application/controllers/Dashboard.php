@@ -892,5 +892,19 @@ class Dashboard extends CI_Controller {
     // echo $view;
 		$this->pdfgenerator->generate($view, "Laporan BKK", TRUE, 'A4', 'landscape');
 	}
+
+	public function statusLpk(){
+		$status = array(
+			'laporan' => $this
+			->model
+			->dataLaporan()
+		);
+		$path = "";
+		$data = array(
+			"page" => $this->load("Pelatihan Kota Depok - Status Laporan LPK/BLKLN", $path),
+			"content" => $this->load->view('dashboard/statusLpk', $status, true),
+		);
+		$this->load->view('dashboard/template/default_template', $data);
+	}
 	
 }

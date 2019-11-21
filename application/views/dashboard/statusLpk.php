@@ -30,26 +30,38 @@
                     <h4 class="card-title">Laporan</h4>
                 </div>
                 <div class="float-right">
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalCetak">Update Laporan</button>
+                    <!-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalCetak">Update Laporan</button> -->
                 </div>
             </div>
             <div class="card-body">
                 <div class="datatable-wrapper table-responsive">
-                    <table id="datatable" class="display compact table table-hover table-striped text-center">
+                    <table id="datatableStatus" class="display compact table table-hover table-striped text-center">
                         <thead>
                             <tr>
                                 <th width="2%">No.</th>
-                                <th>Tanggal Lapor</th>
+                                <th>Nama Lembaga</th>
+                                <th>Tahun Lapor</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
                             $no = 1;
-                            foreach ($laporan as $row) { ?>
+                            foreach ($laporan as $row) { 
+                                $tahun = explode('-', $row->tanggal_lapor);
+                                ?>
                                 <td><?= $no++; ?></td>
-                                <td><?= $row->tanggal_lapor; ?></td>
+                                <td><?= $row->nama; ?></td>
+                                <td><?= $tahun[0]; ?></td>
+                                <td><?= $row->status; ?></td>
                             <?php } ?>
                         </tbody>
+                        <thead>
+                            <th width="2%"></th>
+                            <th></th>
+                            <th>Tahun Lapor</th>
+                            <th>Status</th>
+                        </thead>
                     </table>
                 </div>
             </div>
@@ -267,5 +279,75 @@
     $(".custom-file-input").on("change", function() {
       var fileName = $(this).val().split("\\").pop();
       $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+</script>
+
+<script type="text/javascript">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.print.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.colVis.min.js"></script>
+</script>
+
+<script type="text/javascript">
+    $("#datatableStatus").dataTable({
+        language: {
+            "decimal":        "",
+            "emptyTable":     "Data Tidak Tersedia Di Table",
+            "info":           "Menampilkan _START_ Sampai _END_ Dari _TOTAL_ Data",
+            "infoEmpty":      "Menampilkan 0 Sampai 0 Dari 0 Data",
+            "infoFiltered":   "(Dari Total _MAX_ Data)",
+            "infoPostFix":    "",
+            "thousands":      ",",
+            "lengthMenu":     "Menampilkan _MENU_ Data",
+            "loadingRecords": "Loading...",
+            "processing":     "Memproses...",
+            "search":         "Cari :",
+            "zeroRecords":    "Tidak Ada Data Yang Sesuai",
+            "paginate": {
+                "first":      "Pertama",
+                "last":       "Terakhir",
+                "next":       ">",
+                "previous":   "<"
+            },
+            "aria": {
+                "sortAscending":  ": activate to sort column ascending",
+                "sortDescending": ": activate to sort column descending"
+            }
+        },
+        initComplete: function () {
+            this.api().columns([2, 3]).every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                .appendTo( $(column.header()).empty() )
+                .on( 'change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex(
+                        $(this).val()
+                        );
+                    column
+                    .search( val ? '^'+val+'$' : '', true, false )
+                    .draw();
+                } );
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        },
+        "dom": 'Bfrtip',
+        "buttons": [
+        {
+            extend: 'excelHtml5',
+            text: 'Export Excel',
+            exportOptions: {
+                columns: [ 0, 1, 2, 3 ]
+            },
+        },
+        ],
     });
 </script>

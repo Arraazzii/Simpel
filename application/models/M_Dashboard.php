@@ -7,6 +7,14 @@ class M_Dashboard extends CI_Model{
         $this->load->database();
     }
 
+    public function dataLaporan(){
+        $this->db->select('*');
+        $this->db->from('table_laporan a');
+        $this->db->join('table_user b', 'b.kode_user = a.kode_user');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function dataSlider($kode){
         $this->db->select('*');
         $this->db->from('table_slider');

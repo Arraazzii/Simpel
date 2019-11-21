@@ -17,4 +17,13 @@ class M_DashboardLPK extends CI_Model{
         return $query->result();
     }
 
+    public function dataLaporan($id){
+        $this->db->select('*');
+        $this->db->from('table_laporan a');
+        $this->db->join('table_user b', 'b.kode_user = a.kode_user');
+        $this->db->where('a.kode_user', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }

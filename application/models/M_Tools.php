@@ -132,6 +132,24 @@ class M_Tools extends CI_Model{
        return "PLT".$kode;
     }
 
+    public function get_kode_laporan() {
+    $kode = "";
+    $this->db->select("REPLACE(kode_lapor, 'LPR', '') as kode", FALSE);
+    $this->db->order_by('(0 + kode)','DESC');
+    $this->db->limit(1);
+        $query = $this->db->get('table_lapor_detail');//cek dulu apakah ada sudah ada kode di tabel.
+        if($query->num_rows() <> 0){
+           //jika kode ternyata sudah ada.
+         $data = $query->row();
+         $kode = intval($data->kode) + 1;
+       }
+       else {
+           //jika kode belum ada
+         $kode = 1;
+       }
+       return "LPR".$kode;
+    }
+
     public function cek_nik($id){
         $this->db->select('*');
         $this->db->from('table_peserta');

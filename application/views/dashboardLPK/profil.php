@@ -22,7 +22,7 @@ foreach ($lpkblkln as $row) {
             <div class="card card-statistics">
                 <img class="p-20" src="<?= base_url();?>assets/upload/logo/<?= $row->photo; ?>" alt="<?= $row->photo; ?>">
                 <div class="card-body">
-                    <form method="POST" action="<?= base_url('DashboardLPK/ubahProfil'); ?>">
+                    <form method="POST" action="<?= base_url('DashboardLPK/ubahProfil'); ?>" enctype="multipart/form-data">
                         <input type="hidden" name="kode" value="<?= $row->kode_user; ?>">
                         <div class="tab tab-border">
                             <ul class="nav nav-tabs" role="tablist">
@@ -61,6 +61,13 @@ foreach ($lpkblkln as $row) {
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input type="email" name="email" value="<?= $row->email ?>" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Logo Perusahaan</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFile" name="logo">
+                                            <label class="custom-file-label" for="customFile">Pilih File</label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="pengurus" role="tabpanel" aria-labelledby="pengurus-tab">
@@ -306,4 +313,11 @@ foreach ($lpkblkln as $row) {
             </div>
         </div>
     </div>
-    <?php } ?>
+<?php } ?>
+<script type="text/javascript">
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+  </script>
