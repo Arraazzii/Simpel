@@ -935,6 +935,26 @@ class Dashboard extends CI_Controller {
 		$this->pdfgenerator->generate($view, "Laporan BKK", TRUE, 'A4', 'landscape');
 	}
 
+  public function laporanRekapitulasi()
+  {
+		$tgl_awal 			= $this->input->post("tgl_awal");
+		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
+		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
+		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
+
+		$dataLaporan = $this->model->laporanRekapitulasi($tgl_awal, $tgl_akhir);
+
+		$dataView = [
+			'dataLaporan' => $dataLaporan,
+			'tgl_awal' => date("d M Y", strtotime($tgl_awal)),
+			'tgl_akhir' => date("d M Y", strtotime($tgl_akhir))
+		];
+
+		$view = $this->load->view('dashboard/laporan/laporan4', $dataView, true);
+    // echo $view;
+		$this->pdfgenerator->generate($view, "Laporan BKK", TRUE, 'A4', 'landscape');
+	}
+
   public function laporanPesertaXls()
 	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
@@ -1251,6 +1271,152 @@ class Dashboard extends CI_Controller {
 		$writer = new Xlsx($spreadsheet);
 		header('Content-Type: application/vnd.ms-excel');
 		header('Content-Disposition: attachment; filename="Laporan LPK & BLKLN.xlsx"');
+		$writer->save("php://output");
+    // $fileName = "{$dirPath}/filename.xls";
+
+    // recursively creates all required nested directories   
+    // $writer->save($fileName);
+    // echo $fileName;
+	}
+
+  public function laporanRekapitulasiXls()
+	{
+		$tgl_awal 			= $this->input->post("tgl_awal");
+		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
+		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
+		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
+
+		$dataLaporan = $this->model->laporanRekapitulasi($tgl_awal, $tgl_akhir);
+
+		$dirPath  = BASEPATH."../assets/template_excel/laporan_rekapitulasi.xls";
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($dirPath);
+
+		$sheet = $spreadsheet->getActiveSheet();
+    // $sheet->setCellValue('A1', 'Hello World !');
+		$styleText = [
+			'font' => [
+				'bold' => false,
+			],
+			'alignment' => [
+				'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+			],
+			'borders' => [
+				'top' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'left' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'right' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'bottom' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+			],
+		];
+
+		$styleNumber = [
+			'font' => [
+				'bold' => false,
+			],
+			'alignment' => [
+				'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+			],
+			'borders' => [
+				'top' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'left' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'right' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+				'bottom' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+				],
+			],
+		];
+		$tableIndex = 6;
+    $total = new stdClass();
+    $total->l = 0;
+    $total->p = 0;
+    $total->SAWANGAN = 0;
+    $total->BOJONGSARI = 0;
+    $total->PANCORANMAS = 0;
+    $total->CIPAYUNG = 0;
+    $total->SUKMAJAYA = 0;
+    $total->CILODONG = 0;
+    $total->CIMANGGIS = 0;
+    $total->TAPOS = 0;
+    $total->BEJI = 0;
+    $total->LIMO = 0;
+    $total->CINERE = 0;
+    $total->DST = 0;
+		for ($i=0; $i < count($dataLaporan) ; $i++) { 
+			$tableIndex++;			
+			$sheet->setCellValue('B'.$tableIndex, $dataLaporan[$i]->l);
+			$sheet->setCellValue('C'.$tableIndex, $dataLaporan[$i]->p);
+			$sheet->setCellValue('D'.$tableIndex, $dataLaporan[$i]->SAWANGAN);
+      $sheet->setCellValue('E'.$tableIndex, $dataLaporan[$i]->BOJONGSARI);
+      $sheet->setCellValue('F'.$tableIndex, $dataLaporan[$i]->PANCORANMAS);
+      $sheet->setCellValue('G'.$tableIndex, $dataLaporan[$i]->CIPAYUNG);
+      $sheet->setCellValue('H'.$tableIndex, $dataLaporan[$i]->SUKMAJAYA);
+      $sheet->setCellValue('I'.$tableIndex, $dataLaporan[$i]->CILODONG);
+      $sheet->setCellValue('J'.$tableIndex, $dataLaporan[$i]->CIMANGGIS);
+      $sheet->setCellValue('K'.$tableIndex, $dataLaporan[$i]->TAPOS);
+      $sheet->setCellValue('L'.$tableIndex, $dataLaporan[$i]->BEJI);
+      $sheet->setCellValue('M'.$tableIndex, $dataLaporan[$i]->LIMO);
+      $sheet->setCellValue('N'.$tableIndex, $dataLaporan[$i]->CINERE);
+      $sheet->setCellValue('O'.$tableIndex, $dataLaporan[$i]->DST);
+
+			// $spreadsheet->getActiveSheet()->getStyle('A'.$tableIndex)->applyFromArray($styleText);
+			// $spreadsheet->getActiveSheet()->getStyle('B'.$tableIndex)->applyFromArray($styleNumber);
+			// $spreadsheet->getActiveSheet()->getStyle('C'.$tableIndex)->applyFromArray($styleNumber);
+			// $spreadsheet->getActiveSheet()->getStyle('D'.$tableIndex)->applyFromArray($styleNumber);
+      $total->l += $dataLaporan[$i]->l;
+      $total->p += $dataLaporan[$i]->p;
+      $total->SAWANGAN += $dataLaporan[$i]->SAWANGAN;
+      $total->BOJONGSARI += $dataLaporan[$i]->BOJONGSARI;
+      $total->PANCORANMAS +=$dataLaporan[$i]->PANCORANMAS;
+      $total->CIPAYUNG += $dataLaporan[$i]->CIPAYUNG;
+      $total->SUKMAJAYA += $dataLaporan[$i]->SUKMAJAYA;
+      $total->CILODONG += $dataLaporan[$i]->CILODONG;
+      $total->CIMANGGIS += $dataLaporan[$i]->CIMANGGIS;
+      $total->TAPOS += $dataLaporan[$i]->TAPOS;
+      $total->BEJI += $dataLaporan[$i]->BEJI;
+      $total->LIMO += $dataLaporan[$i]->LIMO;
+      $total->CINERE += $dataLaporan[$i]->CINERE;
+      $total->DST += $dataLaporan[$i]->DST;
+		}
+
+    $sheet->setCellValue('B11', $total->l);
+    $sheet->setCellValue('C11', $total->p);
+    $sheet->setCellValue('D11', $total->SAWANGAN);
+    $sheet->setCellValue('E11', $total->BOJONGSARI);
+    $sheet->setCellValue('F11', $total->PANCORANMAS);
+    $sheet->setCellValue('G11', $total->CIPAYUNG);
+    $sheet->setCellValue('H11', $total->SUKMAJAYA);
+    $sheet->setCellValue('I11', $total->CILODONG);
+    $sheet->setCellValue('J11', $total->CIMANGGIS);
+    $sheet->setCellValue('K11', $total->TAPOS);
+    $sheet->setCellValue('L11', $total->BEJI);
+    $sheet->setCellValue('M11', $total->LIMO);
+    $sheet->setCellValue('N11', $total->CINERE);
+    $sheet->setCellValue('O11', $total->DST);
+
+		// if (!empty($tgl_awal)) {
+		// 	$sheet->setCellValue('B2', date("d/m/Y", strtotime($tgl_awal)));
+		// }
+
+		// if (!empty($tgl_akhir)) {
+		// 	$sheet->setCellValue('D2', date("d/m/Y", strtotime($tgl_akhir)));
+		// }
+
+		$writer = new Xlsx($spreadsheet);
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment; filename="Laporan Rekapitulasi Peserta Pelatihan.xlsx"');
 		$writer->save("php://output");
     // $fileName = "{$dirPath}/filename.xls";
 

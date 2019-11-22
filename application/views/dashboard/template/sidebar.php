@@ -337,6 +337,7 @@
 											<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "lpkblkln") { echo 'class="active"';} ?>><a href="javascript:void(0)" data-toggle="modal" data-target="#modalLaporanPeserta" aria-expanded="false"><span class="nav-title">Laporan Peserta</span></a> </li>
 											<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "statusLpk") { echo 'class="active"';} ?>> <a href='javascript:void(0)' data-toggle="modal" data-target="#modalLaporanStatusPeserta">Laporan Status Peserta</a> </li>
                       <li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "statusLpk") { echo 'class="active"';} ?>> <a href='javascript:void(0)' data-toggle="modal" data-target="#modalLaporanLpkBlkln">Laporan LPK & BLKLN</a> </li>
+                      <li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "statusLpk") { echo 'class="active"';} ?>> <a href='javascript:void(0)' data-toggle="modal" data-target="#modalLaporanRekapitulasi">Laporan Rekapitulasi  Peserta Pelatihan</a> </li>
 										</ul>
                   </li>
 									<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "helpdesk") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>Dashboard/helpdesk" aria-expanded="false"><i class="nav-icon ti ti-receipt"></i><span class="nav-title">Helpdesk</span></a></li>
@@ -485,6 +486,45 @@
           <div class="text-center">
               <button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanLpkBlkln') ?>"><span id="mitraText">Export to PDF</span></button>
               <button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanLpkBlklnXls') ?>"><span id="mitraText">Export to XLS</span></button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="modalLaporanRekapitulasi" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="display:block;">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Laporan Rekapitulasi  Peserta Pelatihan</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-inline" method="POST">
+          <div class="row">
+            <div class="col-sm-2">
+              <label for="email">Dari Tanggal </label>
+            </div>
+            <div class="col-sm-4">
+              <input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;">
+            </div>
+            <div class="col-sm-2">
+              <label for="pwd">Sampai</label>
+            </div>
+            <div class="col-sm-4">
+              <input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;">
+            </div>
+          </div>          
+          <div class="text-center">
+              <button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanRekapitulasi') ?>"><span id="mitraText">Export to PDF</span></button>
+              <button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanRekapitulasiXls') ?>"><span id="mitraText">Export to XLS</span></button>
           </div>
         </form>
       </div>

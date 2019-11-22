@@ -278,4 +278,67 @@ class M_Dashboard extends CI_Model{
       $prepared = $this->db->query($sql);
       return $prepared->result();
     }
+
+    public function laporanRekapitulasi($tgl_awal, $tgl_akhir)
+    {
+      $where = "";
+      if (!empty($tgl_awal) && !empty($tgl_akhir)) {
+        $where .= " WHERE psrtp.tanggal_daftar BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
+      }
+
+      $sql = "SELECT 
+              tingkat.terakhir AS terakhir, 
+              IFNULL(rekap.l, 0) AS l,
+              IFNULL(rekap.p, 0) AS p,
+              IFNULL(rekap.SAWANGAN, 0) AS SAWANGAN,
+              IFNULL(rekap.BOJONGSARI, 0) AS BOJONGSARI,
+              IFNULL(rekap.PANCORANMAS, 0) AS PANCORANMAS,
+              IFNULL(rekap.CIPAYUNG, 0) AS CIPAYUNG,
+              IFNULL(rekap.SUKMAJAYA, 0) AS SUKMAJAYA,
+              IFNULL(rekap.CILODONG, 0) AS CILODONG,
+              IFNULL(rekap.CIMANGGIS, 0) AS CIMANGGIS,
+              IFNULL(rekap.TAPOS, 0) AS TAPOS,
+              IFNULL(rekap.BEJI, 0) AS BEJI,
+              IFNULL(rekap.LIMO, 0) AS LIMO,
+              IFNULL(rekap.CINERE, 0) AS CINERE,
+              IFNULL(rekap.DST, 0) AS DST
+              FROM (
+              SELECT '1' AS id, 'SD' AS terakhir
+                UNION
+                SELECT '2' AS id, 'SMP' AS terakhir
+                UNION
+                SELECT '3' AS id, 'SMK' AS terakhir
+                UNION
+                SELECT '4' AS id, 'Perguruan Tinggi' AS terakhir
+              ) tingkat
+              LEFT JOIN (
+                SELECT 
+                tp.pendidikan_terakhir,
+                SUM(IF(tp.jenis_kelamin = 'Laki-laki', 1, 0)) AS l,
+                SUM(IF(tp.jenis_kelamin = 'Perempuan', 1, 0)) AS p,
+                SUM(IF(ta.kecamatan = 'SAWANGAN', 1, 0)) AS SAWANGAN,
+                SUM(IF(ta.kecamatan = 'BOJONGSARI', 1, 0)) AS BOJONGSARI,
+                SUM(IF(ta.kecamatan = 'PANCORAN MAS', 1, 0)) AS PANCORANMAS,
+                SUM(IF(ta.kecamatan = 'CIPAYUNG', 1, 0)) AS CIPAYUNG,
+                SUM(IF(ta.kecamatan = 'SUKMA JAYA', 1, 0)) AS SUKMAJAYA,
+                SUM(IF(ta.kecamatan = 'CILODONG', 1, 0)) AS CILODONG,
+                SUM(IF(ta.kecamatan = 'CIMANGGIS', 1, 0)) AS CIMANGGIS,
+                SUM(IF(ta.kecamatan = 'TAPOS', 1, 0)) AS TAPOS,
+                SUM(IF(ta.kecamatan = 'BEJI', 1, 0)) AS BEJI,
+                SUM(IF(ta.kecamatan = 'LIMO', 1, 0)) AS LIMO,
+                SUM(IF(ta.kecamatan = 'CINERE', 1, 0)) AS CINERE,
+                SUM(IF(ta.kecamatan != 'SAWANGAN' AND ta.kecamatan != 'BOJONGSARI' AND ta.kecamatan != 'PANCORAN MAS' AND ta.kecamatan != 'CIPAYUNG' AND ta.kecamatan != 'SUKMA JAYA' AND ta.kecamatan != 'CILODONG' AND ta.kecamatan != 'CIMANGGIS' AND ta.kecamatan != 'TAPOS' AND ta.kecamatan != 'BEJI' AND ta.kecamatan != 'LIMO' AND ta.kecamatan != 'CINERE', 1, 0)) AS DST
+                FROM table_peserta tp 
+                LEFT JOIN table_peserta_pelatihan psrtp ON tp.nik = psrtp.nik
+                LEFT JOIN table_pelatihan plthn ON psrtp.kode_pelatihan = plthn.kode_pelatihan
+                LEFT JOIN table_alamat ta ON tp.kode_alamat = ta.kode_alamat
+                {$where}
+                GROUP BY tp.pendidikan_terakhir
+              ) rekap ON tingkat.terakhir = rekap.pendidikan_terakhir
+              GROUP BY tingkat.id, rekap.pendidikan_terakhir, tingkat.terakhir
+              ORDER BY tingkat.id";
+
+      $prepared = $this->db->query($sql);
+      return $prepared->result();
+    }
 }
