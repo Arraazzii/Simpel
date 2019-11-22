@@ -1204,7 +1204,7 @@ class Dashboard extends CI_Controller {
 			$sheet->setCellValue('A'.$tableIndex, $lpk->no);
 			$sheet->setCellValue('B'.$tableIndex, $lpk->nama_lpk);
 			$sheet->setCellValue('C'.$tableIndex, $lpk->no_reg);
-			$sheet->setCellValue('D'.$tableIndex, $lpk->no_reg);
+			$sheet->setCellValue('D'.$tableIndex, $lpk->alamat);
       $sheet->setCellValue('E'.$tableIndex, $lpk->no_izin." ".$lpk->tanggal_izin);
       $sheet->setCellValue('F'.$tableIndex, $lpk->nama_pimpinan." ".$lpk->no_telepon_pimpinan);
       $sheet->setCellValue('G'.$tableIndex, $lpk->nama_program);

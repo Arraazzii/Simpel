@@ -106,7 +106,7 @@
                               <td><?= $lpk->no ?> </td>
                               <td><?= $lpk->nama_lpk ?> </td>
                               <td><?= $lpk->no_reg ?> </td>
-                              <td><?= $lpk->no_reg ?> </td>
+                              <td><?= $lpk->alamat ?> </td>
                               <td><?= $lpk->no_izin." ".$lpk->tanggal_izin ?> </td>
                               <td><?= $lpk->nama_pimpinan." ".$lpk->no_telepon_pimpinan ?> </td>
                               <td><?= $lpk->nama_program ?> </td>

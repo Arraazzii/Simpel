@@ -211,6 +211,7 @@ class M_Dashboard extends CI_Model{
                 '' AS no,
                 user.nama AS nama_lpk,
                 user.no_izin AS no_reg,
+                user.alamat,
                 user.no_izin,
                 user.tanggal_izin,
                 pngrs.nama_pimpinan,
