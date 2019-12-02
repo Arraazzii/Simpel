@@ -125,24 +125,24 @@ foreach ($lpkblkln as $row) {
                     <div class="tab tab-border">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active show" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true"> <i class="fa fa-home"></i> Profile</a>
+                                <a class="nav-link active show" id="profile-tab" data-toggle="tab" href="#profile<?= $row->kode_user; ?>" role="tab" aria-controls="profile" aria-selected="true"> <i class="fa fa-home"></i> Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pengurus-tab" data-toggle="tab" href="#pengurus" role="tab" aria-controls="pengurus" aria-selected="false"><i class="fa fa-user"></i> Pengurus </a>
+                                <a class="nav-link" id="pengurus-tab" data-toggle="tab" href="#pengurus<?= $row->kode_user; ?>" role="tab" aria-controls="pengurus" aria-selected="false"><i class="fa fa-user"></i> Pengurus </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="detail-tab" data-toggle="tab" href="#detail" role="tab" aria-controls="detail" aria-selected="false"><i class="fa fa-list"></i> Detail </a>
+                                <a class="nav-link" id="detail-tab" data-toggle="tab" href="#detail<?= $row->kode_user; ?>" role="tab" aria-controls="detail" aria-selected="false"><i class="fa fa-list"></i> Detail </a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="tab-pane fade active show" id="profile<?= $row->kode_user; ?>" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="form-group">
                                     <label>No. Izin</label>
-                                    <textarea class="form-control"><?= $row->no_izin ?></textarea>
+                                    <input type="text" value="<?= $row->no_izin ?>" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Tanggal izin</label>
-                                    <textarea class="form-control"><?= $row->tanggal_izin ?></textarea>
+                                    <input type="date" value="<?= $row->tanggal_izin ?>" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Nama Lembaga</label>
@@ -154,14 +154,14 @@ foreach ($lpkblkln as $row) {
                                 </div>
                                 <div class="form-group">
                                     <label>Telepon</label>
-                                    <textarea class="form-control"><?= $row->telepon ?></textarea>
+                                    <input type="text" value="<?= $row->telepon ?>" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input type="email" value="<?= $row->email ?>" class="form-control">
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="pengurus" role="tabpanel" aria-labelledby="pengurus-tab">
+                            <div class="tab-pane fade" id="pengurus<?= $row->kode_user; ?>" role="tabpanel" aria-labelledby="pengurus-tab">
                                 <div class="form-group">
                                     <label>Nama Direktur Lembaga</label>
                                     <input type="text" value="<?= $row->nama_pimpinan ?>" class="form-control">
@@ -183,7 +183,7 @@ foreach ($lpkblkln as $row) {
                                     <input type="text" value="<?= $row->no_telepon_pj ?>" class="form-control">
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="detail-tab">
+                            <div class="tab-pane fade" id="detail<?= $row->kode_user; ?>" role="tabpanel" aria-labelledby="detail-tab">
                                 <div class="accordion" id="accordionsimplefill">
                                     <div class="mb-2 acd-group">
                                         <div class="card-header bg-primary rounded-0">

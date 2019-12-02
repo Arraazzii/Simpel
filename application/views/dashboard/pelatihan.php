@@ -77,14 +77,14 @@ foreach ($pelatihan as $row) { ?>
                     <div class="tab tab-border">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active show" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true"> <i class="fa fa-home"></i> Data</a>
+                                <a class="nav-link active show" id="profile-tab" data-toggle="tab" href="#profile<?= $row->kode_pelatihan; ?>" role="tab" aria-controls="profile" aria-selected="true"> <i class="fa fa-home"></i> Data</a>
                             </li>
                             <li class="nav-item" id="listpeserta<?= $row->kode_pelatihan; ?>" <?php if ($row->status != 'Aktif') { echo 'style="display:none"';};?>>
-                                <a class="nav-link" id="pengurus-tab" data-toggle="tab" href="#pengurus" role="tab" aria-controls="pengurus" aria-selected="false"><i class="fa fa-user"></i> Peserta </a>
+                                <a class="nav-link" id="pengurus-tab" data-toggle="tab" href="#pengurus<?= $row->kode_pelatihan; ?>" role="tab" aria-controls="pengurus" aria-selected="false"><i class="fa fa-user"></i> Peserta </a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="tab-pane fade active show" id="profile<?= $row->kode_pelatihan; ?>" role="tabpanel" aria-labelledby="profile-tab">
                                 <form action="<?= base_url('Dashboard/ubahPelatihan');?>" method="POST">
                                     <div class="form-group">
                                         <label>Nama Pelatihan</label>
@@ -152,7 +152,7 @@ foreach ($pelatihan as $row) { ?>
                                     <button type="submit" class="btn btn-success float-right">Simpan</button>
                                 </form>
                             </div>
-                            <div class="tab-pane fade" id="pengurus" role="tabpanel" aria-labelledby="pengurus-tab">
+                            <div class="tab-pane fade" id="pengurus<?= $row->kode_pelatihan; ?>" role="tabpanel" aria-labelledby="pengurus-tab">
                                 <table id="datatable" class="display compact table table-hover table-striped text-center">
                                     <thead>
                                         <tr>
