@@ -3,78 +3,19 @@
   <h2 class="text-center text-info ftco-animate"><b>Berita / Event</b></h2>
   <br>
   <div class="row justify-content-center">
-    <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated">
+    <?php foreach ($berita as $row) { ?>
+    <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated ">
       <div class="blog-entry justify-content-end w-100">
-        <a href="<?php echo base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?php echo base_url(); ?>assets/home/images/bg_2.jpg');">
+        <a href="<?= base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?= base_url(); ?>assets/upload/berita/<?= $row->photo; ?>');">
         </a>
         <div class="text mt-3 mb-3 float-right d-block">
-          <h3 class="heading"><a href="<?php echo base_url(); ?>Home/infoDetail">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h3>
-          <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a href="<?php echo base_url(); ?>Home/infoDetail" class="btn btn-info float-right">Selengkapnya</a>
+          <h3 class="heading"><a href="<?= base_url(); ?>Home/infoDetail/<?= $row->id; ?>"><?= $row->judul; ?></a></h3>
+          <p class="text-justify"><?= $row->detail; ?></p>
+          <a href="<?= base_url(); ?>Home/infoDetail/<?= $row->id; ?>" class="btn btn-info float-right">Selengkapnya</a>
         </div>
       </div>
     </div>
-    <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated">
-      <div class="blog-entry justify-content-end w-100">
-        <a href="<?php echo base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?php echo base_url(); ?>assets/home/images/bg_2.jpg');">
-        </a>
-        <div class="text mt-3 mb-3 float-right d-block">
-          <h3 class="heading"><a href="<?php echo base_url(); ?>Home/infoDetail">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h3>
-          <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a href="<?php echo base_url(); ?>Home/infoDetail" class="btn btn-info float-right">Selengkapnya</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated">
-      <div class="blog-entry justify-content-end w-100">
-        <a href="<?php echo base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?php echo base_url(); ?>assets/home/images/bg_2.jpg');">
-        </a>
-        <div class="text mt-3 mb-3 float-right d-block">
-          <h3 class="heading"><a href="<?php echo base_url(); ?>Home/infoDetail">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h3>
-          <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a href="<?php echo base_url(); ?>Home/infoDetail" class="btn btn-info float-right">Selengkapnya</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated">
-      <div class="blog-entry justify-content-end w-100">
-        <a href="<?php echo base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?php echo base_url(); ?>assets/home/images/bg_2.jpg');">
-        </a>
-        <div class="text mt-3 mb-3 float-right d-block">
-          <h3 class="heading"><a href="<?php echo base_url(); ?>Home/infoDetail">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h3>
-          <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a href="<?php echo base_url(); ?>Home/infoDetail" class="btn btn-info float-right">Selengkapnya</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated">
-      <div class="blog-entry justify-content-end w-100">
-        <a href="<?php echo base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?php echo base_url(); ?>assets/home/images/bg_2.jpg');">
-        </a>
-        <div class="text mt-3 mb-3 float-right d-block">
-          <h3 class="heading"><a href="<?php echo base_url(); ?>Home/infoDetail">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h3>
-          <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a href="<?php echo base_url(); ?>Home/infoDetail" class="btn btn-info float-right">Selengkapnya</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated">
-      <div class="blog-entry justify-content-end w-100">
-        <a href="<?php echo base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?php echo base_url(); ?>assets/home/images/bg_2.jpg');">
-        </a>
-        <div class="text mt-3 mb-3 float-right d-block">
-          <h3 class="heading"><a href="<?php echo base_url(); ?>Home/infoDetail">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h3>
-          <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a href="<?php echo base_url(); ?>Home/infoDetail" class="btn btn-info float-right">Selengkapnya</a>
-        </div>
-      </div>
-    </div>
+    <?php } ?>
   </div>
   
 </div>

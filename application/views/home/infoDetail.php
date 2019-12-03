@@ -2,62 +2,32 @@
   <div class="container">
     <!-- Tab panes -->
     <div class="row mt-5 nomargintop">
+      <?php foreach ($detail as $detail) { ?>
       <div class="col-lg-8 col-md-7 col-sm-12 col-12">
-        <h3><b>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. </b></h3>
-        <p class="text-justify">Allah berfirman dalam Surah Al-Baqarah 261 yang artinya "Perumpamaan (nafkah yang dikeluarkan oleh) orang-orang yang menafkahkan hartanya di jalan Allah adalah serupa dengan sebutir benih yang menumbuhkan tujuh bulir, pada tiap bulir seratus biji. Allah melipat gandakan ganjaran bagi siapa yang dikehendaki dan Allah Maha Luas (Karunia-Nya) lagi Maha Mengetahui."</p>
-        <p class="text-justify">Anak-anak yatim dan dhuafa di Kabupaten Polewali Mandar saat ini tidak seberuntung kita yang bisa tidur nyenyak di kasur yang nyaman dan lembut. Lebih dari 50 anak yatim dan dhuafa yang memiliki semangat menghafal Al-Qur'an dan bercita-cita menjadi Hafidz Qur'an saat ini hanya bisa tidur di lantai 2 Masjid Merdeka Wonomulyo yang ada di daerah tersebut. Apalagi, setelah pemindahan masjid telah dilakukan, pemerintah daerah akan merobohkan masjid tersebut karena dampak pelebaran jalan untuk dijadikan lahan hijau kota.</p>
-        <p class="text-justify">Beginilah kegiatan para santri yang bersemangat menghafalkan Al-Qur'an</p>
-        <p class="text-justify">Mereka sangat gigih dan giat dalam menghafal Al-Qur'an dan suatu saat nanti akan menjadi penerus para Tahfidz dan Da'i saat ini. Akan tetapi semangat dan kegigihan mereka dalam menghafal Al-Qur'an belum didukung dengan sarana dan fasilitas yang memadai. Mereka terpaksa harus menumpang sementara di Lantai 2 masjid. Banyak warga sekitar yang membantu mereka. Salah satunya adalah tanah wakaf. Tanah wakaf tersebut masih dalam bentuk tanah dan belum di jamah sama sekali. Keterbatasaan dana adalah faktor utama yang menjadi penghambat dalam pembangunan asrama.</p>
-        <p class="text-justify">Dan suasana tempat mereka beristirahat hanya beralaskan karpet kecil yang tidak empuk. Akan tetapi kegigihan mereka tidak menyurutkan niat untuk tetap menghafal dan menjadi Hafidz Al-Qur'an. </p>
-        <p class="text-justify">Rencana pembangunan asrama akan dibangun dengan luas 200m2 terdiri dari 3 lantai. Desain bangunan nya dapat dilihat seperti dibawah ini.</p>
+        <img src="<?= base_url(); ?>assets/upload/berita/<?= $detail->photo; ?>" class="img-fluid">
+        <span class="badge badge-success"><?php echo date("d F Y", strtotime($detail->tanggal)); ?></span>
+        <span class="badge badge-warning"><?php echo $detail->tipe; ?></span>
+        <h3><b><?php echo $detail->judul; ?></b></h3>
+        <p class="text-justify"><?php echo $detail->detail; ?></p>
       </div>
+      <?php } ?>
+
       <div class="col-lg-4 col-md-5 col-sm-12 col-12">
         <h4 class="text-info"><b>Berita / Event Terbaru</b></h4>
+        <?php 
+        foreach ($info as $info) { ?>
         <div class="card mb-2">
           <div class="row m-1">
             <div class="col-lg-4 col-md-4 col-sm-4 col-4">
-              <img src="<?php echo base_url(); ?>assets/home/images/bg_3.jpg" class="img-donatur2">
+              <img src="<?= base_url(); ?>assets/upload/berita/<?= $info->photo; ?>" class="img-donatur2">
             </div>
             <div class="col-lg-8 col-md-8 col-sm-8 col-8">
-              <h6 class="mb-0"><b><a href="<?php echo base_url(); ?>Home/infoDetail">Lorem Ipsum Dolor Sit Amet</a></b></h6>
-              <small>29 Jun 2019 12:34</small>
+              <h6 class="mb-0"><b><a href="<?= base_url(); ?>Home/infoDetail/<?= $info->id; ?>"><?php echo $info->judul; ?></a></b></h6>
+              <small><?php echo date("d F Y", strtotime($info->tanggal)); ?></small>
             </div>
           </div>
         </div>
-        <div class="card mb-2">
-          <div class="row m-1">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-4">
-              <img src="<?php echo base_url(); ?>assets/home/images/bg_3.jpg" class="img-donatur2">
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
-              <h6 class="mb-0"><b><a href="<?php echo base_url(); ?>Home/infoDetail">Lorem Ipsum Dolor Sit Amet</a></b></h6>
-              <small>29 Jun 2019 12:34</small>
-            </div>
-          </div>
-        </div>
-        <div class="card mb-2">
-          <div class="row m-1">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-4">
-              <img src="<?php echo base_url(); ?>assets/home/images/bg_3.jpg" class="img-donatur2">
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
-              <h6 class="mb-0"><b><a href="<?php echo base_url(); ?>Home/infoDetail">Lorem Ipsum Dolor Sit Amet</a></b></h6>
-              <small>29 Jun 2019 12:34</small>
-            </div>
-          </div>
-        </div>
-        <div class="card mb-2">
-          <div class="row m-1">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-4">
-              <img src="<?php echo base_url(); ?>assets/home/images/bg_3.jpg" class="img-donatur2">
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
-              <h6 class="mb-0"><b><a href="<?php echo base_url(); ?>Home/infoDetail">Lorem Ipsum Dolor Sit Amet</a></b></h6>
-              <small>29 Jun 2019 12:34</small>
-            </div>
-          </div>
-        </div>
+        <?php }?>
       </div>
     </div>
   </div>

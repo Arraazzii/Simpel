@@ -34,6 +34,15 @@ class M_Home extends CI_Model{
         return $query->result();
     }
 
+    public function dataBeritaDetail($id){
+        $this->db->select('*');
+        $this->db->from('table_berita');
+        $this->db->where('id', $id);
+        $this->db->order_by('id', 'DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function dataPelatihan($limit){
         $this->db->select('*');
         $this->db->from('table_pelatihan a');
@@ -57,6 +66,17 @@ class M_Home extends CI_Model{
         return $query->result();
     }
 
+    public function dataLPKdetail($id){
+        $this->db->select('*');
+        $this->db->from('table_user a');
+        $this->db->join('table_login b', 'b.kode_user = a.kode_user');
+        $this->db->join('table_pengurus c', 'c.kode_user = a.kode_user');
+        $this->db->where("a.kode_user", $id);
+        $this->db->order_by('b.created_date', 'DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function dataPelatihanDetail($id){
         $this->db->select('*');
         $this->db->from('table_pelatihan a');
@@ -74,6 +94,13 @@ class M_Home extends CI_Model{
         $this->db->join('table_kategori c', 'c.kode_kategori = a.kode_kategori');
         $this->db->where('kode_pelatihan !=', $id);
         $this->db->limit(5);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function datajenis(){
+        $this->db->select('*');
+        $this->db->from('table_jenis');
         $query = $this->db->get();
         return $query->result();
     }

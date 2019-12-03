@@ -75,52 +75,57 @@
         <div class="col-lg-3 col-md-3 col-sm-6 col-12">
           <label>Bulan</label>
           <div class="form-group">
-            <select class="form-control">
-              <option>Januari</option>
-              <option>Februari</option>
-              <option>Maret</option>
-              <option>April</option>
-              <option>Mei</option>
-              <option>Juni</option>
-              <option>Juli</option>
-              <option>Agustus</option>
-              <option>September</option>
-              <option>Oktober</option>
-              <option>November</option>
-              <option>Desember</option>
+            <select class="form-control" id="bulanpelatihan">
+              <option value="">Silahkan Pilih</option>
+              <option value="01">Januari</option>
+              <option value="02">Februari</option>
+              <option value="03">Maret</option>
+              <option value="04">April</option>
+              <option value="05">Mei</option>
+              <option value="06">Juni</option>
+              <option value="07">Juli</option>
+              <option value="08">Agustus</option>
+              <option value="09">September</option>
+              <option value="10">Oktober</option>
+              <option value="11">November</option>
+              <option value="12">Desember</option>
             </select>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-12">
           <label>Tahun</label>
           <div class="form-group">
-            <select class="form-control">
-              <option>2015</option>
-              <option>2016</option>
-              <option>2017</option>
-              <option>2018</option>
-              <option>2019</option>
+            <select class="form-control" id="tahunpelatihan">
+              <option value="">Silahkan Pilih</option>
+              <?php
+                      for($tahunchart1 = date('2010'); $tahunchart1 <= date('Y'); $tahunchart1++){ 
+                    ?>
+                    <option value="<?php echo $tahunchart1; ?>"><?php echo $tahunchart1; ?></option>
+                    <?php } ?>
             </select>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-12">
           <label>Jenis Pelatihan</label>
           <div class="form-group">
-            <select class="form-control">
-              <option>Pelatihan A</option>
-              <option>Pelatihan B</option>
-              <option>Pelatihan C</option>
+            <select class="form-control" id="jenispelatihan">
+              <option value="">Silahkan Pilih</option>
+              <?php foreach ($jenis as $jenis) { ?>
+              <option value="<?php echo $jenis->kode_jenis; ?>"><?php echo $jenis->jenis; ?></option>
+              <?php } ?>
             </select>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-12">
           <label>Nama Pelatihan</label>
           <div class="form-group">
-           <input type="text" class="form-control" placeholder="Masukan Pencarian Disini" name="">
+           <input type="text" class="form-control" placeholder="Masukan Pencarian Disini" id="keypelatihan">
          </div>
        </div>
+     </div>
+      <div class="row ftco-animate" id="appendpelatihan">
        <?php foreach ($pelatihan as $row) { ?>
-         <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+         <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan">
           <div class="card">
             <div class="card-body">
               <a href="<?= base_url(); ?>Home/pelatihanDetail/<?= $row->kode_pelatihan; ?>"><h5 class="text-info"><?= $row->nama;?></h5></a>
@@ -157,13 +162,13 @@
         <div class="col-lg-5 col-md-5 col-sm-6 col-12 float-right">
           <label>Pencarian</label>
           <div class="form-group">
-           <input type="text" class="form-control" placeholder="Masukan Pencarian LPK Disini" name="">
+           <input type="text" class="form-control" placeholder="Masukan Pencarian LPK Disini" name="" id="keylpk">
          </div>
        </div>
      </div>
-     <div class="row ftco-animate">
+     <div class="row ftco-animate" id="appendlpk">
       <?php foreach ($lpk as $row) { ?>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+      <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removelpk">
         <div class="card">
           <div class="card-body">
             <a href="<?= base_url();?>Home/lpkDetail/<?= $row->kode_user; ?>"><h5 class="text-info"><?= $row->nama  ; ?></h5></a>
@@ -191,7 +196,7 @@
         <h2 class="text-center text-light ftco-animate"><b>Informasi</b></h2>
         <div class="row ftco-animate">
           <?php foreach ($berita as $row) { ?>
-          <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated">
+          <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated ">
             <div class="blog-entry justify-content-end w-100">
               <a href="<?= base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?= base_url(); ?>assets/upload/berita/<?= $row->photo; ?>');">
               </a>
@@ -220,3 +225,142 @@
     toastr.info('If all three of these are referenced correctly, then this should toast should pop-up.');
   });
 </script> -->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#jenispelatihan").change(function(){
+      var jenispelatihan = $("#jenispelatihan").val();
+      var tahunpelatihan = $("#tahunpelatihan").val();
+      var bulanpelatihan = $("#bulanpelatihan").val();
+      var keypelatihan = $("#keypelatihan").val();
+      $.ajax({
+      type: "POST",
+      dataType : 'JSON',
+      url: "<?php echo base_url(); ?>Home/cariPelatihan",
+      data: {jenispelatihan: jenispelatihan, tahunpelatihan: tahunpelatihan, keypelatihan: keypelatihan, bulanpelatihan: bulanpelatihan},
+      success: function(msg) {
+        var html = "";
+        var date = "<?php echo date('Y-m-d'); ?>";
+        $(".removepelatihan").remove();
+        $.each(msg, function(index, val){
+          html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan' >";
+          html += "<div class='card'><div class='card-body'><a href='<?= base_url(); ?>Home/pelatihanDetail/" + val.kode_pelatihan + "'><h5 class='text-info'>"+val.nama+"</h5></a>";
+          if (date > val.tanggal_berakhir_daftar) {
+            html += "<span class='badge badge-danger'>Expired</span>";
+          }
+          html += "<span class='badge badge-success'>" + val.standar_kompetensi + "</span>";
+          html += "<p>" + val.keterangan + "</p>";
+          html += "<a href='<?= base_url(); ?>Home/pelatihanDetail/"+val.kode_pelatihan+"' class='btn btn-info float-right'>Selengkapnya</a>";
+          html += " </div></div></div>";
+        });
+        $("#appendpelatihan").append(html);
+      }
+      });
+    });
+    $("#tahunpelatihan").change(function(){
+      var jenispelatihan = $("#jenispelatihan").val();
+      var tahunpelatihan = $("#tahunpelatihan").val();
+      var bulanpelatihan = $("#bulanpelatihan").val();
+      var keypelatihan = $("#keypelatihan").val();
+      $.ajax({
+      type: "POST",
+      dataType : 'JSON',
+      url: "<?php echo base_url(); ?>Home/cariPelatihan",
+      data: {jenispelatihan: jenispelatihan, tahunpelatihan: tahunpelatihan, keypelatihan: keypelatihan, bulanpelatihan: bulanpelatihan},
+      success: function(msg) {
+        var html = "";
+        var date = "<?php echo date('Y-m-d'); ?>";
+        $(".removepelatihan").remove();
+        $.each(msg, function(index, val){
+          html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan' >";
+          html += "<div class='card'><div class='card-body'><a href='<?= base_url(); ?>Home/pelatihanDetail/" + val.kode_pelatihan + "'><h5 class='text-info'>"+val.nama+"</h5></a>";
+          if (date > val.tanggal_berakhir_daftar) {
+            html += "<span class='badge badge-danger'>Expired</span>";
+          }
+          html += "<span class='badge badge-success'>" + val.standar_kompetensi + "</span>";
+          html += "<p>" + val.keterangan + "</p>";
+          html += "<a href='<?= base_url(); ?>Home/pelatihanDetail/"+val.kode_pelatihan+"' class='btn btn-info float-right'>Selengkapnya</a>";
+          html += " </div></div></div>";
+        });
+        $("#appendpelatihan").append(html);
+      }
+      });
+    });
+    $("#bulanpelatihan").change(function(){
+      var jenispelatihan = $("#jenispelatihan").val();
+      var tahunpelatihan = $("#tahunpelatihan").val();
+      var bulanpelatihan = $("#bulanpelatihan").val();
+      var keypelatihan = $("#keypelatihan").val();
+      $.ajax({
+      type: "POST",
+      dataType : 'JSON',
+      url: "<?php echo base_url(); ?>Home/cariPelatihan",
+      data: {jenispelatihan: jenispelatihan, tahunpelatihan: tahunpelatihan, keypelatihan: keypelatihan, bulanpelatihan: bulanpelatihan},
+      success: function(msg) {
+        var html = "";
+        var date = "<?php echo date('Y-m-d'); ?>";
+        $(".removepelatihan").remove();
+        $.each(msg, function(index, val){
+          html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan' >";
+          html += "<div class='card'><div class='card-body'><a href='<?= base_url(); ?>Home/pelatihanDetail/" + val.kode_pelatihan + "'><h5 class='text-info'>"+val.nama+"</h5></a>";
+          if (date > val.tanggal_berakhir_daftar) {
+            html += "<span class='badge badge-danger'>Expired</span>";
+          }
+          html += "<span class='badge badge-success'>" + val.standar_kompetensi + "</span>";
+          html += "<p>" + val.keterangan + "</p>";
+          html += "<a href='<?= base_url(); ?>Home/pelatihanDetail/"+val.kode_pelatihan+"' class='btn btn-info float-right'>Selengkapnya</a>";
+          html += " </div></div></div>";
+        });
+        $("#appendpelatihan").append(html);
+      }
+      });
+    });
+    $("#keypelatihan").on('keyup',function(){
+      var jenispelatihan = $("#jenispelatihan").val();
+      var tahunpelatihan = $("#tahunpelatihan").val();
+      var bulanpelatihan = $("#bulanpelatihan").val();
+      var keypelatihan = $("#keypelatihan").val();
+      $.ajax({
+      type: "POST",
+      dataType : 'JSON',
+      url: "<?php echo base_url(); ?>Home/cariPelatihan",
+      data: {jenispelatihan: jenispelatihan, tahunpelatihan: tahunpelatihan, keypelatihan: keypelatihan, bulanpelatihan: bulanpelatihan},
+      success: function(msg) {
+        var html = "";
+        var date = "<?php echo date('Y-m-d'); ?>";
+        $(".removepelatihan").remove();
+        $.each(msg, function(index, val){
+          html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan' >";
+          html += "<div class='card'><div class='card-body'><a href='<?= base_url(); ?>Home/pelatihanDetail/" + val.kode_pelatihan + "'><h5 class='text-info'>"+val.nama+"</h5></a>";
+          if (date > val.tanggal_berakhir_daftar) {
+            html += "<span class='badge badge-danger'>Expired</span>";
+          }
+          html += "<span class='badge badge-success'>" + val.standar_kompetensi + "</span>";
+          html += "<p>" + val.keterangan + "</p>";
+          html += "<a href='<?= base_url(); ?>Home/pelatihanDetail/"+val.kode_pelatihan+"' class='btn btn-info float-right'>Selengkapnya</a>";
+          html += " </div></div></div>";
+        });
+        $("#appendpelatihan").append(html);
+      }
+      });
+    });
+    $("#keylpk").on('keyup',function(){
+      var keylpk = $("#keylpk").val();
+      $.ajax({
+      type: "POST",
+      dataType : 'JSON',
+      url: "<?php echo base_url(); ?>Home/carilpk",
+      data: {keylpk: keylpk},
+      success: function(msg) {
+        var html = "";
+        var date = "<?php echo date('Y-m-d'); ?>";
+        $(".removelpk").remove();
+        $.each(msg, function(index, val){
+          html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removelpk'><div class='card'><div class='card-body'><a href='<?= base_url();?>Home/lpkDetail/" + val.kode_user + "'><h5 class='text-info'>" + val.nama + "</h5></a><p>" + val.alamat + "</p></div></div></div>";
+        });
+        $("#appendlpk").append(html);
+      }
+      });
+    });
+  });
+</script>

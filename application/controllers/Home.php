@@ -35,9 +35,12 @@ class Home extends CI_Controller {
             'berita' => $this
             ->model
             ->dataBerita(6),
-            'pelatihan' => $this
+            'pelatihan' => $this 
             ->model
             ->dataPelatihan(6),
+            'jenis' => $this 
+            ->model
+            ->datajenis(),
         );
 		$path = "";
 		// $data1['model'] = $this->model->dataPelatihan();
@@ -48,12 +51,58 @@ class Home extends CI_Controller {
 		$this->load->view('home/template/default_template', $data);
 	}
 
+	public function cariPelatihan(){
+		$bulanpelatihan = $this->input->post("bulanpelatihan");
+		$tahunpelatihan = $this->input->post("tahunpelatihan");
+		$jenispelatihan = $this->input->post("jenispelatihan");
+		$keypelatihan = $this->input->post("keypelatihan");
+
+		$this->db->select("*");
+        $this->db->from('table_pelatihan');
+        if ($bulanpelatihan != NULL || $bulanpelatihan != "") {
+        	$this->db->where('MONTH(tanggal_berakhir_daftar)', $bulanpelatihan);
+        }
+        if ($tahunpelatihan != NULL || $tahunpelatihan != "") {
+        	$this->db->where('YEAR(tanggal_berakhir_daftar)', $tahunpelatihan);
+        }
+        if ($jenispelatihan != NULL || $jenispelatihan != "") {
+        	$this->db->where('kode_jenis', $jenispelatihan);
+        }
+        if ($keypelatihan != NULL || $keypelatihan != "") {
+	        $this->db->like('nama', $keypelatihan);
+        }
+        $this->db->order_by("kode_pelatihan", "DESC");
+        $this->db->limit(6);
+        $query = $this->db->get();
+        echo json_encode($query->result_array());
+	}
+
+	public function carilpk(){
+		$keylpk = $this->input->post("keylpk");
+		$this->db->select('*');
+        $this->db->from('table_user a');
+        $this->db->join('table_login b', 'b.kode_user = a.kode_user');
+        $this->db->join('table_pengurus c', 'c.kode_user = a.kode_user');
+        if ($keylpk != NULL || $keylpk != "") {
+	        $this->db->like('a.nama', $keylpk);
+        }
+        $this->db->order_by('b.created_date', 'DESC');
+        $this->db->limit(6);
+        $query = $this->db->get();
+        echo json_encode($query->result_array());
+	}
+
 	public function pelatihan()
 	{
 		$path = "";
+		$arraydata = array(
+		'pelatihan' => $this
+            ->model
+            ->dataPelatihan(12),
+        );
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - Pelatihan", $path),
-			"content" => $this->load->view('home/pelatihan', false, true),
+			"content" => $this->load->view('home/pelatihan', $arraydata, true),
 		);
 		$this->load->view('home/template/default_template', $data);
 	}
@@ -160,19 +209,33 @@ class Home extends CI_Controller {
 	public function lpk()
 	{
 		$path = "";
+		$arraydata = array(
+		'lpk' => $this
+            ->model
+            ->dataLPK(12),
+        );
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - LPK", $path),
-			"content" => $this->load->view('home/lpk', false, true),
+			"content" => $this->load->view('home/lpk', $arraydata, true),
+			
 		);
 		$this->load->view('home/template/default_template', $data);
 	}
 
 	public function lpkDetail()
 	{
+		$id = $this->uri->segment(3);
+		$array = array(
+			"detail"=> $this->model->dataLPKdetail($id),
+			'lpk' => $this
+            ->model
+            ->dataLPK(6),
+		);
 		$path = "";
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - LPK Detail", $path),
-			"content" => $this->load->view('home/lpkDetail', false, true),
+			"content" => $this->load->view('home/lpkDetail', $array, true),
+
 		);
 		$this->load->view('home/template/default_template', $data);
 	}
@@ -180,29 +243,31 @@ class Home extends CI_Controller {
 	public function info()
 	{
 		$path = "";
+		$arraydata = array(
+		'berita' => $this
+            ->model
+            ->dataBerita(6),
+        );
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - Informasi", $path),
-			"content" => $this->load->view('home/info', false, true),
+			"content" => $this->load->view('home/info', $arraydata, true),
 		);
 		$this->load->view('home/template/default_template', $data);
 	}
 
 	public function infoDetail()
 	{
+		$id = $this->uri->segment(3);
+		$array = array(
+			"detail"=> $this->model->dataBeritaDetail($id),
+			'info' => $this
+            ->model
+            ->dataBerita(6),
+		);
 		$path = "";
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - Informasii Detail", $path),
-			"content" => $this->load->view('home/infoDetail', false, true),
-		);
-		$this->load->view('home/template/default_template', $data);
-	}
-
-	public function data()
-	{
-		$path = "";
-		$data = array(
-			"page" => $this->load("Pelatihan Kota Depok - Data", $path),
-			"content" => $this->load->view('home/data', false, true),
+			"content" => $this->load->view('home/infoDetail', $array, true),
 		);
 		$this->load->view('home/template/default_template', $data);
 	}
