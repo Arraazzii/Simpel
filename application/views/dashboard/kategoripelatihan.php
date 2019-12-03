@@ -29,7 +29,7 @@
                                     <td><?= $row->kategori; ?></td>
                                     <td>
                                         <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit<?= $row->kode_kategori; ?>">Edit</button>
-                                        <button class="btn btn-danger btn-sm" type="button" onclick="hapus('<?= $row->kode_kategori; ?>')">Delete</button>
+                                        <button class="btn btn-danger btn-sm" type="button" onclick="hapuskategori('<?= $row->kode_kategori; ?>')">Delete</button>
                                     </td>
                                 </tr>
                             <?php } ?>

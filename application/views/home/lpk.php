@@ -4,7 +4,7 @@
   <br>
   <div class="row d-flex ftco-animate justify-content-center">
     <?php foreach ($lpk as $lpk) { ?>
-    <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removelpk">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3 divControl">
       <div class="card">
         <div class="card-body">
           <a href="<?= base_url();?>Home/lpkDetail/<?= $lpk->kode_user; ?>"><h5 class="text-info"><?= $lpk->nama  ; ?></h5></a>
@@ -15,12 +15,11 @@
     <?php } ?>
     
   </div>
-  <ul class="pagination text-center justify-content-center">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
+  <div class="row justify-content-center">
+    <div class="prev">prev</div>
+    <div id="divPages"></div>
+    <div class="next">next</div>
+  </div>
 </div>
 </section>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/home/js/pagination.js"></script>

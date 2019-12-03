@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	function hapus(){
+	function hapusPelatihan(id){
 
 		swal({
 			title: "Warning",
@@ -10,23 +10,142 @@
 		})
 		.then((willDelete) => {
 			if (willDelete) {
-				// $.ajax({
-				// 	url: '<?= base_url();?>pengurus/addNew',
-				// 	type: 'POST',
-				// 	data: {
-				// 		"kode" : kode, "nama" : nama, "bank" : bank, "cicilan" : cicilan, "level" : lv, "fase" : fase
-				// 	},
-				// 	dataType: "HTML",
-				// 	error: function (xhr, ajaxOptions, thrownError) {
-				// 		swal("Error!", "Please try again", "error");
-				// 	},
-				// 	success: function(data) {
-				// 		swal("Success!", "Berhasil Menambah Kelompok!", "success");
-				// 		setTimeout(function() {
-				// 			window.location.reload();
-				// 		}, 1000);
-				// 	}
-				// });
+				$.ajax({
+					url: '<?= base_url();?>Dashboard/hapusPelatihan',
+					type: 'POST',
+					data: {
+						"kode" : id
+					},
+					dataType: "HTML",
+					error: function (xhr, ajaxOptions, thrownError) {
+						swal("Error!", "Please try again", "error");
+					},
+					success: function(data) {
+						if (data == 'ok') {
+						swal("Success!", "Data Berhasil Dihapus!", "success");
+						setTimeout(function() {
+							window.location.reload();
+						}, 1000);
+					}else{
+						swal("Error!", "Please try again", "error");
+
+					}
+					}
+				});
+			} else {
+			}
+		});
+	}
+
+	function hapusjenispelatihan(id){
+
+		swal({
+			title: "Warning",
+			text: "Apa Data Ingin Dihapus?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+				$.ajax({
+					url: '<?= base_url();?>Dashboard/hapusjenispelatihan',
+					type: 'POST',
+					data: {
+						"kode" : id
+					},
+					dataType: "HTML",
+					error: function (xhr, ajaxOptions, thrownError) {
+						swal("Error!", "Please try again", "error");
+					},
+					success: function(data) {
+						if (data == 'ok') {
+						swal("Success!", "Data Berhasil Dihapus!", "success");
+						setTimeout(function() {
+							window.location.reload();
+						}, 1000);
+					}else{
+						swal("Error!", "Please try again", "error");
+
+					}
+					}
+				});
+			} else {
+			}
+		});
+	}
+
+	function hapusjenispelatihan(id){
+
+		swal({
+			title: "Warning",
+			text: "Apa Data Ingin Dihapus?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+				$.ajax({
+					url: '<?= base_url();?>Dashboard/hapusjenispelatihan',
+					type: 'POST',
+					data: {
+						"kode" : id
+					},
+					dataType: "HTML",
+					error: function (xhr, ajaxOptions, thrownError) {
+						swal("Error!", "Please try again", "error");
+					},
+					success: function(data) {
+						if (data == 'ok') {
+						swal("Success!", "Data Berhasil Dihapus!", "success");
+						setTimeout(function() {
+							window.location.reload();
+						}, 1000);
+					}else{
+						swal("Error!", "Please try again", "error");
+
+					}
+					}
+				});
+			} else {
+			}
+		});
+	}
+
+	function hapuskategori(id){
+
+		swal({
+			title: "Warning",
+			text: "Apa Data Ingin Dihapus?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+				$.ajax({
+					url: '<?= base_url();?>Dashboard/hapuskategori',
+					type: 'POST',
+					data: {
+						"kode" : id
+					},
+					dataType: "HTML",
+					error: function (xhr, ajaxOptions, thrownError) {
+						swal("Error!", "Please try again", "error");
+					},
+					success: function(data) {
+						if (data == 'ok') {
+						swal("Success!", "Data Berhasil Dihapus!", "success");
+						setTimeout(function() {
+							window.location.reload();
+						}, 1000);
+					}else{
+						swal("Error!", "Please try again", "error");
+
+					}
+					}
+				});
 			} else {
 			}
 		});
