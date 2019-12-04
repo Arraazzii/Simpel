@@ -48,7 +48,7 @@
                                             <button class="btn btn-danger btn-sm batalkan" onclick="nonaktifkan('<?= $row->kode_pelatihan; ?>')" id="nonaktif<?= $row->kode_pelatihan; ?>">Non Aktifkan</button>
                                         <?php } ?>
                                         <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit<?= $row->kode_pelatihan; ?>">Detail</button>
-                                        <button class="btn btn-danger btn-sm" type="button" onclick="hapus()">Delete</button>
+                                        <button class="btn btn-danger btn-sm" type="button" onclick="hapusPelatihan('<?= $row->kode_pelatihan; ?>')">Delete</button>
                                     </td>
                                 </tr>
                             <?php } ?>

@@ -59,6 +59,7 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <center><img src="<?= base_url(); ?>assets/upload/berita/<?= $row->photo; ?>" class="col-lg-6 img-fluid" style="padding:20px"></center>
+                            <input type="hidden" name="kode" class="form-control" value="<?= $row->id; ?>" required="">
                     <div class="form-group">
                             <label>Tipe</label>
                             <select class="form-control" name="tipe" required="">

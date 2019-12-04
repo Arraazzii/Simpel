@@ -29,7 +29,7 @@
                                     <td><?= $row->jenis; ?></td>
                                     <td>
                                         <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit<?= $row->kode_jenis; ?>">Edit</button>
-                                        <button class="btn btn-danger btn-sm" type="button" onclick="hapus('<?= $row->kode_jenis; ?>')">Delete</button>
+                                        <button class="btn btn-danger btn-sm" type="button" onclick="hapusjenispelatihan('<?= $row->kode_jenis; ?>')">Delete</button>
                                     </td>
                                 </tr>
                             <?php } ?>

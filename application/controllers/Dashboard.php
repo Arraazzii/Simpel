@@ -1438,5 +1438,63 @@ class Dashboard extends CI_Controller {
 		);
 		$this->load->view('dashboard/template/default_template', $data);
 	}
+
+	public function hapusPelatihan(){
+		$kode = $this->input->post('kode');
+		$delete = $this->db->query("DELETE FROM table_pelatihan WHERE kode_pelatihan = '$kode'");
+		if ($delete) {
+			echo "ok";
+		}else{
+			echo "fail";
+		}
+	}
+
+	public function hapusjenispelatihan(){
+		$kode = $this->input->post('kode');
+		$delete = $this->db->query("DELETE FROM table_jenis WHERE kode_jenis = '$kode'");
+		if ($delete) {
+			echo "ok";
+		}else{
+			echo "fail";
+		}
+	}
+
+	public function hapuskategori(){
+		$kode = $this->input->post('kode');
+		$delete = $this->db->query("DELETE FROM table_kategori WHERE kode_kategori = '$kode'");
+		if ($delete) {
+			echo "ok";
+		}else{
+			echo "fail";
+		}
+	}
+
+	public function editBerita(){
+		$kode       = $this->input->post('kode');
+		$tipe 		= $this->input->post('tipe');
+		$judul      = $this->input->post('judul');
+		$deskripsi  = $this->input->post('deskripsi');
+
+		$data = array(
+			'tipe' => $tipe,
+			'judul' => $judul,
+			'detail' => $deskripsi,
+			'photo' => $_FILES['foto']['name'],
+		);
+
+		$dataHistory = array(
+			'aktivitas'  => 'Edit Berita/Events : '.$judul,
+			'detail' => $deskripsi,
+			'photo' => $_FILES['foto']['name'],
+			'kode_user' => $kode
+		);
+
+		move_uploaded_file($_FILES['foto']['tmp_name'], './assets/upload/berita/' . $_FILES['foto']['name']);
+		$this->db->where("id", $kode);
+		$this->db->update("table_berita", $data);
+		$this->db->insert("table_history", $dataHistory);
+		$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
+		redirect('Dashboard/info');
+	}
 	
 }
