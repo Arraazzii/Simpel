@@ -33,9 +33,9 @@
 				</ul>
 				<ul class="navbar-nav nav-right ml-auto">
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<!-- 						<a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="ti ti-email"></i>
-						</a>
+						</a> -->
 						<div class="dropdown-menu extended animated fadeIn" aria-labelledby="navbarDropdown">
 							<ul>
 								<li class="dropdown-header bg-gradient p-4 text-white text-left">Messages
@@ -130,7 +130,7 @@
 									</li>
 								</ul>
 							</div>
-						</li>
+<!-- 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fe fe-bell"></i>
@@ -248,7 +248,7 @@
 										</form>
 									</div>
 								</div>
-							</li>
+							</li> -->
 							<li class="nav-item dropdown user-profile">
 								<a href="javascript:void(0)" class="nav-link dropdown-toggle " id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<img src="<?= base_url(); ?>assets/dashboard/img/avtar/02.jpg" alt="avtar-img">
@@ -258,14 +258,14 @@
 									<div class="bg-gradient px-4 py-3">
 										<div class="d-flex align-items-center justify-content-between">
 											<div class="mr-1">
-												<h4 class="text-white mb-0">Alice Williams</h4>
-												<small class="text-white">Henry@example.com</small>
+												<!-- <h4 class="text-white mb-0">Alice Williams</h4>
+												<small class="text-white">Henry@example.com</small> -->
 											</div>
 											<a href="#" class="text-white font-20 tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Logout" id="logout"> <i
 												class="zmdi zmdi-power"></i></a>
 											</div>
 										</div>
-										<div class="p-4">
+<!-- 										<div class="p-4">
 											<a class="dropdown-item d-flex nav-link" href="javascript:void(0)">
 												<i class="fa fa-user pr-2 text-success"></i> Profile</a>
 												<a class="dropdown-item d-flex nav-link" href="javascript:void(0)">
@@ -291,7 +291,7 @@
 															</a>
 														</div>
 													</div>
-												</div>
+												</div> -->
 											</div>
 										</li>
 									</ul>
@@ -332,14 +332,14 @@
 									<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "info") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>Dashboard/info" aria-expanded="false"><i class="nav-icon ti ti-clipboard"></i><span class="nav-title">Berita / Events</span></a> </li>
 									<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "peserta") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>Dashboard/peserta" aria-expanded="false"><i class="nav-icon ti ti-comments-smiley"></i><span class="nav-title">Daftar Peserta</span></a> </li>
 									<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "laporan") { echo 'class="active"';} ?>><a href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-clipboard"></i><span class="nav-title">Laporan</span></a>
-                    <!-- <?= base_url(); ?>Dashboard/laporan  -->
-                    <ul aria-expanded="false">
+										<!-- <?= base_url(); ?>Dashboard/laporan  -->
+										<ul aria-expanded="false">
 											<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "lpkblkln") { echo 'class="active"';} ?>><a href="javascript:void(0)" data-toggle="modal" data-target="#modalLaporanPeserta" aria-expanded="false"><span class="nav-title">Laporan Peserta</span></a> </li>
 											<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "statusLpk") { echo 'class="active"';} ?>> <a href='javascript:void(0)' data-toggle="modal" data-target="#modalLaporanStatusPeserta">Laporan Status Peserta</a> </li>
-                      <li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "statusLpk") { echo 'class="active"';} ?>> <a href='javascript:void(0)' data-toggle="modal" data-target="#modalLaporanLpkBlkln">Laporan LPK & BLKLN</a> </li>
-                      <li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "statusLpk") { echo 'class="active"';} ?>> <a href='javascript:void(0)' data-toggle="modal" data-target="#modalLaporanRekapitulasi">Laporan Rekapitulasi  Peserta Pelatihan</a> </li>
+											<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "statusLpk") { echo 'class="active"';} ?>> <a href='javascript:void(0)' data-toggle="modal" data-target="#modalLaporanLpkBlkln">Laporan LPK & BLKLN</a> </li>
+											<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "statusLpk") { echo 'class="active"';} ?>> <a href='javascript:void(0)' data-toggle="modal" data-target="#modalLaporanRekapitulasi">Laporan Rekapitulasi  Peserta Pelatihan</a> </li>
 										</ul>
-                  </li>
+									</li>
 									<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "helpdesk") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>Dashboard/helpdesk" aria-expanded="false"><i class="nav-icon ti ti-receipt"></i><span class="nav-title">Helpdesk</span></a></li>
 									<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "slider") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>Dashboard/slider" aria-expanded="false"><i class="nav-icon ti ti-desktop"></i><span class="nav-title">Slider</span></a> </li>
 									<!-- <li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "aktivitas") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>Dashboard/aktivitas" aria-expanded="false"><i class="nav-icon ti ti-briefcase"></i><span class="nav-title">Aktivitas</span></a></li> -->
@@ -380,158 +380,158 @@
 					</script>
 
 
-<div id="modalLaporanPeserta" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
+					<div id="modalLaporanPeserta" class="modal fade" role="dialog">
+						<div class="modal-dialog modal-lg">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="display:block;">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Laporan Peserta</h4>
-      </div>
-      <div class="modal-body">
-        <form class="form-inline" method="POST">
-          <div class="row">
-            <div class="col-sm-2">
-              <label for="email">Dari Tanggal </label>
-            </div>
-            <div class="col-sm-4">
-              <input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;">
-            </div>
-            <div class="col-sm-2">
-              <label for="pwd">Sampai</label>
-            </div>
-            <div class="col-sm-4">
-              <input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;">
-            </div>
-          </div>          
-          <div class="text-center">
-              <button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanPeserta') ?>"><span id="mitraText">Export to PDF</span></button>
-              <button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanPesertaXls') ?>"><span id="mitraText">Export to XLS</span></button>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header" style="display:block;">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Laporan Peserta</h4>
+								</div>
+								<div class="modal-body">
+									<form class="form-inline" method="POST">
+										<div class="row">
+											<div class="col-sm-2">
+												<label for="email">Dari Tanggal </label>
+											</div>
+											<div class="col-sm-4">
+												<input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;">
+											</div>
+											<div class="col-sm-2">
+												<label for="pwd">Sampai</label>
+											</div>
+											<div class="col-sm-4">
+												<input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;">
+											</div>
+										</div>          
+										<div class="text-center">
+											<button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanPeserta') ?>"><span id="mitraText">Export to PDF</span></button>
+											<button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanPesertaXls') ?>"><span id="mitraText">Export to XLS</span></button>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
 
-  </div>
-</div>
+						</div>
+					</div>
 
-<div id="modalLaporanStatusPeserta" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
+					<div id="modalLaporanStatusPeserta" class="modal fade" role="dialog">
+						<div class="modal-dialog modal-lg">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="display:block;">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Laporan Status Peserta</h4>
-      </div>
-      <div class="modal-body">
-        <form class="form-inline" method="POST">
-          <div class="row">
-            <div class="col-sm-2">
-              <label for="email">Dari Tanggal </label>
-            </div>
-            <div class="col-sm-4">
-              <input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;">
-            </div>
-            <div class="col-sm-2">
-              <label for="pwd">Sampai</label>
-            </div>
-            <div class="col-sm-4">
-              <input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;">
-            </div>
-          </div>          
-          <div class="text-center">
-              <button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanStatusPeserta') ?>"><span id="mitraText">Export to PDF</span></button>
-              <button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanStatusPesertaXls') ?>"><span id="mitraText">Export to XLS</span></button>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header" style="display:block;">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Laporan Status Peserta</h4>
+								</div>
+								<div class="modal-body">
+									<form class="form-inline" method="POST">
+										<div class="row">
+											<div class="col-sm-2">
+												<label for="email">Dari Tanggal </label>
+											</div>
+											<div class="col-sm-4">
+												<input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;">
+											</div>
+											<div class="col-sm-2">
+												<label for="pwd">Sampai</label>
+											</div>
+											<div class="col-sm-4">
+												<input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;">
+											</div>
+										</div>          
+										<div class="text-center">
+											<button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanStatusPeserta') ?>"><span id="mitraText">Export to PDF</span></button>
+											<button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanStatusPesertaXls') ?>"><span id="mitraText">Export to XLS</span></button>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
 
-  </div>
-</div>
+						</div>
+					</div>
 
-<div id="modalLaporanLpkBlkln" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
+					<div id="modalLaporanLpkBlkln" class="modal fade" role="dialog">
+						<div class="modal-dialog modal-lg">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="display:block;">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Laporan LPK & BLKLN</h4>
-      </div>
-      <div class="modal-body">
-        <form class="form-inline" method="POST">
-          <div class="row">
-            <div class="col-sm-2">
-              <label for="email">Dari Tanggal </label>
-            </div>
-            <div class="col-sm-4">
-              <input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;">
-            </div>
-            <div class="col-sm-2">
-              <label for="pwd">Sampai</label>
-            </div>
-            <div class="col-sm-4">
-              <input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;">
-            </div>
-          </div>          
-          <div class="text-center">
-              <button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanLpkBlkln') ?>"><span id="mitraText">Export to PDF</span></button>
-              <button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanLpkBlklnXls') ?>"><span id="mitraText">Export to XLS</span></button>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header" style="display:block;">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Laporan LPK & BLKLN</h4>
+								</div>
+								<div class="modal-body">
+									<form class="form-inline" method="POST">
+										<div class="row">
+											<div class="col-sm-2">
+												<label for="email">Dari Tanggal </label>
+											</div>
+											<div class="col-sm-4">
+												<input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;">
+											</div>
+											<div class="col-sm-2">
+												<label for="pwd">Sampai</label>
+											</div>
+											<div class="col-sm-4">
+												<input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;">
+											</div>
+										</div>          
+										<div class="text-center">
+											<button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanLpkBlkln') ?>"><span id="mitraText">Export to PDF</span></button>
+											<button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanLpkBlklnXls') ?>"><span id="mitraText">Export to XLS</span></button>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
 
-  </div>
-</div>
+						</div>
+					</div>
 
-<div id="modalLaporanRekapitulasi" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
+					<div id="modalLaporanRekapitulasi" class="modal fade" role="dialog">
+						<div class="modal-dialog modal-lg">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="display:block;">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Laporan Rekapitulasi  Peserta Pelatihan</h4>
-      </div>
-      <div class="modal-body">
-        <form class="form-inline" method="POST">
-          <div class="row">
-            <div class="col-sm-2">
-              <label for="email">Dari Tanggal </label>
-            </div>
-            <div class="col-sm-4">
-              <input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;">
-            </div>
-            <div class="col-sm-2">
-              <label for="pwd">Sampai</label>
-            </div>
-            <div class="col-sm-4">
-              <input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;">
-            </div>
-          </div>          
-          <div class="text-center">
-              <button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanRekapitulasi') ?>"><span id="mitraText">Export to PDF</span></button>
-              <button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanRekapitulasiXls') ?>"><span id="mitraText">Export to XLS</span></button>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header" style="display:block;">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Laporan Rekapitulasi  Peserta Pelatihan</h4>
+								</div>
+								<div class="modal-body">
+									<form class="form-inline" method="POST">
+										<div class="row">
+											<div class="col-sm-2">
+												<label for="email">Dari Tanggal </label>
+											</div>
+											<div class="col-sm-4">
+												<input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;">
+											</div>
+											<div class="col-sm-2">
+												<label for="pwd">Sampai</label>
+											</div>
+											<div class="col-sm-4">
+												<input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;">
+											</div>
+										</div>          
+										<div class="text-center">
+											<button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanRekapitulasi') ?>"><span id="mitraText">Export to PDF</span></button>
+											<button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanRekapitulasiXls') ?>"><span id="mitraText">Export to XLS</span></button>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
 
-  </div>
-</div>
+						</div>
+					</div>
