@@ -6,22 +6,22 @@
       if (empty($slider)) { ?>
         <div class="carousel-item active">
           <img src="<?= base_url(); ?>assets/home/images/bg_1.jpg" alt="Slider2" class="carousel-obj">
-          <div class="carousel-caption">
+<!--           <div class="carousel-caption">
             <h3 class="text-white">Sistem Pelatihan Kota Depok</h3>
             <p>Selamat Datang Di Website Sistem Pelatihan Kota Depok</p>
             <button class="btn btn-info" type="button">Selengkapnya</button>
-          </div>
+          </div> -->
         </div>
       <?php } else {
         $no = 0;
         foreach ($slider as $slide) { $no++;?>
           <div class="carousel-item <?php if($no <= 1){echo 'active';}?>">
             <img src="<?= base_url(); ?>assets/upload/slider/<?= $slide->photo; ?>" alt="Slider1" class="carousel-obj">
-            <div class="carousel-caption">
+<!--             <div class="carousel-caption">
               <h3 class="text-white"><?= $slide->judul; ?></h3>
               <p><?= $slide->detail; ?></p>
               <button class="btn btn-info" type="button">Selengkapnya</button>
-            </div>
+            </div> -->
           </div> 
         <?php }
 

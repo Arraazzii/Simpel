@@ -79,13 +79,13 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <label class="control-label">Type Akun <span style="color:red" title="Wajib Diisi">*</span></label><br>
+                                                    <label class="control-label">Type Akun</label><br>
                                                     <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="customRadioInline1" name="tipe" class="custom-control-input" value="LPK" required>
+                                                        <input type="radio" id="customRadioInline1" name="tipe" class="custom-control-input" value="LPK" >
                                                         <label class="custom-control-label" for="customRadioInline1">LPK</label>
                                                     </div>
                                                     <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="customRadioInline2" name="tipe" class="custom-control-input" value="BLKLN" required>
+                                                        <input type="radio" id="customRadioInline2" name="tipe" class="custom-control-input" value="BLKLN" >
                                                         <label class="custom-control-label" for="customRadioInline2">BLKLN</label>
                                                     </div>
                                                 </div>
@@ -133,19 +133,19 @@
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">No. Izin <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                        <input type="text" name="no_izin" class="form-control" placeholder="No. Izin" required="" />
+                                                        <label class="control-label">No. Izin </label>
+                                                        <input type="text" name="no_izin" class="form-control" placeholder="No. Izin"  />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Tanggal Izin <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                        <input type="date" name="tanggal_izin" class="form-control" required="" />
+                                                        <label class="control-label">Tanggal Izin </label>
+                                                        <input type="date" name="tanggal_izin" class="form-control"  />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Jenis <span style="color:red" title="Wajib Diisi">*</span></label><br>
+                                                        <label class="control-label">Jenis </label><br>
                                                         <div class="custom-control custom-radio custom-control-inline">
                                                             <input type="radio" id="customRadioInline3" name="jenis" class="custom-control-input" value="Pemerintah" required>
                                                             <label class="custom-control-label" for="customRadioInline3">Pemerintah</label>
@@ -162,20 +162,20 @@
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Status Akreditas <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                        <input type="text" name="status_akreditas" class="form-control" required="" />
+                                                        <label class="control-label">Status Akreditas </label>
+                                                        <input type="text" name="status_akreditas" class="form-control"  />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">No. Akreditas <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                        <input type="text" name="no_akreditas" class="form-control" required="" />
+                                                        <label class="control-label">No. Akreditas </label>
+                                                        <input type="text" name="no_akreditas" class="form-control"  />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Ruang Lingkup <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                        <input type="text" name="ruang_lingkup" class="form-control" required="" />
+                                                        <label class="control-label">Ruang Lingkup </label>
+                                                        <input type="text" name="ruang_lingkup" class="form-control"  />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -192,32 +192,32 @@
                                                 <legend>Data Pimpinan</legend>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Nama Pimpinan <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                        <input type="text" name="nama_pimpinan" class="form-control" placeholder="Nama Pimpinan" required="" />
+                                                        <label class="control-label">Nama Pimpinan </label>
+                                                        <input type="text" name="nama_pimpinan" class="form-control" placeholder="Nama Pimpinan"  />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">No. Telepon Pimpinan <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                        <input type="text" name="no_telepon_pimpinan" class="form-control" placeholder="(+62) ..." required="" />
+                                                        <label class="control-label">No. Telepon Pimpina</label>
+                                                        <input type="text" name="no_telepon_pimpinan" class="form-control" placeholder="(+62) ..."  />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Nama Penanggung Jawab <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                        <input type="text" name="nama_pj" class="form-control" placeholder="Nama Pimpinan" required="" />
+                                                        <label class="control-label">Nama Penanggung Jawab </label>
+                                                        <input type="text" name="nama_pj" class="form-control" placeholder="Nama Pimpinan"  />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Jabatan Penanggung Jawab <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                        <input type="text" name="jabatan_pj" class="form-control" placeholder="Nama Pimpinan" required="" />
+                                                        <label class="control-label">Jabatan Penanggung Jawab </label>
+                                                        <input type="text" name="jabatan_pj" class="form-control" placeholder="Nama Pimpinan"  />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">No. Telepon Penanggung Jawab <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                        <input type="text" name="no_telepon_pj" class="form-control" placeholder="(+62) ..." required="" />
+                                                        <label class="control-label">No. Telepon Penanggung Jawab </label>
+                                                        <input type="text" name="no_telepon_pj" class="form-control" placeholder="(+62) ..."  />
                                                     </div>
                                                 </div>
                                             </fieldset>
@@ -236,38 +236,38 @@
                                                         </tr>
                                                         <tr>
                                                             <td>Karyawan</td>
-                                                            <td><input type="number" name="karyawan_laki" class="form-control" value="0" required="" /></td>
-                                                            <td><input type="number" name="karyawan_perempuan" class="form-control" value="0" required="" /></td>
+                                                            <td><input type="number" name="karyawan_laki" class="form-control" value="0"  /></td>
+                                                            <td><input type="number" name="karyawan_perempuan" class="form-control" value="0"  /></td>
                                                         </tr>
                                                         <tr>
                                                             <td>Tenaga Pelatihan Tetap</td>
-                                                            <td><input type="number" name="tpt_laki" class="form-control" value="0" required="" /></td>
-                                                            <td><input type="number" name="tpt_perempuan" class="form-control" value="0" required="" /></td>
+                                                            <td><input type="number" name="tpt_laki" class="form-control" value="0"  /></td>
+                                                            <td><input type="number" name="tpt_perempuan" class="form-control" value="0"  /></td>
                                                         </tr>
                                                         <tr>
                                                             <td>Tenaga Pelatihan Tidak Tetap</td>
-                                                            <td><input type="number" name="tptt_laki" class="form-control" value="0" required="" /></td>
-                                                            <td><input type="number" name="tptt_perempuan" class="form-control" value="0" required="" /></td>
+                                                            <td><input type="number" name="tptt_laki" class="form-control" value="0"  /></td>
+                                                            <td><input type="number" name="tptt_perempuan" class="form-control" value="0"  /></td>
                                                         </tr>
                                                         <tr>
                                                             <td>Instruktur Tetap</td>
-                                                            <td><input type="number" name="it_laki" class="form-control" value="0" required="" /></td>
-                                                            <td><input type="number" name="it_perempuan" class="form-control" value="0" required="" /></td>
+                                                            <td><input type="number" name="it_laki" class="form-control" value="0"  /></td>
+                                                            <td><input type="number" name="it_perempuan" class="form-control" value="0"  /></td>
                                                         </tr>
                                                         <tr>
                                                             <td>Instruktur Tidak Tetap</td>
-                                                            <td><input type="number" name="itt_laki" class="form-control" value="0" required="" /></td>
-                                                            <td><input type="number" name="itt_perempuan" class="form-control" value="0" required="" /></td>
+                                                            <td><input type="number" name="itt_laki" class="form-control" value="0"  /></td>
+                                                            <td><input type="number" name="itt_perempuan" class="form-control" value="0"  /></td>
                                                         </tr>
                                                         <tr>
                                                             <td>Asesor Kompetensi</td>
-                                                            <td><input type="number" name="ak_laki" class="form-control" value="0" required="" /></td>
-                                                            <td><input type="number" name="ak_perempuan" class="form-control" value="0" required="" /></td>
+                                                            <td><input type="number" name="ak_laki" class="form-control" value="0"  /></td>
+                                                            <td><input type="number" name="ak_perempuan" class="form-control" value="0"  /></td>
                                                         </tr>
                                                         <tr>
                                                             <td>Instruktur/Asesor WNA</td>
-                                                            <td><input type="number" name="aw_laki" class="form-control" value="0" required="" /></td>
-                                                            <td><input type="number" name="aw_perempuan" class="form-control" value="0" required="" /></td>
+                                                            <td><input type="number" name="aw_laki" class="form-control" value="0"  /></td>
+                                                            <td><input type="number" name="aw_perempuan" class="form-control" value="0"  /></td>
                                                         </tr>
                                                     </center>
                                                 </table>
