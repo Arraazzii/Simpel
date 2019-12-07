@@ -9,16 +9,16 @@
             </div>
             <div class="card-body">
                 <div class="datatable-wrapper table-responsive">
-                    <table id="datatable" class="table table-borderless crypto-table w-100">
+                    <table id="datatable" class="table table-borderless w-100">
                         <thead class="bg-light">
                             <tr>
                                 <th width="2%">No.</th>
                                 <th>Nik</th>
+                                <th>Tanggal</th>
+                                <th>Jenis Helpdesk</th>
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Pesan</th>
-                                <th>Tipe</th>
-                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -35,17 +35,11 @@
                                             -
                                         <?php } ?>
                                     </td>
+                                    <td><?= tanggal_indo($row->tanggal, true); ?></td>
+                                    <td><span class="badge badge-success"><?= $row->tipe; ?></span></td>
                                     <td><?= $row->nama; ?></td>
                                     <td><?= $row->email; ?></td>
                                     <td><?= $row->pesan; ?></td>
-                                    <td><span class="badge badge-success"><?= $row->tipe; ?></span></td>
-                                    <td>
-                                        <?php if ($row->status_h == 'Sudah') { ?>
-                                            <span class="badge badge-success">Sudah</span>
-                                        <?php } else { ?>
-                                            <span class="badge badge-danger">Belum</span>
-                                        <?php } ?>
-                                    </td>
                                     <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalEdit<?= $row->id; ?>">Edit</button></td>
                                 </tr>
                             <?php } ?>

@@ -18,7 +18,6 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Judul</th>
-                                <th>Detail</th>
                                 <th>Foto</th>
                                 <th>Aksi</th>
                             </tr>
@@ -31,7 +30,6 @@
                                     <td><?= $no++; ?></td>
                                     <td><?= tanggal_indo($row->tanggal, true); ?></td>
                                     <td><?= $row->judul; ?></td>
-                                    <td><?= $row->detail; ?></td>
                                     <td><img src="<?= base_url(); ?>assets/upload/slider/<?= $row->photo; ?>" class="col-lg-6 img-fluid"></td>
                                     <td>
                                         <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit<?= $row->id; ?>">Edit</button>
@@ -70,12 +68,9 @@ foreach ($slider as $row) { ?>
                         <input type="text" name="judul" class="form-control" value="<?= $row->judul; ?>">
                     </div>
                     <div class="form-group">
-                        <label>Deskripsi</label>
-                        <textarea class="form-control" name="deskripsi"><?= $row->detail; ?></textarea>
-                    </div>
-                    <div class="form-group">
                         <label>Foto</label>
-                        <input type="file" name="foto" class="form-control" required="">
+                        <input type="file" name="foto" class="form-control foto" required="">
+                        <p>Gambar JPG/PNG Max. 2Mb</p>
                     </div>
                 </div>
                 <!-- Modal footer -->
@@ -106,12 +101,9 @@ foreach ($slider as $row) { ?>
                         <input type="text" name="judul" class="form-control" placeholder="Judul" required="">
                     </div>
                     <div class="form-group">
-                        <label>Deskripsi</label>
-                        <textarea class="form-control" name="deskripsi"></textarea>
-                    </div>
-                    <div class="form-group">
                         <label>Foto</label>
-                        <input type="file" name="foto" class="form-control" required="">
+                        <input type="file" name="foto" class="form-control foto" required="">
+                        <p>Gambar JPG/PNG Max. 2Mb</p>
                     </div>
                 </div>
                 <!-- Modal footer -->
@@ -123,3 +115,20 @@ foreach ($slider as $row) { ?>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+$(".foto").change(function() {
+    if (this.files && this.files[0] && this.files[0].name.match(/\.(jpg|png|jpeg|PNG|JPG|JPEG)$/) ) {
+        if(this.files[0].size>2097152) {
+            $('.foto').val('');
+            alert('Batas Maximal Ukuran File 2MB !');
+        }
+        else {
+            var reader = new FileReader();
+            reader.readAsDataURL(this.files[0]);
+        }
+    } else{
+        $('.foto').val('');
+        alert('Hanya File jpg/png Yang Diizinkan !');
+    }
+});
+</script>

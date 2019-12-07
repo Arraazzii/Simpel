@@ -20,7 +20,9 @@ foreach ($lpkblkln as $row) {
     <div class="row account-contant">
         <div class="col-12">
             <div class="card card-statistics">
-                <img class="p-20" src="<?= base_url();?>assets/upload/logo/<?= $row->photo; ?>" alt="<?= $row->photo; ?>">
+                <center>
+                    <img class="p-20" src="<?= base_url();?>assets/upload/logo/<?= $row->photo; ?>" alt="<?= $row->photo; ?>" width="30%" height="30%">
+                </center>
                 <div class="card-body">
                     <form method="POST" action="<?= base_url('DashboardLPK/ubahProfil'); ?>" enctype="multipart/form-data">
                         <input type="hidden" name="kode" value="<?= $row->kode_user; ?>">

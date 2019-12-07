@@ -69,6 +69,9 @@
                                                 <div class="col-12  mt-3">
                                                     <p>Tidak Punya Akun ?<a href="<?= base_url(); ?>pendaftaran"> Register</a></p>
                                                 </div>
+                                                <div class="col-12  mt-0">
+                                                    <p>Kembali ke<a href="<?= base_url(); ?>"> Beranda</a></p>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>

@@ -1,7 +1,7 @@
 <!-- Notification -->
 <div class="row">
     <div class="col-md-12">
-        <div class="alert border-0 alert-primary bg-gradient m-b-30 alert-dismissible fade show border-radius-none" role="alert">
+        <div class="alert border-0 alert-success bg-gradient m-b-30 alert-dismissible fade show border-radius-none" role="alert">
             <strong>Selamat Datang !</strong> Pelatihan Kota Depok
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <i class="ti ti-close"></i>
@@ -58,61 +58,4 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card card-statistics">
-            <div class="card-header d-flex align-items-center justify-content-between">
-                <div class="card-heading">
-                    <h4 class="card-title">Kegiatan Terbaru</h4>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="datatable-wrapper table-responsive">
-                    <div class="datatable-wrapper table-responsive">
-                        <table id="datatable" class="display compact table table-hover table-striped text-center">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Inisiator</th>
-                                    <th>Pelatihan</th>
-                                    <th>Jenis Pelatihan</th>
-                                    <th>Kuota</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>System Architect</td>
-                                    <td>example@gmail.com</td>
-                                    <td><span class="badge badge-success">LPK</span></td>
-                                    <td><span class="badge badge-success">123</span></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>System Architect</td>
-                                    <td>example@gmail.com</td>
-                                    <td><span class="badge badge-success">LPK</span></td>
-                                    <td><span class="badge badge-success">123</span></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>System Architect</td>
-                                    <td>example@gmail.com</td>
-                                    <td><span class="badge badge-success">LPK</span></td>
-                                    <td><span class="badge badge-success">123</span></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>System Architect</td>
-                                    <td>example@gmail.com</td>
-                                    <td><span class="badge badge-success">LPK</span></td>
-                                    <td><span class="badge badge-success">123</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 <!-- end container-fluid -->

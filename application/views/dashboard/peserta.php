@@ -22,10 +22,10 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Peserta</th>
-                                <th>No Hp</th>
                                 <th>Alamat</th>
-                                <th>Status Kerja</th>
+                                <th>No Hp</th>
                                 <th>Pelatihan</th>
+                                <th>Status Kerja</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -36,8 +36,9 @@
                                 <tr>
                                     <td><?= $no++; ?>.</td>
                                     <td><?= $row->nama; ?></td>
-                                    <td><?= $row->hp; ?></td>
                                     <td><?= $row->alamat; ?> <?= $row->kec; ?> <?= $row->kel; ?></td>
+                                    <td><?= $row->hp; ?></td>
+                                    <td><?= $row->nama_pelatihan; ?></td>
                                     <td>
                                         <?php if ($row->status == 'Sudah Bekerja') { ?>
                                             <span class="badge badge-success">Bekerja</span>
@@ -45,24 +46,24 @@
                                             <span class="badge badge-warning">Belum Bekerja</span>
                                         <?php } ?>                                        
                                     </td>
-                                    <td><?= $row->nama_pelatihan; ?></td>
                                     <td>
+                                        <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalDetail<?= $row->nik; ?>">Detail</button>
                                         <button class="btn btn-success btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit<?= $row->nik; ?>">Edit</button>
                                     </td>
                                 </tr>
                             <?php } ?>
                         </tbody>
-                        <thead>
+                        <tfoot>
                             <tr>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <th>sada</th>
                                 <th></th>
-                                <th>Pelatihan</th>
                                 <th></th>
                             </tr>
-                        </thead>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -131,6 +132,67 @@ foreach ($pesertaPelatihan as $row) { ?>
     </div>
 <?php } ?>
 
+<?php
+$no = 1; 
+foreach ($pesertaPelatihan as $row) { ?>
+    <!-- The Modal -->
+    <div class="modal" id="myModalDetail<?= $row->nik; ?>">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Detail Peserta</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <form action="#" method="POST">
+                    <input type="hidden" name="id" value="<?= $row->nik; ?>">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Status Bekerja</label>
+                            <select class="form-control" name="status_pekerjaan" id="status_pekerjaan<?= $row->nik; ?>" >
+                                <option value="Sudah Bekerja" <?php if($row->status == 'Sudah Bekerja') {echo 'Selected';}?>>Sudah Bekerja</option>
+                                <option value="Belum Bekerja" <?php if($row->status == 'Belum Bekerja') {echo 'Selected';}?>>Belum Bekerja</option>
+                            </select>
+                        </div>
+                        <div id="popup<?= $row->nik; ?>">
+                            <div class="form-group">
+                                <label>Nama Perusahaan</label>
+                                <input type="text" name="nama" class="form-control" placeholder="Nama Perusahaan" value="<?= $row->nama_perusahaan; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label>Alamat Perushaan</label>
+                                <textarea class="form-control" name="alamat"><?= $row->alamat_perusahaan; ?></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>No. Telepon Perusahaan</label>
+                                <input type="text" name="telp" class="form-control" placeholder="No. Telepon Perusahaan" value="<?= $row->no_telp_perusahaan; ?>">
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            <?php if($row->status == 'Belum Bekerja') { ?>
+                                $("#popup<?= $row->nik; ?>").hide();
+                            <?php } ?>
+                            $('#status_pekerjaan<?= $row->nik; ?>').on('change', function(){
+                                if($('#status_pekerjaan<?= $row->nik; ?>').val() == 'Sudah Bekerja') {
+                                    $("#popup<?= $row->nik; ?>").show(); 
+                                } else {
+                                    $("#popup<?= $row->nik; ?>").hide();
+                                }
+                            });
+                        </script>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <!-- <button type="submit" class="btn btn-success">Simpan</button> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
 <!-- The Modal -->
 <!-- <div class="modal" id="myModalTambah">
     <div class="modal-dialog">
@@ -181,20 +243,28 @@ foreach ($pesertaPelatihan as $row) { ?>
     </div>
 </div> -->
 
-<script type="text/javascript">
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.bootstrap4.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.print.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.colVis.min.js"></script>
-</script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.bootstrap4.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.print.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.colVis.min.js"></script>
 <script type="text/javascript">
     $("#datatablePeserta").dataTable({
+        "dom": 'Bfrtip',
+        "buttons": [
+            {
+                extend: 'excelHtml5',
+                text: 'Export Excel',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5 ]
+                },
+            },
+        ],
         language: {
             "decimal":        "",
             "emptyTable":     "Data Tidak Tersedia Di Table",
@@ -220,32 +290,24 @@ foreach ($pesertaPelatihan as $row) { ?>
             }
         },
         initComplete: function () {
-            this.api().columns([5]).every( function () {
+            this.api().columns().every( function () {
                 var column = this;
                 var select = $('<select><option value=""></option></select>')
-                .appendTo( $(column.header()).empty() )
-                .on( 'change', function () {
-                    var val = $.fn.dataTable.util.escapeRegex(
-                        $(this).val()
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
                         );
-                    column
-                    .search( val ? '^'+val+'$' : '', true, false )
-                    .draw();
-                } );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
                 column.data().unique().sort().each( function ( d, j ) {
                     select.append( '<option value="'+d+'">'+d+'</option>' )
                 } );
             } );
         },
-        "dom": 'Bfrtip',
-        "buttons": [
-        {
-            extend: 'excelHtml5',
-            text: 'Export Excel',
-            exportOptions: {
-                columns: [ 0, 1, 2, 3, 4, 5 ]
-            },
-        },
-        ],
     });
 </script>

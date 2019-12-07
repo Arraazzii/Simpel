@@ -81,11 +81,11 @@
 								<div class="form-group">
 									<label>Tipe</label><br>
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" value="umum" name="tipe">
+										<input class="form-check-input" type="radio" value="Umum" name="tipe">
 										<label class="form-check-label" for="inlineCheckbox1">Umum</label>
 									</div>
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" value="lpk" name="tipe">
+										<input class="form-check-input" type="radio" value="LPK/BLKLN" name="tipe">
 										<label class="form-check-label" for="inlineCheckbox2">LPK/BLKLN</label>
 									</div>
 								</div>
@@ -145,10 +145,10 @@
 		$("#umum").hide();
 		$("#lpk").hide();
 		$('input[type="radio"][name="tipe"]').on('click', function(){
-			if (this.value == 'umum') {
+			if (this.value == 'Umum') {
 				$("#umum").show();
 				$("#lpk").hide();
-			} else if (this.value == 'lpk') {
+			} else if (this.value == 'LPK/BLKLN') {
 				$("#umum").hide();
 				$("#lpk").show();
 			}

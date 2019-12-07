@@ -16,7 +16,7 @@
         $no = 0;
         foreach ($slider as $slide) { $no++;?>
           <div class="carousel-item <?php if($no <= 1){echo 'active';}?>">
-            <img src="<?= base_url(); ?>assets/upload/slider/<?= $slide->photo; ?>" alt="Slider1" class="carousel-obj">
+            <img src="<?= base_url(); ?>assets/upload/slider/<?= $slide->photo; ?>" alt="Slider1" class="carousel-obj" >
 <!--             <div class="carousel-caption">
               <h3 class="text-white"><?= $slide->judul; ?></h3>
               <p><?= $slide->detail; ?></p>
@@ -98,10 +98,10 @@
             <select class="form-control" id="tahunpelatihan">
               <option value="">Silahkan Pilih</option>
               <?php
-                      for($tahunchart1 = date('2010'); $tahunchart1 <= date('Y'); $tahunchart1++){ 
-                    ?>
-                    <option value="<?php echo $tahunchart1; ?>"><?php echo $tahunchart1; ?></option>
-                    <?php } ?>
+              for($tahunchart1 = date('Y'); $tahunchart1 >= date('2010'); $tahunchart1--){ 
+                ?>
+                <option value="<?php echo $tahunchart1; ?>"><?php echo $tahunchart1; ?></option>
+              <?php } ?>
             </select>
           </div>
         </div>
@@ -111,7 +111,7 @@
             <select class="form-control" id="jenispelatihan">
               <option value="">Silahkan Pilih</option>
               <?php foreach ($jenis as $jenis) { ?>
-              <option value="<?php echo $jenis->kode_jenis; ?>"><?php echo $jenis->jenis; ?></option>
+                <option value="<?php echo $jenis->kode_jenis; ?>"><?php echo $jenis->jenis; ?></option>
               <?php } ?>
             </select>
           </div>
@@ -123,19 +123,28 @@
          </div>
        </div>
      </div>
-      <div class="row ftco-animate" id="appendpelatihan">
+     <div class="row ftco-animate" id="appendpelatihan">
        <?php foreach ($pelatihan as $row) { ?>
          <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan">
           <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between">
+              <a href="<?= base_url(); ?>Home/pelatihanDetail/<?= $row->kode_pelatihan; ?>"><h3 class="text-info"><?= $row->nama;?></h3></a>
+              <div class="float-right">
+                <?php $date = date('Y-m-d'); if ($date > $row->tanggal_berakhir_daftar) { ?> <span class="badge badge-danger">Expired</span><?php } ?>
+              </div>
+            </div>
             <div class="card-body">
-              <a href="<?= base_url(); ?>Home/pelatihanDetail/<?= $row->kode_pelatihan; ?>"><h5 class="text-info"><?= $row->nama;?></h5></a>
-              <?php
-              $date = date('Y-m-d');
-              if ($date > $row->tanggal_berakhir_daftar) { ?>
-              <span class="badge badge-danger">Expired</span>
-              <?php } ?>
-              <span class="badge badge-success"><?= $row->standar_kompetensi;?></span>
-              <p><?= $row->keterangan;?></p>
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label>Pendaftaran</label>
+                  <p><b><?= date('d M Y', strtotime($row->tanggal_mulai_daftar)) ?> - <?= date('d M Y', strtotime($row->tanggal_berakhir_daftar)) ?></b></p>
+                </div>
+                <hr>
+                <div class="form-group">
+                  <label>Waktu Pelatihan</label>
+                  <p><b><?= date('d M Y', strtotime($row->tanggal_mulai_pelatihan)) ?> - <?= date('d M Y', strtotime($row->tanggal_berakhir_pelatihan)) ?></b></p>
+                </div>
+              </form>
               <a href="<?= base_url(); ?>Home/pelatihanDetail/<?= $row->kode_pelatihan; ?>" class="btn btn-info float-right">Selengkapnya</a>
             </div>
           </div>
@@ -168,15 +177,18 @@
      </div>
      <div class="row ftco-animate" id="appendlpk">
       <?php foreach ($lpk as $row) { ?>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removelpk">
-        <div class="card">
-          <div class="card-body">
-            <a href="<?= base_url();?>Home/lpkDetail/<?= $row->kode_user; ?>"><h5 class="text-info"><?= $row->nama  ; ?></h5></a>
-            <p><?= $row->alamat; ?></p>
+        <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated removelpk">
+          <div class="blog-entry justify-content-end w-100">
+            <a href="<?= base_url();?>Home/lpkDetail/<?= $row->kode_user; ?>" class="block-20">
+              <img src="<?= base_url(); ?>assets/upload/logo/<?= $row->photo; ?>" style="width: 100%; height: 100%;">
+            </a>
+            <div class="text mt-3 mb-3 float-right d-block">
+              <h3 class="heading"><a href="<?= base_url();?>Home/lpkDetail/<?= $row->kode_user; ?>"><?= $row->nama; ?></a></h3>
+              <a href="<?= base_url(); ?>Home/infoDetail/<?= $row->id; ?>" class="btn btn-info float-right">Selengkapnya</a>
+            </div>
           </div>
         </div>
-      </div>
-    <?php } ?>
+      <?php } ?>
     </div>
     <br>
     <div class="row justify-content-center">
@@ -196,17 +208,18 @@
         <h2 class="text-center text-light ftco-animate"><b>Informasi</b></h2>
         <div class="row ftco-animate">
           <?php foreach ($berita as $row) { ?>
-          <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated ">
-            <div class="blog-entry justify-content-end w-100">
-              <a href="<?= base_url(); ?>Home/infoDetail" class="block-20" style="background-image: url('<?= base_url(); ?>assets/upload/berita/<?= $row->photo; ?>');">
-              </a>
-              <div class="text mt-3 mb-3 float-right d-block">
-                <h3 class="heading"><a href="<?= base_url(); ?>Home/infoDetail/<?= $row->id; ?>"><?= $row->judul; ?></a></h3>
-                <p class="text-justify"><?= $row->detail; ?></p>
-                <a href="<?= base_url(); ?>Home/infoDetail/<?= $row->id; ?>" class="btn btn-info float-right">Selengkapnya</a>
+            <div class="col-md-4 d-flex ftco-animate fadeInUp ftco-animated ">
+              <div class="blog-entry justify-content-end w-100">
+                <a href="<?= base_url(); ?>Home/infoDetail" class="block-20">
+                  <img src="<?= base_url(); ?>assets/upload/berita/<?= $row->photo; ?>" class='img-responsive' style="width: 100%; height: 100%;">
+                </a>
+                <div class="text mt-3 mb-3 float-right d-block">
+                  <h3 class="heading"><a href="<?= base_url(); ?>Home/infoDetail/<?= $row->id; ?>"><?= $row->judul; ?></a></h3>
+                  <p class="text-justify"><?= $row->detail; ?></p>
+                  <a href="<?= base_url(); ?>Home/infoDetail/<?= $row->id; ?>" class="btn btn-info float-right">Selengkapnya</a>
+                </div>
               </div>
             </div>
-          </div>
           <?php } ?>
         </div>
         <br>
@@ -234,27 +247,26 @@
       var bulanpelatihan = $("#bulanpelatihan").val();
       var keypelatihan = $("#keypelatihan").val();
       $.ajax({
-      type: "POST",
-      dataType : 'JSON',
-      url: "<?php echo base_url(); ?>Home/cariPelatihan",
-      data: {jenispelatihan: jenispelatihan, tahunpelatihan: tahunpelatihan, keypelatihan: keypelatihan, bulanpelatihan: bulanpelatihan},
-      success: function(msg) {
-        var html = "";
-        var date = "<?php echo date('Y-m-d'); ?>";
-        $(".removepelatihan").remove();
-        $.each(msg, function(index, val){
-          html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan' >";
-          html += "<div class='card'><div class='card-body'><a href='<?= base_url(); ?>Home/pelatihanDetail/" + val.kode_pelatihan + "'><h5 class='text-info'>"+val.nama+"</h5></a>";
-          if (date > val.tanggal_berakhir_daftar) {
-            html += "<span class='badge badge-danger'>Expired</span>";
-          }
-          html += "<span class='badge badge-success'>" + val.standar_kompetensi + "</span>";
-          html += "<p>" + val.keterangan + "</p>";
-          html += "<a href='<?= base_url(); ?>Home/pelatihanDetail/"+val.kode_pelatihan+"' class='btn btn-info float-right'>Selengkapnya</a>";
-          html += " </div></div></div>";
-        });
-        $("#appendpelatihan").append(html);
-      }
+        type: "POST",
+        dataType : 'JSON',
+        url: "<?php echo base_url(); ?>Home/cariPelatihan",
+        data: {jenispelatihan: jenispelatihan, tahunpelatihan: tahunpelatihan, keypelatihan: keypelatihan, bulanpelatihan: bulanpelatihan},
+        success: function(msg) {
+          var html = "";
+          var date = "<?php echo date('Y-m-d'); ?>";
+          $(".removepelatihan").remove();
+          $.each(msg, function(index, val){
+            html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan' >";
+            html += "<div class='card'><div class='card-header d-flex align-items-center justify-content-between'><a href='<?= base_url(); ?>Home/pelatihanDetail/"+val.kode_pelatihan+"'><h3 class='text-info'>"+val.nama+"</h3></a>";
+            if (date > val.tanggal_berakhir_daftar) {
+              html += "<span class='badge badge-danger'>Expired</span>";
+            }
+            html += "</div></div>";
+            html += "<div class='card-body'><form class='form-horizontal'><div class='form-group'><label>Pendaftaran</label><p><b>" + val.tanggal_mulai_daftar + " - " + val.tanggal_berakhir_daftar + "</b></p></div><hr><div class='form-group'><label>Waktu Pelatihan</label><p><b>" + val.tanggal_mulai_pelatihan + " - " + val.tanggal_berakhir_pelatihan + "</b></p></div></form><a href='<?= base_url(); ?>Home/pelatihanDetail/" +val.kode_pelatihan+ "' class='btn btn-info float-right'>Selengkapnya</a></div>";
+            html += "</div></div>";
+          });
+          $("#appendpelatihan").append(html);
+        }
       });
     });
     $("#tahunpelatihan").change(function(){
@@ -263,27 +275,26 @@
       var bulanpelatihan = $("#bulanpelatihan").val();
       var keypelatihan = $("#keypelatihan").val();
       $.ajax({
-      type: "POST",
-      dataType : 'JSON',
-      url: "<?php echo base_url(); ?>Home/cariPelatihan",
-      data: {jenispelatihan: jenispelatihan, tahunpelatihan: tahunpelatihan, keypelatihan: keypelatihan, bulanpelatihan: bulanpelatihan},
-      success: function(msg) {
-        var html = "";
-        var date = "<?php echo date('Y-m-d'); ?>";
-        $(".removepelatihan").remove();
-        $.each(msg, function(index, val){
-          html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan' >";
-          html += "<div class='card'><div class='card-body'><a href='<?= base_url(); ?>Home/pelatihanDetail/" + val.kode_pelatihan + "'><h5 class='text-info'>"+val.nama+"</h5></a>";
-          if (date > val.tanggal_berakhir_daftar) {
-            html += "<span class='badge badge-danger'>Expired</span>";
-          }
-          html += "<span class='badge badge-success'>" + val.standar_kompetensi + "</span>";
-          html += "<p>" + val.keterangan + "</p>";
-          html += "<a href='<?= base_url(); ?>Home/pelatihanDetail/"+val.kode_pelatihan+"' class='btn btn-info float-right'>Selengkapnya</a>";
-          html += " </div></div></div>";
-        });
-        $("#appendpelatihan").append(html);
-      }
+        type: "POST",
+        dataType : 'JSON',
+        url: "<?php echo base_url(); ?>Home/cariPelatihan",
+        data: {jenispelatihan: jenispelatihan, tahunpelatihan: tahunpelatihan, keypelatihan: keypelatihan, bulanpelatihan: bulanpelatihan},
+        success: function(msg) {
+          var html = "";
+          var date = "<?php echo date('Y-m-d'); ?>";
+          $(".removepelatihan").remove();
+          $.each(msg, function(index, val){
+            html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan' >";
+            html += "<div class='card'><div class='card-header d-flex align-items-center justify-content-between'><a href='<?= base_url(); ?>Home/pelatihanDetail/"+val.kode_pelatihan+"'><h3 class='text-info'>"+val.nama+"</h3></a>";
+            if (date > val.tanggal_berakhir_daftar) {
+              html += "<span class='badge badge-danger'>Expired</span>";
+            }
+            html += "</div></div>";
+            html += "<div class='card-body'><form class='form-horizontal'><div class='form-group'><label>Pendaftaran</label><p><b>" + val.tanggal_mulai_daftar + " - " + val.tanggal_berakhir_daftar + "</b></p></div><hr><div class='form-group'><label>Waktu Pelatihan</label><p><b>" + val.tanggal_mulai_pelatihan + " - " + val.tanggal_berakhir_pelatihan + "</b></p></div></form><a href='<?= base_url(); ?>Home/pelatihanDetail/" +val.kode_pelatihan+ "' class='btn btn-info float-right'>Selengkapnya</a></div>";
+            html += "</div></div>";
+          });
+          $("#appendpelatihan").append(html);
+        }
       });
     });
     $("#bulanpelatihan").change(function(){
@@ -292,27 +303,26 @@
       var bulanpelatihan = $("#bulanpelatihan").val();
       var keypelatihan = $("#keypelatihan").val();
       $.ajax({
-      type: "POST",
-      dataType : 'JSON',
-      url: "<?php echo base_url(); ?>Home/cariPelatihan",
-      data: {jenispelatihan: jenispelatihan, tahunpelatihan: tahunpelatihan, keypelatihan: keypelatihan, bulanpelatihan: bulanpelatihan},
-      success: function(msg) {
-        var html = "";
-        var date = "<?php echo date('Y-m-d'); ?>";
-        $(".removepelatihan").remove();
-        $.each(msg, function(index, val){
-          html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan' >";
-          html += "<div class='card'><div class='card-body'><a href='<?= base_url(); ?>Home/pelatihanDetail/" + val.kode_pelatihan + "'><h5 class='text-info'>"+val.nama+"</h5></a>";
-          if (date > val.tanggal_berakhir_daftar) {
-            html += "<span class='badge badge-danger'>Expired</span>";
-          }
-          html += "<span class='badge badge-success'>" + val.standar_kompetensi + "</span>";
-          html += "<p>" + val.keterangan + "</p>";
-          html += "<a href='<?= base_url(); ?>Home/pelatihanDetail/"+val.kode_pelatihan+"' class='btn btn-info float-right'>Selengkapnya</a>";
-          html += " </div></div></div>";
-        });
-        $("#appendpelatihan").append(html);
-      }
+        type: "POST",
+        dataType : 'JSON',
+        url: "<?php echo base_url(); ?>Home/cariPelatihan",
+        data: {jenispelatihan: jenispelatihan, tahunpelatihan: tahunpelatihan, keypelatihan: keypelatihan, bulanpelatihan: bulanpelatihan},
+        success: function(msg) {
+          var html = "";
+          var date = "<?php echo date('Y-m-d'); ?>";
+          $(".removepelatihan").remove();
+          $.each(msg, function(index, val){
+            html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan' >";
+            html += "<div class='card'><div class='card-header d-flex align-items-center justify-content-between'><a href='<?= base_url(); ?>Home/pelatihanDetail/"+val.kode_pelatihan+"'><h3 class='text-info'>"+val.nama+"</h3></a>";
+            if (date > val.tanggal_berakhir_daftar) {
+              html += "<span class='badge badge-danger'>Expired</span>";
+            }
+            html += "</div></div>";
+            html += "<div class='card-body'><form class='form-horizontal'><div class='form-group'><label>Pendaftaran</label><p><b>" + val.tanggal_mulai_daftar + " - " + val.tanggal_berakhir_daftar + "</b></p></div><hr><div class='form-group'><label>Waktu Pelatihan</label><p><b>" + val.tanggal_mulai_pelatihan + " - " + val.tanggal_berakhir_pelatihan + "</b></p></div></form><a href='<?= base_url(); ?>Home/pelatihanDetail/" +val.kode_pelatihan+ "' class='btn btn-info float-right'>Selengkapnya</a></div>";
+            html += "</div></div>";
+          });
+          $("#appendpelatihan").append(html);
+        }
       });
     });
     $("#keypelatihan").on('keyup',function(){
@@ -321,45 +331,44 @@
       var bulanpelatihan = $("#bulanpelatihan").val();
       var keypelatihan = $("#keypelatihan").val();
       $.ajax({
-      type: "POST",
-      dataType : 'JSON',
-      url: "<?php echo base_url(); ?>Home/cariPelatihan",
-      data: {jenispelatihan: jenispelatihan, tahunpelatihan: tahunpelatihan, keypelatihan: keypelatihan, bulanpelatihan: bulanpelatihan},
-      success: function(msg) {
-        var html = "";
-        var date = "<?php echo date('Y-m-d'); ?>";
-        $(".removepelatihan").remove();
-        $.each(msg, function(index, val){
-          html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan' >";
-          html += "<div class='card'><div class='card-body'><a href='<?= base_url(); ?>Home/pelatihanDetail/" + val.kode_pelatihan + "'><h5 class='text-info'>"+val.nama+"</h5></a>";
-          if (date > val.tanggal_berakhir_daftar) {
-            html += "<span class='badge badge-danger'>Expired</span>";
-          }
-          html += "<span class='badge badge-success'>" + val.standar_kompetensi + "</span>";
-          html += "<p>" + val.keterangan + "</p>";
-          html += "<a href='<?= base_url(); ?>Home/pelatihanDetail/"+val.kode_pelatihan+"' class='btn btn-info float-right'>Selengkapnya</a>";
-          html += " </div></div></div>";
-        });
-        $("#appendpelatihan").append(html);
-      }
+        type: "POST",
+        dataType : 'JSON',
+        url: "<?php echo base_url(); ?>Home/cariPelatihan",
+        data: {jenispelatihan: jenispelatihan, tahunpelatihan: tahunpelatihan, keypelatihan: keypelatihan, bulanpelatihan: bulanpelatihan},
+        success: function(msg) {
+          var html = "";
+          var date = "<?php echo date('Y-m-d'); ?>";
+          $(".removepelatihan").remove();
+          $.each(msg, function(index, val){
+            html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removepelatihan' >";
+            html += "<div class='card'><div class='card-header d-flex align-items-center justify-content-between'><a href='<?= base_url(); ?>Home/pelatihanDetail/"+val.kode_pelatihan+"'><h3 class='text-info'>"+val.nama+"</h3></a>";
+            if (date > val.tanggal_berakhir_daftar) {
+              html += "<span class='badge badge-danger'>Expired</span>";
+            }
+            html += "</div></div>";
+            html += "<div class='card-body'><form class='form-horizontal'><div class='form-group'><label>Pendaftaran</label><p><b>" + val.tanggal_mulai_daftar + " - " + val.tanggal_berakhir_daftar + "</b></p></div><hr><div class='form-group'><label>Waktu Pelatihan</label><p><b>" + val.tanggal_mulai_pelatihan + " - " + val.tanggal_berakhir_pelatihan + "</b></p></div></form><a href='<?= base_url(); ?>Home/pelatihanDetail/" +val.kode_pelatihan+ "' class='btn btn-info float-right'>Selengkapnya</a></div>";
+            html += "</div></div>";
+          });
+          $("#appendpelatihan").append(html);
+        }
       });
     });
     $("#keylpk").on('keyup',function(){
       var keylpk = $("#keylpk").val();
       $.ajax({
-      type: "POST",
-      dataType : 'JSON',
-      url: "<?php echo base_url(); ?>Home/carilpk",
-      data: {keylpk: keylpk},
-      success: function(msg) {
-        var html = "";
-        var date = "<?php echo date('Y-m-d'); ?>";
-        $(".removelpk").remove();
-        $.each(msg, function(index, val){
-          html += "<div class='col-lg-4 col-md-4 col-sm-6 col-12 mb-3 removelpk'><div class='card'><div class='card-body'><a href='<?= base_url();?>Home/lpkDetail/" + val.kode_user + "'><h5 class='text-info'>" + val.nama + "</h5></a><p>" + val.alamat + "</p></div></div></div>";
-        });
-        $("#appendlpk").append(html);
-      }
+        type: "POST",
+        dataType : 'JSON',
+        url: "<?php echo base_url(); ?>Home/carilpk",
+        data: {keylpk: keylpk},
+        success: function(msg) {
+          var html = "";
+          var date = "<?php echo date('Y-m-d'); ?>";
+          $(".removelpk").remove();
+          $.each(msg, function(index, val){
+            html += "<div class='col-md-4 d-flex ftco-animate fadeInUp ftco-animated removelpk'><div class='blog-entry justify-content-end w-100'><a href='<?= base_url();?>Home/lpkDetail/" + val.kode_user + "' class='block-20'><img src='<?= base_url(); ?>assets/upload/logo/" + val.photo + "' class='img-responsive' style='width: 100%; height: 100%;'></a><div class='text mt-3 mb-3 float-right d-block'><h3 class='heading'><a href='<?= base_url();?>Home/lpkDetail/" + val.kode_user + "'>" + val.nama + "</a></h3><a href='<?= base_url();?>Home/lpkDetail/" + val.kode_user + "' class='btn btn-info float-right'>Selengkapnya</a></div></div></div>";
+          });
+          $("#appendlpk").append(html);
+        }
       });
     });
   });

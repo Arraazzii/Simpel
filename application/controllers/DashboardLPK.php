@@ -38,17 +38,23 @@ class DashboardLPK extends CI_Controller {
 		$path = "";
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - Dashboard", $path),
-			"content" => $this->load->view('dashboardLPK/profil', $profil, true),
+			"content" => $this->load->view('dashboardLPK/index', $profil, true),
 		);
 		$this->load->view('dashboard/template/default_template', $data);
 	}
 
 	public function profil()
 	{
+		$kode = $this->session->userdata['kode'];
+		$profil = array(
+			'lpkblkln' => $this
+			->model
+			->dataLPK($kode)
+		);
 		$path = "";
 		$data = array(
 			"page" => $this->load("Pelatihan Kota Depok - My Profil", $path),
-			"content" => $this->load->view('dashboardLPK/profil', false, true),
+			"content" => $this->load->view('dashboardLPK/profil', $profil, true),
 		);
 		$this->load->view('dashboard/template/default_template', $data);
 	}
@@ -151,9 +157,9 @@ class DashboardLPK extends CI_Controller {
 	{
 		$kode = $this->session->userdata['kode'];
 		$laporan = array(
-			'laporan' => $this
-			->model
-			->dataLaporan($kode)
+			'laporan' => $this->model->dataLaporan($kode),
+			'lpkblkln' => $this->model->dataLPK($kode),
+
 		);
 		$path = "";
 		$data = array(

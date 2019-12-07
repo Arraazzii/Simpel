@@ -15,18 +15,22 @@
         font-size:14px;
         font-weight:bold;
         margin-bottom: 0px; 
-        width: 20%; 
+        width: auto; 
         border: 1px solid #ddd;
         border-radius: 4px; 
         padding: 5px 5px 5px 10px; 
         background-color: #ffffff;
     }
-    .table th {
-     text-align: center;   
- }
- .table td {
-     text-align: center;   
- }
+    tbody .bod {
+        display:block;
+        max-height:500px;
+        overflow-y:auto;
+    }
+    thead .hea, tbody .bod tr {
+        display:table;
+        width: var(--table-width);
+        table-layout:fixed;
+    }
 </style>
 <div class="row">
     <div class="col-lg-12">
@@ -41,7 +45,7 @@
             </div>
             <div class="card-body">
                 <div class="datatable-wrapper table-responsive">
-                    <table id="datatable" class="display compact table table-hover table-striped text-center">
+                    <table id="datatableLPK" class="display compact table table-hover table-striped text-center" width="100%">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -75,8 +79,8 @@
                                             <button type="button" class="btn btn-danger btn-sm" onclick="blokir('<?= $row->kode_user; ?>')">Blokir</button>
                                             <button type="button" class="btn btn-success btn-sm" onclick="aktivasi('<?= $row->kode_user; ?>', '<?= $row->nama; ?>', '<?= $row->alamat; ?>', '<?= $row->email; ?>')">Aktivasi</button>
                                         <?php } elseif ($row->status == 'Suspend') { ?>
-                                         <button type="button" class="btn btn-success btn-sm" onclick="aktivasi('<?= $row->kode_user; ?>')">Buka Blokir</button>
-                                     <?php } else { ?>
+                                           <button type="button" class="btn btn-success btn-sm" onclick="aktivasi('<?= $row->kode_user; ?>', '<?= $row->nama; ?>', '<?= $row->alamat; ?>', '<?= $row->email; ?>')">Buka Blokir</button>
+                                       <?php } else { ?>
                                         <button type="button" class="btn btn-danger btn-sm" onclick="blokir('<?= $row->kode_user; ?>')">Blokir</button>
                                     <?php } ?>
                                     <button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#myModalLihat<?= $row->kode_user; ?>">Detail</button>
@@ -428,6 +432,10 @@ foreach ($lpkblkln as $row) {
                                 <input type="radio" id="customRadioInline2" name="tipe" class="custom-control-input" value="BLKLN" required>
                                 <label class="custom-control-label" for="customRadioInline2">BLKLN</label>
                             </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInlineX" name="tipe" class="custom-control-input" value="BLK komunitas" required>
+                                <label class="custom-control-label" for="customRadioInlineX">BLK komunitas</label>
+                            </div>
                         </div>
                     </div>
                     <fieldset class="col-md-12">
@@ -563,54 +571,60 @@ foreach ($lpkblkln as $row) {
                     </fieldset>
                     <fieldset class="col-md-12 mt-10">
                         <legend>Data Pengurus</legend>
-                        <table class="table table-striped">
-                            <center>
-                                <tr>
-                                    <!-- <th scope="col" rowspan="2">No.</th> -->
-                                    <th scope="col" rowspan="2" class="align-middle">Tipe</th>
-                                    <th scope="col" colspan="2">Jenis Kelamin</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Laki-laki</th>
-                                    <th scope="col">Perempuan</th>
-                                </tr>
-                                <tr>
-                                    <td>Karyawan</td>
-                                    <td><input type="number" name="karyawan_laki" class="form-control" value="0" required="" /></td>
-                                    <td><input type="number" name="karyawan_perempuan" class="form-control" value="0" required="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Tenaga Pelatihan Tetap</td>
-                                    <td><input type="number" name="tpt_laki" class="form-control" value="0" required="" /></td>
-                                    <td><input type="number" name="tpt_perempuan" class="form-control" value="0" required="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Tenaga Pelatihan Tidak Tetap</td>
-                                    <td><input type="number" name="tptt_laki" class="form-control" value="0" required="" /></td>
-                                    <td><input type="number" name="tptt_perempuan" class="form-control" value="0" required="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Instruktur Tetap</td>
-                                    <td><input type="number" name="it_laki" class="form-control" value="0" required="" /></td>
-                                    <td><input type="number" name="it_perempuan" class="form-control" value="0" required="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Instruktur Tidak Tetap</td>
-                                    <td><input type="number" name="itt_laki" class="form-control" value="0" required="" /></td>
-                                    <td><input type="number" name="itt_perempuan" class="form-control" value="0" required="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Asesor Kompetensi</td>
-                                    <td><input type="number" name="ak_laki" class="form-control" value="0" required="" /></td>
-                                    <td><input type="number" name="ak_perempuan" class="form-control" value="0" required="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Instruktur/Asesor WNA</td>
-                                    <td><input type="number" name="aw_laki" class="form-control" value="0" required="" /></td>
-                                    <td><input type="number" name="aw_perempuan" class="form-control" value="0" required="" /></td>
-                                </tr>
-                            </center>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-striped" style="margin-bottom: 0;">
+                                <center>
+                                    <thead class="hea">
+                                        <tr>
+                                            <!-- <th scope="col" rowspan="2">No.</th> -->
+                                            <th rowspan="2" class="align-middle" width="30%">Tipe</th>
+                                            <th colspan="2" width="70%">Jenis Kelamin</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Laki-laki</th>
+                                            <th>Perempuan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bod">
+                                        <tr>
+                                            <td>Karyawan</td>
+                                            <td><input type="number" name="karyawan_laki" class="form-control" value="0" required="" /></td>
+                                            <td><input type="number" name="karyawan_perempuan" class="form-control" value="0" required="" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tenaga Pelatihan<br> Tetap</td>
+                                            <td><input type="number" name="tpt_laki" class="form-control" value="0" required="" /></td>
+                                            <td><input type="number" name="tpt_perempuan" class="form-control" value="0" required="" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tenaga Pelatihan<br> Tidak Tetap</td>
+                                            <td><input type="number" name="tptt_laki" class="form-control" value="0" required="" /></td>
+                                            <td><input type="number" name="tptt_perempuan" class="form-control" value="0" required="" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Instruktur Tetap</td>
+                                            <td><input type="number" name="it_laki" class="form-control" value="0" required="" /></td>
+                                            <td><input type="number" name="it_perempuan" class="form-control" value="0" required="" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Instruktur Tidak<br> Tetap</td>
+                                            <td><input type="number" name="itt_laki" class="form-control" value="0" required="" /></td>
+                                            <td><input type="number" name="itt_perempuan" class="form-control" value="0" required="" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Asesor<br> Kompetensi</td>
+                                            <td><input type="number" name="ak_laki" class="form-control" value="0" required="" /></td>
+                                            <td><input type="number" name="ak_perempuan" class="form-control" value="0" required="" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Instruktur/<br>Asesor WNA</td>
+                                            <td><input type="number" name="aw_laki" class="form-control" value="0" required="" /></td>
+                                            <td><input type="number" name="aw_perempuan" class="form-control" value="0" required="" /></td>
+                                        </tr>
+                                    </tbody>
+                                </center>
+                            </table>
+                        </div>
                     </fieldset>
                 </div>
                 <!-- Modal footer -->
@@ -622,6 +636,55 @@ foreach ($lpkblkln as $row) {
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.bootstrap4.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.print.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.colVis.min.js"></script>
+<script type="text/javascript">
+    $("#datatableLPK").dataTable({
+        language: {
+            "decimal":        "",
+            "emptyTable":     "Data Tidak Tersedia Di Table",
+            "info":           "Menampilkan _START_ Sampai _END_ Dari _TOTAL_ Data",
+            "infoEmpty":      "Menampilkan 0 Sampai 0 Dari 0 Data",
+            "infoFiltered":   "(Dari Total _MAX_ Data)",
+            "infoPostFix":    "",
+            "thousands":      ",",
+            "lengthMenu":     "Menampilkan _MENU_ Data",
+            "loadingRecords": "Loading...",
+            "processing":     "Memproses...",
+            "search":         "Cari :",
+            "zeroRecords":    "Tidak Ada Data Yang Sesuai",
+            "paginate": {
+                "first":      "Pertama",
+                "last":       "Terakhir",
+                "next":       ">",
+                "previous":   "<"
+            },
+            "aria": {
+                "sortAscending":  ": activate to sort column ascending",
+                "sortDescending": ": activate to sort column descending"
+            }
+        },
+        "dom": 'Bfrtip',
+        "buttons": [
+        {
+            extend: 'excelHtml5',
+            text: 'Export Excel',
+            exportOptions: {
+                columns: [ 0, 1, 2, 3, 4]
+            },
+        },
+        ],
+    });
+</script>
 
 <script type="text/javascript">
     // $(document).ready(function(){
@@ -645,7 +708,7 @@ foreach ($lpkblkln as $row) {
                         "id" : id,
                         "nama" : nama,
                         "alamat" : alamat,
-                        "email" : email
+                        "email" : email,
                     },
                     dataType: "HTML",
                     error: function (xhr, ajaxOptions, thrownError) {
@@ -653,9 +716,9 @@ foreach ($lpkblkln as $row) {
                     },
                     success: function(data) {
                         swal("Success!", "Akun Berhasil Diaktifkan!", "success");
-                        setTimeout(function(){
-                            window.location.reload();
-                        }, 1000);
+                        // setTimeout(function(){
+                        //     window.location.reload();
+                        // }, 1000);
                     }
                 });
             } else {

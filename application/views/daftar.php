@@ -38,17 +38,17 @@
         font-size:14px;
         font-weight:bold;
         margin-bottom: 0px; 
-        width: 20%; 
+        width: auto; 
         border: 1px solid #ddd;
         border-radius: 4px; 
         padding: 5px 5px 5px 10px; 
         background-color: #ffffff;
     }
     .table th {
-     text-align: center;   
+       text-align: center;   
     }
     .table td {
-     text-align: center;   
+       text-align: center;   
     }
 </style>
 <body class="bg-white">
@@ -69,23 +69,23 @@
             <!--start login contant-->
             <div class="app-contant">
                 <div class="bg-white">
-                    <div class="container-fluid p-5">
+                    <div class="container-fluid">
                         <div class="row justify-content-center">
-                            <div class="d-flex align-items-center card col-lg-7">
+                            <div class="d-flex align-items-center col-lg-7">
                                 <div class="login p-50">
                                     <h1 class="mb-2 text-center">Pendaftaran</h1>
-                                    <p class="text-center">Selamat Datang Di Website Pelatihan Kota Depok, Silahkan Masukan Data Anda Dengan Lengkap</p>
+                                    <p class="text-center">Selamat Datang Di Website Pelatihan Kota Depok, Silahkan Masukan Data Anda Dengan Lengkap</p><br/>
                                     <form action="<?= base_url('Login/daftar'); ?>" method="POST" enctype="multipart/form-data" class="mt-2 mt-sm-4">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label class="control-label">Type Akun</label><br>
                                                     <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="customRadioInline1" name="tipe" class="custom-control-input" value="LPK" >
+                                                        <input type="radio" id="customRadioInline1" name="tipe" class="custom-control-input" value="LPK" required="" >
                                                         <label class="custom-control-label" for="customRadioInline1">LPK</label>
                                                     </div>
                                                     <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="customRadioInline2" name="tipe" class="custom-control-input" value="BLKLN" >
+                                                        <input type="radio" id="customRadioInline2" name="tipe" class="custom-control-input" value="BLKLN" required="" >
                                                         <label class="custom-control-label" for="customRadioInline2">BLKLN</label>
                                                     </div>
                                                 </div>
@@ -116,7 +116,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Alamat <span style="color:red" title="Wajib Diisi">*</span></label>
-                                                        <textarea class="form-control" name="alamat"></textarea>
+                                                        <textarea class="form-control" name="alamat" required=""></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -198,7 +198,7 @@
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">No. Telepon Pimpina</label>
+                                                        <label class="control-label">No. Telepon Pimpinan</label>
                                                         <input type="text" name="no_telepon_pimpinan" class="form-control" placeholder="(+62) ..."  />
                                                     </div>
                                                 </div>
@@ -277,6 +277,9 @@
                                             </div>
                                             <div class="col-12 mt-3 text-center">
                                                 <p>Sudah Punya Akun ? <a href="<?= base_url(); ?>login">Login</a></p>
+                                            </div>
+                                            <div class="col-12  mt-0 text-center">
+                                                <p>Kembali ke<a href="<?= base_url(); ?>"> Beranda</a></p>
                                             </div>
                                         </div>
                                     </form>

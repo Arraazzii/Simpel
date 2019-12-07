@@ -50,10 +50,12 @@
                             foreach ($laporan as $row) { 
                                 $tahun = explode('-', $row->tanggal_lapor);
                                 ?>
-                                <td><?= $no++; ?></td>
-                                <td><?= $row->nama; ?></td>
-                                <td><?= $tahun[0]; ?></td>
-                                <td><?= $row->status; ?></td>
+                                <tr>
+                                    <td><?= $no++; ?></td>
+                                    <td><?= $row->nama; ?></td>
+                                    <td><?= $tahun[0]; ?></td>
+                                    <td><?= $row->status; ?></td>
+                                </tr>
                             <?php } ?>
                         </tbody>
                         <thead>

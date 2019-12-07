@@ -1,3 +1,4 @@
+<script src="https://cdn.ckeditor.com/4.13.0/basic/ckeditor.js"></script>
 <div class="row">
     <?= $this->session->flashdata('notif');?>
     <div class="col-lg-12">
@@ -33,7 +34,7 @@
                                 <td><span class="badge badge-success"><?= $row->tipe; ?></span></td>
                                 <td>
                                     <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#myModalEdit<?= $row->id; ?>">Edit</button>
-                                    <button class="btn btn-danger btn-sm" type="button" onclick="hapus('<?= $row->id; ?>')">Delete</button>
+                                    <button class="btn btn-danger btn-sm" type="button" onclick="hapusBerita('<?= $row->id; ?>')">Delete</button>
                                 </td>
                             </tr>
                             <?php } ?>
@@ -65,7 +66,8 @@
                             <select class="form-control" name="tipe" required="">
                                 <option hidden value="">Silahkan Pilih</option>
                                 <option value="Berita" <?php if ($row->tipe == 'Berita') { echo 'selected'; } ?>>Berita</option>
-                                <option value="Events" <?php if ($row->tipe == 'Events') { echo 'selected'; } ?>>Events</option>
+                                <option value="Pengumuman" <?php if ($row->tipe == 'Pengumuman') { echo 'selected'; } ?>>Pengumuman</option>
+                                <option value="Lainnya" <?php if ($row->tipe == 'Lainnya') { echo 'selected'; } ?>>Lainnya</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -74,11 +76,12 @@
                         </div>
                         <div class="form-group">
                             <label>Deskripsi</label>
-                            <textarea class="form-control" name="deskripsi"><?= $row->detail; ?></textarea>
+                            <textarea class="form-control" id="editor<?= $row->id; ?>" name="deskripsi"><?= $row->detail; ?></textarea>
                         </div>
                         <div class="form-group">
                             <label>Foto</label>
-                            <input type="file" name="foto" class="form-control" required="">
+                            <input type="file" name="foto" class="form-control foto" required="">
+                            <p>Gambar JPG/PNG Max. 2Mb</p>
                         </div>
                 </div>
                 <!-- Modal footer -->
@@ -90,6 +93,11 @@
         </div>
     </div>
 </div>
+<script>
+    CKEDITOR.replace('editor<?= $row->id; ?>', {
+      height: 150
+  });
+</script>
 <?php } ?>
 
 <!-- The Modal -->
@@ -109,7 +117,8 @@
                         <select class="form-control" name="tipe" required="">
                             <option hidden value="">Silahkan Pilih</option>
                             <option value="Berita">Berita</option>
-                            <option value="Events">Events</option>
+                            <option value="Pengumuman">Pengumuman</option>
+                            <option value="Lainnya">Lainnya</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -118,11 +127,12 @@
                     </div>
                     <div class="form-group">
                         <label>Deskripsi</label>
-                        <textarea class="form-control" name="deskripsi"></textarea>
+                        <textarea class="form-control" name="deskripsi" id="editor"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Foto</label>
-                        <input type="file" name="foto" class="form-control" required="">
+                        <input type="file" name="foto" class="form-control foto" required="">
+                        <p>Gambar JPG/PNG Max. 2Mb</p>
                     </div>
                 </div>
                 <!-- Modal footer -->
@@ -134,3 +144,25 @@
         </div>
     </div>
 </div>
+<script>
+    CKEDITOR.replace('editor', {
+      height: 150
+  });
+</script>
+<script type="text/javascript">
+$(".foto").change(function() {
+    if (this.files && this.files[0] && this.files[0].name.match(/\.(jpg|png|jpeg|PNG|JPG|JPEG)$/) ) {
+        if(this.files[0].size>2097152) {
+            $('.foto').val('');
+            alert('Batas Maximal Ukuran File 2MB !');
+        }
+        else {
+            var reader = new FileReader();
+            reader.readAsDataURL(this.files[0]);
+        }
+    } else{
+        $('.foto').val('');
+        alert('Hanya File jpg/png Yang Diizinkan !');
+    }
+});
+</script>

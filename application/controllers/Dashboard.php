@@ -256,55 +256,55 @@ class Dashboard extends CI_Controller {
 		$this->load->library('PHPMailer');
 		$this->load->library('SMTP');
 
-		$email_admin = 'disnaker.depok@gmail.com';
-		$nama_admin = 'noreply-Simpel';
-		$password_admin = '2014umar';
+		// $email_admin = 'disnaker.depok@gmail.com';
+		// $nama_admin = 'noreply-Simpel';
+		// $password_admin = '2014umar';
 
-		$mail = new PHPMailer();
-		$mail->isSMTP();  
-		$mail->SMTPKeepAlive = true;
-		$mail->Charset  = 'UTF-8';
-		$mail->IsHTML(true);
-        // $mail->SMTPDebug = 1;
-		$mail->SMTPAuth = true;
-		$mail->Host = 'smtp.gmail.com'; 
-		$mail->Port = 587;
-		$mail->SMTPSecure = 'ssl';
-		$mail->Username = $email_admin;
-		$mail->Password = $password_admin;
-		$mail->Mailer   = 'smtp';
-		$mail->WordWrap = 100;       
+		// $mail = new PHPMailer();
+		// $mail->isSMTP();  
+		// $mail->SMTPKeepAlive = true;
+		// $mail->Charset  = 'UTF-8';
+		// $mail->IsHTML(true);
+  //       // $mail->SMTPDebug = 1;
+		// $mail->SMTPAuth = true;
+		// $mail->Host = 'smtp.gmail.com'; 
+		// $mail->Port = 587;
+		// $mail->SMTPSecure = 'ssl';
+		// $mail->Username = $email_admin;
+		// $mail->Password = $password_admin;
+		// $mail->Mailer   = 'smtp';
+		// $mail->WordWrap = 100;       
 
-		$mail->setFrom($email_admin);
-		$mail->FromName = $nama_admin;
-		$mail->addAddress($email);
-		// $mail->AddEmbeddedImage('assets/img-acc-pencaker.png', 'acc');
-		$mail->Subject          = 'Verifikasi Akun '.$nama;
-		$mail_data['subject']   = $nama;
-		$mail_data['nama']  = $nama;
-		$mail_data['alamat']  = $alamat;
-		$message = $this->load->view('email_temp', $mail_data, TRUE);
-		$mail->Body = $message;
-		if ($mail->send()) {
-			$data = array(
-				'status' => 'Aktif'
-			);
+		// $mail->setFrom($email_admin);
+		// $mail->FromName = $nama_admin;
+		// $mail->addAddress($email);
+		// // $mail->AddEmbeddedImage('assets/img-acc-pencaker.png', 'acc');
+		// $mail->Subject          = 'Verifikasi Akun '.$nama;
+		// $mail_data['subject']   = $nama;
+		// $mail_data['nama']  = $nama;
+		// $mail_data['alamat']  = $alamat;
+		// $message = $this->load->view('email_temp', $mail_data, TRUE);
+		// $mail->Body = $message;
+		// if ($mail->send()) {
+		$data = array(
+			'status' => 'Aktif'
+		);
 
-			$dataHistory = array(
-				'aktivitas'  => 'Aktivasi Akun : '.$id,
-				'detail' => json_encode($dataLPK),
-				'kode_user' => $ss
-			);
+		$dataHistory = array(
+			'aktivitas'  => 'Aktivasi Akun : '.$id,
+			'detail' => json_encode($dataLPK),
+			'kode_user' => $ss
+		);
 
-			$this->db->where('kode_user', $id);
-			$this->db->update('table_login', $data);
-			$this->db->insert('table_history', $dataHistory);
-			$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
+		$this->db->where('kode_user', $id);
+		$this->db->update('table_login', $data);
+		$this->db->insert('table_history', $dataHistory);
+		$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
 		redirect('Dashboard/lpkblkln');
-		} else {
-			echo 'Message could not be sent.';
-			echo 'Mailer Error: ' . $mail->ErrorInfo;
-		}
+		// } else {
+		// 	echo 'Message could not be sent.';
+		// 	echo 'Mailer Error: ' . $mail->ErrorInfo;
+		// }
 	}
 
 	public function blokirAkun() {
@@ -422,6 +422,20 @@ class Dashboard extends CI_Controller {
 		$update = $this->db->update('table_peserta_pelatihan', $data);
 		if ($update) {
 			echo json_encode('ok');
+		}
+	}
+
+	public function pesertaLulus(){
+		$idUser = $this->input->post("idUser");
+		$idPelatihan = $this->input->post("idPelatihan");
+		$id = $this->input->post("id");
+
+		$peserta_lulus = $this->db->query("SELECT * FROM table_peserta AS b JOIN table_peserta_pelatihan AS a ON a.nik = b.nik JOIN table_pelatihan AS c ON c.kode_pelatihan = a.kode_pelatihan WHERE a.kode_pelatihan = '$idPelatihan' AND a.status = '1'")->num_rows();
+
+		if ($peserta_lulus < 1) {
+			echo json_encode('0');
+		} else {
+			echo json_encode($peserta_lulus);
 		}
 	}
 
@@ -873,8 +887,8 @@ class Dashboard extends CI_Controller {
 		redirect('Dashboard/helpdesk');
 	}
 
-  public function laporanPeserta()
-  {
+	public function laporanPeserta()
+	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
 		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
@@ -893,8 +907,8 @@ class Dashboard extends CI_Controller {
 		$this->pdfgenerator->generate($view, "Laporan BKK", TRUE, 'A4', 'landscape');
 	}
 
-  public function laporanStatusPeserta()
-  {
+	public function laporanStatusPeserta()
+	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
 		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
@@ -913,19 +927,19 @@ class Dashboard extends CI_Controller {
 		$this->pdfgenerator->generate($view, "Laporan BKK", TRUE, 'A4', 'landscape');
 	}
 
-  public function laporanLpkBlkln()
-  {
+	public function laporanLpkBlkln()
+	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
 		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
 		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
 
 		$dataLpk = $this->model->laporanLpk($tgl_awal, $tgl_akhir);
-    $dataBlkln = $this->model->laporanBlkln($tgl_awal, $tgl_akhir);
+		$dataBlkln = $this->model->laporanBlkln($tgl_awal, $tgl_akhir);
 
 		$dataView = [
 			'dataLpk' => $dataLpk,
-      'dataBlkln' => $dataBlkln,
+			'dataBlkln' => $dataBlkln,
 			'tgl_awal' => date("d M Y", strtotime($tgl_awal)),
 			'tgl_akhir' => date("d M Y", strtotime($tgl_akhir))
 		];
@@ -935,8 +949,8 @@ class Dashboard extends CI_Controller {
 		$this->pdfgenerator->generate($view, "Laporan BKK", TRUE, 'A4', 'landscape');
 	}
 
-  public function laporanRekapitulasi()
-  {
+	public function laporanRekapitulasi()
+	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
 		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
@@ -955,7 +969,7 @@ class Dashboard extends CI_Controller {
 		$this->pdfgenerator->generate($view, "Laporan BKK", TRUE, 'A4', 'landscape');
 	}
 
-  public function laporanPesertaXls()
+	public function laporanPesertaXls()
 	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
@@ -1021,14 +1035,14 @@ class Dashboard extends CI_Controller {
 			$sheet->setCellValue('B'.$tableIndex, $dataLaporan[$i]->kk);
 			$sheet->setCellValue('C'.$tableIndex, $dataLaporan[$i]->nama);
 			$sheet->setCellValue('D'.$tableIndex, $dataLaporan[$i]->jenis_kelamin);
-      $sheet->setCellValue('E'.$tableIndex, $dataLaporan[$i]->alamat);
-      $sheet->setCellValue('F'.$tableIndex, $dataLaporan[$i]->kelurahan);
-      $sheet->setCellValue('G'.$tableIndex, $dataLaporan[$i]->tempat_lahir." ".$dataLaporan[$i]->tanggal_lahir);
-      $sheet->setCellValue('H'.$tableIndex, $dataLaporan[$i]->no_telepon);
-      $sheet->setCellValue('I'.$tableIndex, $dataLaporan[$i]->pendidikan_terakhir);
-      $sheet->setCellValue('J'.$tableIndex, $dataLaporan[$i]->jenis);
-      $sheet->setCellValue('K'.$tableIndex, $dataLaporan[$i]->no_pencaker);
-      $sheet->setCellValue('L'.$tableIndex, $dataLaporan[$i]->keterangan);
+			$sheet->setCellValue('E'.$tableIndex, $dataLaporan[$i]->alamat);
+			$sheet->setCellValue('F'.$tableIndex, $dataLaporan[$i]->kelurahan);
+			$sheet->setCellValue('G'.$tableIndex, $dataLaporan[$i]->tempat_lahir." ".$dataLaporan[$i]->tanggal_lahir);
+			$sheet->setCellValue('H'.$tableIndex, $dataLaporan[$i]->no_telepon);
+			$sheet->setCellValue('I'.$tableIndex, $dataLaporan[$i]->pendidikan_terakhir);
+			$sheet->setCellValue('J'.$tableIndex, $dataLaporan[$i]->jenis);
+			$sheet->setCellValue('K'.$tableIndex, $dataLaporan[$i]->no_pencaker);
+			$sheet->setCellValue('L'.$tableIndex, $dataLaporan[$i]->keterangan);
 
 			// $spreadsheet->getActiveSheet()->getStyle('A'.$tableIndex)->applyFromArray($styleText);
 			// $spreadsheet->getActiveSheet()->getStyle('B'.$tableIndex)->applyFromArray($styleNumber);
@@ -1055,7 +1069,7 @@ class Dashboard extends CI_Controller {
     // echo $fileName;
 	}
 
-  public function laporanStatusPesertaXls()
+	public function laporanStatusPesertaXls()
 	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
@@ -1121,16 +1135,16 @@ class Dashboard extends CI_Controller {
 			$sheet->setCellValue('B'.$tableIndex, $dataLaporan[$i]->kk);
 			$sheet->setCellValue('C'.$tableIndex, $dataLaporan[$i]->nama);
 			$sheet->setCellValue('D'.$tableIndex, $dataLaporan[$i]->jenis_kelamin);
-      $sheet->setCellValue('E'.$tableIndex, $dataLaporan[$i]->alamat);
-      $sheet->setCellValue('F'.$tableIndex, $dataLaporan[$i]->kelurahan);
-      $sheet->setCellValue('G'.$tableIndex, $dataLaporan[$i]->tempat_lahir." ".$dataLaporan[$i]->tanggal_lahir);
-      $sheet->setCellValue('H'.$tableIndex, $dataLaporan[$i]->no_telepon);
-      $sheet->setCellValue('I'.$tableIndex, $dataLaporan[$i]->pendidikan_terakhir);
-      $sheet->setCellValue('J'.$tableIndex, $dataLaporan[$i]->jenis);
-      $sheet->setCellValue('K'.$tableIndex, $dataLaporan[$i]->status);
-      $sheet->setCellValue('L'.$tableIndex, $dataLaporan[$i]->status_pekerjaan);
-      $sheet->setCellValue('M'.$tableIndex, $dataLaporan[$i]->keterangan);
-      $sheet->setCellValue('N'.$tableIndex, $dataLaporan[$i]->no_pencaker);
+			$sheet->setCellValue('E'.$tableIndex, $dataLaporan[$i]->alamat);
+			$sheet->setCellValue('F'.$tableIndex, $dataLaporan[$i]->kelurahan);
+			$sheet->setCellValue('G'.$tableIndex, $dataLaporan[$i]->tempat_lahir." ".$dataLaporan[$i]->tanggal_lahir);
+			$sheet->setCellValue('H'.$tableIndex, $dataLaporan[$i]->no_telepon);
+			$sheet->setCellValue('I'.$tableIndex, $dataLaporan[$i]->pendidikan_terakhir);
+			$sheet->setCellValue('J'.$tableIndex, $dataLaporan[$i]->jenis);
+			$sheet->setCellValue('K'.$tableIndex, $dataLaporan[$i]->status);
+			$sheet->setCellValue('L'.$tableIndex, $dataLaporan[$i]->status_pekerjaan);
+			$sheet->setCellValue('M'.$tableIndex, $dataLaporan[$i]->keterangan);
+			$sheet->setCellValue('N'.$tableIndex, $dataLaporan[$i]->no_pencaker);
 
 			// $spreadsheet->getActiveSheet()->getStyle('A'.$tableIndex)->applyFromArray($styleText);
 			// $spreadsheet->getActiveSheet()->getStyle('B'.$tableIndex)->applyFromArray($styleNumber);
@@ -1157,7 +1171,7 @@ class Dashboard extends CI_Controller {
     // echo $fileName;
 	}
 
-  public function laporanLpkBlklnXls()
+	public function laporanLpkBlklnXls()
 	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
@@ -1165,7 +1179,7 @@ class Dashboard extends CI_Controller {
 		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
 
 		$dataLpk = $this->model->laporanLpk($tgl_awal, $tgl_akhir);
-    $dataBlkln = $this->model->laporanBlkln($tgl_awal, $tgl_akhir);
+		$dataBlkln = $this->model->laporanBlkln($tgl_awal, $tgl_akhir);
 
 		$dirPath  = BASEPATH."../assets/template_excel/laporan_lpk_blkln.xls";
 		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($dirPath);
@@ -1220,16 +1234,16 @@ class Dashboard extends CI_Controller {
 		$tableIndex = 6;
 		for ($i=0; $i < count($dataLpk) ; $i++) { 
 			$tableIndex++;
-      $lpk = $dataLpk[$i];
+			$lpk = $dataLpk[$i];
 			$sheet->setCellValue('A'.$tableIndex, $lpk->no);
 			$sheet->setCellValue('B'.$tableIndex, $lpk->nama_lpk);
 			$sheet->setCellValue('C'.$tableIndex, $lpk->no_reg);
 			$sheet->setCellValue('D'.$tableIndex, $lpk->alamat);
-      $sheet->setCellValue('E'.$tableIndex, $lpk->no_izin." ".$lpk->tanggal_izin);
-      $sheet->setCellValue('F'.$tableIndex, $lpk->nama_pimpinan." ".$lpk->no_telepon_pimpinan);
-      $sheet->setCellValue('G'.$tableIndex, $lpk->nama_program);
-      $sheet->setCellValue('H'.$tableIndex, $lpk->jumlah_peserta);
-      $sheet->setCellValue('I'.$tableIndex, $lpk->jumlah_lulusan);
+			$sheet->setCellValue('E'.$tableIndex, $lpk->no_izin." ".$lpk->tanggal_izin);
+			$sheet->setCellValue('F'.$tableIndex, $lpk->nama_pimpinan." ".$lpk->no_telepon_pimpinan);
+			$sheet->setCellValue('G'.$tableIndex, $lpk->nama_program);
+			$sheet->setCellValue('H'.$tableIndex, $lpk->jumlah_peserta);
+			$sheet->setCellValue('I'.$tableIndex, $lpk->jumlah_lulusan);
 
 			// $spreadsheet->getActiveSheet()->getStyle('A'.$tableIndex)->applyFromArray($styleText);
 			// $spreadsheet->getActiveSheet()->getStyle('B'.$tableIndex)->applyFromArray($styleNumber);
@@ -1237,22 +1251,22 @@ class Dashboard extends CI_Controller {
 			// $spreadsheet->getActiveSheet()->getStyle('D'.$tableIndex)->applyFromArray($styleNumber);
 		}
 
-    $tableIndex = 7;
+		$tableIndex = 7;
 		for ($i=0; $i < count($dataBlkln) ; $i++) { 
 			$tableIndex++;
-      $blkln = $dataBlkln[$i];
+			$blkln = $dataBlkln[$i];
 			$sheet->setCellValue('M'.$tableIndex, $blkln->kejuruan);
 			$sheet->setCellValue('N'.$tableIndex, $blkln->skema);
 			$sheet->setCellValue('O'.$tableIndex, $blkln->kapasitas);
 			$sheet->setCellValue('P'.$tableIndex, $blkln->nama);
-      $sheet->setCellValue('Q'.$tableIndex, $blkln->tptp);
-      $sheet->setCellValue('R'.$tableIndex, $blkln->tptl);
-      $sheet->setCellValue('S'.$tableIndex, $blkln->tpttp);
-      $sheet->setCellValue('T'.$tableIndex, $blkln->tpttl);
-      $sheet->setCellValue('U'.$tableIndex, $blkln->itp);
-      $sheet->setCellValue('V'.$tableIndex, $blkln->itl);
-      $sheet->setCellValue('W'.$tableIndex, $blkln->ittp);
-      $sheet->setCellValue('X'.$tableIndex, $blkln->ittl);
+			$sheet->setCellValue('Q'.$tableIndex, $blkln->tptp);
+			$sheet->setCellValue('R'.$tableIndex, $blkln->tptl);
+			$sheet->setCellValue('S'.$tableIndex, $blkln->tpttp);
+			$sheet->setCellValue('T'.$tableIndex, $blkln->tpttl);
+			$sheet->setCellValue('U'.$tableIndex, $blkln->itp);
+			$sheet->setCellValue('V'.$tableIndex, $blkln->itl);
+			$sheet->setCellValue('W'.$tableIndex, $blkln->ittp);
+			$sheet->setCellValue('X'.$tableIndex, $blkln->ittl);
 
 			// $spreadsheet->getActiveSheet()->getStyle('A'.$tableIndex)->applyFromArray($styleText);
 			// $spreadsheet->getActiveSheet()->getStyle('B'.$tableIndex)->applyFromArray($styleNumber);
@@ -1279,7 +1293,7 @@ class Dashboard extends CI_Controller {
     // echo $fileName;
 	}
 
-  public function laporanRekapitulasiXls()
+	public function laporanRekapitulasiXls()
 	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
@@ -1339,72 +1353,72 @@ class Dashboard extends CI_Controller {
 			],
 		];
 		$tableIndex = 6;
-    $total = new stdClass();
-    $total->l = 0;
-    $total->p = 0;
-    $total->SAWANGAN = 0;
-    $total->BOJONGSARI = 0;
-    $total->PANCORANMAS = 0;
-    $total->CIPAYUNG = 0;
-    $total->SUKMAJAYA = 0;
-    $total->CILODONG = 0;
-    $total->CIMANGGIS = 0;
-    $total->TAPOS = 0;
-    $total->BEJI = 0;
-    $total->LIMO = 0;
-    $total->CINERE = 0;
-    $total->DST = 0;
+		$total = new stdClass();
+		$total->l = 0;
+		$total->p = 0;
+		$total->SAWANGAN = 0;
+		$total->BOJONGSARI = 0;
+		$total->PANCORANMAS = 0;
+		$total->CIPAYUNG = 0;
+		$total->SUKMAJAYA = 0;
+		$total->CILODONG = 0;
+		$total->CIMANGGIS = 0;
+		$total->TAPOS = 0;
+		$total->BEJI = 0;
+		$total->LIMO = 0;
+		$total->CINERE = 0;
+		$total->DST = 0;
 		for ($i=0; $i < count($dataLaporan) ; $i++) { 
 			$tableIndex++;			
 			$sheet->setCellValue('B'.$tableIndex, $dataLaporan[$i]->l);
 			$sheet->setCellValue('C'.$tableIndex, $dataLaporan[$i]->p);
 			$sheet->setCellValue('D'.$tableIndex, $dataLaporan[$i]->SAWANGAN);
-      $sheet->setCellValue('E'.$tableIndex, $dataLaporan[$i]->BOJONGSARI);
-      $sheet->setCellValue('F'.$tableIndex, $dataLaporan[$i]->PANCORANMAS);
-      $sheet->setCellValue('G'.$tableIndex, $dataLaporan[$i]->CIPAYUNG);
-      $sheet->setCellValue('H'.$tableIndex, $dataLaporan[$i]->SUKMAJAYA);
-      $sheet->setCellValue('I'.$tableIndex, $dataLaporan[$i]->CILODONG);
-      $sheet->setCellValue('J'.$tableIndex, $dataLaporan[$i]->CIMANGGIS);
-      $sheet->setCellValue('K'.$tableIndex, $dataLaporan[$i]->TAPOS);
-      $sheet->setCellValue('L'.$tableIndex, $dataLaporan[$i]->BEJI);
-      $sheet->setCellValue('M'.$tableIndex, $dataLaporan[$i]->LIMO);
-      $sheet->setCellValue('N'.$tableIndex, $dataLaporan[$i]->CINERE);
-      $sheet->setCellValue('O'.$tableIndex, $dataLaporan[$i]->DST);
+			$sheet->setCellValue('E'.$tableIndex, $dataLaporan[$i]->BOJONGSARI);
+			$sheet->setCellValue('F'.$tableIndex, $dataLaporan[$i]->PANCORANMAS);
+			$sheet->setCellValue('G'.$tableIndex, $dataLaporan[$i]->CIPAYUNG);
+			$sheet->setCellValue('H'.$tableIndex, $dataLaporan[$i]->SUKMAJAYA);
+			$sheet->setCellValue('I'.$tableIndex, $dataLaporan[$i]->CILODONG);
+			$sheet->setCellValue('J'.$tableIndex, $dataLaporan[$i]->CIMANGGIS);
+			$sheet->setCellValue('K'.$tableIndex, $dataLaporan[$i]->TAPOS);
+			$sheet->setCellValue('L'.$tableIndex, $dataLaporan[$i]->BEJI);
+			$sheet->setCellValue('M'.$tableIndex, $dataLaporan[$i]->LIMO);
+			$sheet->setCellValue('N'.$tableIndex, $dataLaporan[$i]->CINERE);
+			$sheet->setCellValue('O'.$tableIndex, $dataLaporan[$i]->DST);
 
 			// $spreadsheet->getActiveSheet()->getStyle('A'.$tableIndex)->applyFromArray($styleText);
 			// $spreadsheet->getActiveSheet()->getStyle('B'.$tableIndex)->applyFromArray($styleNumber);
 			// $spreadsheet->getActiveSheet()->getStyle('C'.$tableIndex)->applyFromArray($styleNumber);
 			// $spreadsheet->getActiveSheet()->getStyle('D'.$tableIndex)->applyFromArray($styleNumber);
-      $total->l += $dataLaporan[$i]->l;
-      $total->p += $dataLaporan[$i]->p;
-      $total->SAWANGAN += $dataLaporan[$i]->SAWANGAN;
-      $total->BOJONGSARI += $dataLaporan[$i]->BOJONGSARI;
-      $total->PANCORANMAS +=$dataLaporan[$i]->PANCORANMAS;
-      $total->CIPAYUNG += $dataLaporan[$i]->CIPAYUNG;
-      $total->SUKMAJAYA += $dataLaporan[$i]->SUKMAJAYA;
-      $total->CILODONG += $dataLaporan[$i]->CILODONG;
-      $total->CIMANGGIS += $dataLaporan[$i]->CIMANGGIS;
-      $total->TAPOS += $dataLaporan[$i]->TAPOS;
-      $total->BEJI += $dataLaporan[$i]->BEJI;
-      $total->LIMO += $dataLaporan[$i]->LIMO;
-      $total->CINERE += $dataLaporan[$i]->CINERE;
-      $total->DST += $dataLaporan[$i]->DST;
+			$total->l += $dataLaporan[$i]->l;
+			$total->p += $dataLaporan[$i]->p;
+			$total->SAWANGAN += $dataLaporan[$i]->SAWANGAN;
+			$total->BOJONGSARI += $dataLaporan[$i]->BOJONGSARI;
+			$total->PANCORANMAS +=$dataLaporan[$i]->PANCORANMAS;
+			$total->CIPAYUNG += $dataLaporan[$i]->CIPAYUNG;
+			$total->SUKMAJAYA += $dataLaporan[$i]->SUKMAJAYA;
+			$total->CILODONG += $dataLaporan[$i]->CILODONG;
+			$total->CIMANGGIS += $dataLaporan[$i]->CIMANGGIS;
+			$total->TAPOS += $dataLaporan[$i]->TAPOS;
+			$total->BEJI += $dataLaporan[$i]->BEJI;
+			$total->LIMO += $dataLaporan[$i]->LIMO;
+			$total->CINERE += $dataLaporan[$i]->CINERE;
+			$total->DST += $dataLaporan[$i]->DST;
 		}
 
-    $sheet->setCellValue('B11', $total->l);
-    $sheet->setCellValue('C11', $total->p);
-    $sheet->setCellValue('D11', $total->SAWANGAN);
-    $sheet->setCellValue('E11', $total->BOJONGSARI);
-    $sheet->setCellValue('F11', $total->PANCORANMAS);
-    $sheet->setCellValue('G11', $total->CIPAYUNG);
-    $sheet->setCellValue('H11', $total->SUKMAJAYA);
-    $sheet->setCellValue('I11', $total->CILODONG);
-    $sheet->setCellValue('J11', $total->CIMANGGIS);
-    $sheet->setCellValue('K11', $total->TAPOS);
-    $sheet->setCellValue('L11', $total->BEJI);
-    $sheet->setCellValue('M11', $total->LIMO);
-    $sheet->setCellValue('N11', $total->CINERE);
-    $sheet->setCellValue('O11', $total->DST);
+		$sheet->setCellValue('B11', $total->l);
+		$sheet->setCellValue('C11', $total->p);
+		$sheet->setCellValue('D11', $total->SAWANGAN);
+		$sheet->setCellValue('E11', $total->BOJONGSARI);
+		$sheet->setCellValue('F11', $total->PANCORANMAS);
+		$sheet->setCellValue('G11', $total->CIPAYUNG);
+		$sheet->setCellValue('H11', $total->SUKMAJAYA);
+		$sheet->setCellValue('I11', $total->CILODONG);
+		$sheet->setCellValue('J11', $total->CIMANGGIS);
+		$sheet->setCellValue('K11', $total->TAPOS);
+		$sheet->setCellValue('L11', $total->BEJI);
+		$sheet->setCellValue('M11', $total->LIMO);
+		$sheet->setCellValue('N11', $total->CINERE);
+		$sheet->setCellValue('O11', $total->DST);
 
 		// if (!empty($tgl_awal)) {
 		// 	$sheet->setCellValue('B2', date("d/m/Y", strtotime($tgl_awal)));
@@ -1469,6 +1483,7 @@ class Dashboard extends CI_Controller {
 		}
 	}
 
+
 	public function editBerita(){
 		$kode       = $this->input->post('kode');
 		$tipe 		= $this->input->post('tipe');
@@ -1495,6 +1510,16 @@ class Dashboard extends CI_Controller {
 		$this->db->insert("table_history", $dataHistory);
 		$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
 		redirect('Dashboard/info');
+	}
+
+	public function hapusBerita(){
+		$kode = $this->input->post('kode');
+		$delete = $this->db->query("DELETE FROM table_berita WHERE id = '$kode'");
+		if ($delete) {
+			echo "ok";
+		}else{
+			echo "fail";
+		}
 	}
 	
 }

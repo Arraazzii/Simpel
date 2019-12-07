@@ -1,7 +1,7 @@
 <?= $this->session->flashdata('notif');?>
 <div class="row">
     <div class="col-md-12">
-        <div class="alert border-0 alert-primary bg-gradient m-b-30 alert-dismissible fade show border-radius-none" role="alert">
+        <div class="alert border-0 alert-success bg-gradient m-b-30 alert-dismissible fade show border-radius-none" role="alert">
             <strong>Selamat Datang !</strong> Pelatihan Kota Depok
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <i class="ti ti-close"></i>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="d-block d-sm-flex h-100 align-items-center">
                             <div class="statistics mt-3 text-center">
-                                <h3 class="mb-0 text-white"><i class="icon-arrow-up-circle"></i><?= $jumlahPeserta[0]['total']; ?></h3>
+                                <h3 class="mb-0 text-white"><i class="icon-arrow-up-circle"></i><?= $jumlahPeserta ?></h3>
                             </div>
                         </div>
                     </div>

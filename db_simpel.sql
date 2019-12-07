@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2019 at 05:48 PM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 5.6.37
+-- Generation Time: Dec 07, 2019 at 06:27 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -7868,7 +7868,8 @@ INSERT INTO `table_alamat` (`kode_alamat`, `alamat`, `kelurahan`, `kecamatan`, `
 ('ALM4', 'Rumah', 'cisalak', '16452', 'Depok', '2019-11-08'),
 ('ALM5', 'Rumah', 'cisalak', '16452', 'Depok', '2019-11-08'),
 ('ALM6', 'Rumah', 'cisalak', '16452', 'Depok', '2019-11-08'),
-('ALM7', 'Rumah', 'cisalak', '16452', 'Depok', '2019-11-08');
+('ALM7', 'Rumah', 'cisalak', '16452', 'Depok', '2019-11-08'),
+('ALM8', 'aaa', 'SAWANGAN BARU', 'SAWANGAN', 'asdasd', '2019-12-06');
 
 -- --------------------------------------------------------
 
@@ -7919,7 +7920,49 @@ INSERT INTO `table_anggota` (`id`, `tipe`, `jenis_kelamin`, `jumlah`, `kode_user
 (109, 'Asesor Kompetensi', 'Laki-laki', 5, 'LPR1'),
 (110, 'Asesor Kompetensi', 'Perempuan', 5, 'LPR1'),
 (111, 'Instruktur/Asesor WNA', 'Laki-laki', 5, 'LPR1'),
-(112, 'Instruktur/Asesor WNA', 'Perempuan', 5, 'LPR1');
+(112, 'Instruktur/Asesor WNA', 'Perempuan', 5, 'LPR1'),
+(113, 'Karyawan', 'Laki-laki', 14, 'USER2'),
+(114, 'Karyawan', 'Perempuan', 12, 'USER2'),
+(115, 'Tenaga Pelatihan Tetap', 'Laki-laki', 4, 'USER2'),
+(116, 'Tenaga Pelatihan Tetap', 'Perempuan', 2, 'USER2'),
+(117, 'Tenaga Pelatihan Tidak Tetap', 'Laki-laki', 2, 'USER2'),
+(118, 'Tenaga Pelatihan Tidak Tetap', 'Perempuan', 2, 'USER2'),
+(119, 'Instruktur Tetap', 'Laki-laki', 2, 'USER2'),
+(120, 'Instruktur Tetap', 'Perempuan', 2, 'USER2'),
+(121, 'Instruktur Tidak Tetap', 'Laki-laki', 2, 'USER2'),
+(122, 'Instruktur Tidak Tetap', 'Perempuan', 2, 'USER2'),
+(123, 'Asesor Kompetensi', 'Laki-laki', 2, 'USER2'),
+(124, 'Asesor Kompetensi', 'Perempuan', 2, 'USER2'),
+(125, 'Instruktur/Asesor WNA', 'Laki-laki', 2, 'USER2'),
+(126, 'Instruktur/Asesor WNA', 'Perempuan', 2, 'USER2'),
+(127, 'Karyawan', 'Laki-laki', 15, 'LPR2'),
+(128, 'Karyawan', 'Perempuan', 14, 'LPR2'),
+(129, 'Tenaga Pelatihan Tetap', 'Laki-laki', 5, 'LPR2'),
+(130, 'Tenaga Pelatihan Tetap', 'Perempuan', 4, 'LPR2'),
+(131, 'Tenaga Pelatihan Tidak Tetap', 'Laki-laki', 2, 'LPR2'),
+(132, 'Tenaga Pelatihan Tidak Tetap', 'Perempuan', 2, 'LPR2'),
+(133, 'Instruktur Tetap', 'Laki-laki', 2, 'LPR2'),
+(134, 'Instruktur Tetap', 'Perempuan', 2, 'LPR2'),
+(135, 'Instruktur Tidak Tetap', 'Laki-laki', 2, 'LPR2'),
+(136, 'Instruktur Tidak Tetap', 'Perempuan', 2, 'LPR2'),
+(137, 'Asesor Kompetensi', 'Laki-laki', 2, 'LPR2'),
+(138, 'Asesor Kompetensi', 'Perempuan', 2, 'LPR2'),
+(139, 'Instruktur/Asesor WNA', 'Laki-laki', 2, 'LPR2'),
+(140, 'Instruktur/Asesor WNA', 'Perempuan', 2, 'LPR2'),
+(141, 'Karyawan', 'Laki-laki', 13, 'LPR3'),
+(142, 'Karyawan', 'Perempuan', 12, 'LPR3'),
+(143, 'Tenaga Pelatihan Tetap', 'Laki-laki', 3, 'LPR3'),
+(144, 'Tenaga Pelatihan Tetap', 'Perempuan', 2, 'LPR3'),
+(145, 'Tenaga Pelatihan Tidak Tetap', 'Laki-laki', 2, 'LPR3'),
+(146, 'Tenaga Pelatihan Tidak Tetap', 'Perempuan', 2, 'LPR3'),
+(147, 'Instruktur Tetap', 'Laki-laki', 2, 'LPR3'),
+(148, 'Instruktur Tetap', 'Perempuan', 2, 'LPR3'),
+(149, 'Instruktur Tidak Tetap', 'Laki-laki', 2, 'LPR3'),
+(150, 'Instruktur Tidak Tetap', 'Perempuan', 2, 'LPR3'),
+(151, 'Asesor Kompetensi', 'Laki-laki', 2, 'LPR3'),
+(152, 'Asesor Kompetensi', 'Perempuan', 2, 'LPR3'),
+(153, 'Instruktur/Asesor WNA', 'Laki-laki', 2, 'LPR3'),
+(154, 'Instruktur/Asesor WNA', 'Perempuan', 2, 'LPR3');
 
 -- --------------------------------------------------------
 
@@ -7929,7 +7972,7 @@ INSERT INTO `table_anggota` (`id`, `tipe`, `jenis_kelamin`, `jumlah`, `kode_user
 
 CREATE TABLE `table_berita` (
   `id` int(11) NOT NULL,
-  `tipe` enum('Berita','Events') NOT NULL,
+  `tipe` varchar(20) NOT NULL,
   `judul` varchar(100) NOT NULL,
   `detail` text NOT NULL,
   `photo` text NOT NULL,
@@ -7942,9 +7985,9 @@ CREATE TABLE `table_berita` (
 --
 
 INSERT INTO `table_berita` (`id`, `tipe`, `judul`, `detail`, `photo`, `tanggal`, `kode_user`) VALUES
-(1, 'Berita', 'Test', 'Test', 'GAMA.jpg', '2019-11-06 16:15:57', 'ADMIN'),
-(2, 'Events', 'Test', '123', 'foto.jpg', '2019-11-06 16:17:11', 'ADMIN'),
-(3, 'Events', 'Test', 'asfasdfag', 'foto.jpg', '2019-11-06 16:18:42', 'ADMIN');
+(1, 'Lainnya', 'Test', '<p>Test</p>', 'lowongan-kerja-pertamina-november-2019.jpg', '2019-11-06 16:15:57', 'ADMIN'),
+(2, 'Pengumuman', 'Test', '<p>123</p>', 'image-slider-2.jpg', '2019-11-06 16:17:11', 'ADMIN'),
+(3, 'Berita', 'asdasda', '<p>asfasdfagasdasdad</p>', 'lowongan-kerja-FIX-2-1024x720.jpg', '2019-11-06 16:18:42', 'ADMIN');
 
 -- --------------------------------------------------------
 
@@ -7980,17 +8023,18 @@ CREATE TABLE `table_helpdesk` (
   `status` enum('Sudah Bekerja','Belum Bekerja') DEFAULT NULL,
   `email` varchar(50) NOT NULL,
   `pesan` text NOT NULL,
-  `tipe` enum('umum','lpk') NOT NULL,
-  `status_h` enum('Sudah','Belum') NOT NULL DEFAULT 'Belum'
+  `tipe` enum('Umum','LPK/BLKLN') NOT NULL,
+  `status_h` enum('Sudah','Belum') NOT NULL DEFAULT 'Belum',
+  `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_helpdesk`
 --
 
-INSERT INTO `table_helpdesk` (`id`, `nik`, `nama`, `status`, `email`, `pesan`, `tipe`, `status_h`) VALUES
-(4, '', 'Tes', NULL, 'tes@gmail.com', 'tes', 'lpk', 'Belum'),
-(5, '123', 'testes', 'Sudah Bekerja', 'testestes@gmail.com', 'tes', 'umum', 'Belum');
+INSERT INTO `table_helpdesk` (`id`, `nik`, `nama`, `status`, `email`, `pesan`, `tipe`, `status_h`, `tanggal`) VALUES
+(4, '', 'Tes', NULL, 'tes@gmail.com', 'tes', 'LPK/BLKLN', 'Belum', '2019-12-05 17:00:00'),
+(5, '123', 'testes', 'Sudah Bekerja', 'testestes@gmail.com', 'tes', 'Umum', 'Belum', '2019-12-04 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -8138,7 +8182,42 @@ INSERT INTO `table_history` (`id`, `waktu`, `aktivitas`, `detail`, `photo`, `kod
 (124, '2019-11-21 16:26:56', 'Update Laporan : tes', '{\"kode_lapor\":\"LPR1\",\"nama\":\"tes\",\"alamat\":\"tes\",\"telepon\\t\":\"123\",\"email\":\"testestes@gmail.com\",\"no_izin\":\"123\",\"tanggal_izin\":\"2019-11-21\",\"jenis\":\"Pemerintah\",\"status_akreditas\":\"tes\",\"no_akreditas\":\"123\",\"ruang_lingkup\":\"tes\",\"program\":\"tes\",\"photo\":\"foto.jpg\",\"absensi\":\"GAMA.jpg\"}', NULL, 'USER1'),
 (125, '2019-11-21 16:28:58', 'Update Laporan : tes', '{\"kode_lapor\":\"LPR1\",\"nama\":\"tes\",\"alamat\":\"tes\",\"telepon\\t\":\"123\",\"email\":\"testestes@gmail.com\",\"no_izin\":\"123\",\"tanggal_izin\":\"2019-11-21\",\"jenis\":\"Pemerintah\",\"status_akreditas\":\"tes\",\"no_akreditas\":\"123\",\"ruang_lingkup\":\"tes\",\"program\":\"tes\",\"photo\":\"foto.jpg\",\"absensi\":\"GAMA.jpg\",\"kode_user\":\"USER1\"}', NULL, 'USER1'),
 (126, '2019-11-21 16:32:55', 'Logout', NULL, NULL, 'USER1'),
-(127, '2019-11-21 16:33:01', 'Login', NULL, NULL, 'ADMIN');
+(127, '2019-11-21 16:33:01', 'Login', NULL, NULL, 'ADMIN'),
+(128, '2019-12-05 01:37:16', 'Login', NULL, NULL, 'ADMIN'),
+(129, '2019-12-05 01:40:41', 'Ubah Kategori Pelatihan : KTG1', NULL, NULL, 'ADMIN'),
+(130, '2019-12-05 01:58:15', 'Logout', NULL, NULL, 'ADMIN'),
+(131, '2019-12-05 06:01:57', 'Login', NULL, NULL, 'ADMIN'),
+(132, '2019-12-05 06:26:13', 'Blokir Akun : USER1', '[{\"kode_user\":\"USER1\",\"nama\":\"tes\",\"alamat\":\"tes\",\"telepon\":\"123\",\"email\":\"mumaraziz2014@gmail.com\",\"no_izin\":\"123\",\"tanggal_izin\":\"2019-01-01\",\"jenis\":\"Pemerintah\",\"status_akreditas\":\"tes\",\"no_akreditas\":\"123\",\"ruang_lingkup\":\"tes\",\"tipe\":\"LPK\",\"photo\":\"GAMA.jpg\",\"tanggal_input\":\"2019-11-20 19:18:51\",\"id\":\"8\",\"username\":\"tes\",\"password\":\"28b662d883b6d76fd96e4ddc5e9ba780\",\"level\":\"User\",\"status\":\"Aktif\",\"created_date\":\"2019-11-10 14:45:30\",\"nama_pimpinan\":\"testtes\",\"no_telepon_pimpinan\":\"123\",\"nama_pj\":\"tes\",\"jabatan_pj\":\"tes\",\"no_telepon_pj\":\"123\"}]', NULL, 'ADMIN'),
+(133, '2019-12-05 06:27:42', 'Aktivasi Akun : USER1', '[{\"kode_user\":\"USER1\",\"nama\":\"tes\",\"alamat\":\"tes\",\"telepon\":\"123\",\"email\":\"mumaraziz2014@gmail.com\",\"no_izin\":\"123\",\"tanggal_izin\":\"2019-01-01\",\"jenis\":\"Pemerintah\",\"status_akreditas\":\"tes\",\"no_akreditas\":\"123\",\"ruang_lingkup\":\"tes\",\"tipe\":\"LPK\",\"photo\":\"GAMA.jpg\",\"tanggal_input\":\"2019-11-20 19:18:51\",\"id\":\"8\",\"username\":\"tes\",\"password\":\"28b662d883b6d76fd96e4ddc5e9ba780\",\"level\":\"User\",\"status\":\"Suspend\",\"created_date\":\"2019-11-10 14:45:30\",\"nama_pimpinan\":\"testtes\",\"no_telepon_pimpinan\":\"123\",\"nama_pj\":\"tes\",\"jabatan_pj\":\"tes\",\"no_telepon_pj\":\"123\"}]', NULL, 'ADMIN'),
+(134, '2019-12-05 06:30:14', 'Blokir Akun : USER1', '[{\"kode_user\":\"USER1\",\"nama\":\"tes\",\"alamat\":\"tes\",\"telepon\":\"123\",\"email\":\"calenger747@gmail.com\",\"no_izin\":\"123\",\"tanggal_izin\":\"2019-01-01\",\"jenis\":\"Pemerintah\",\"status_akreditas\":\"tes\",\"no_akreditas\":\"123\",\"ruang_lingkup\":\"tes\",\"tipe\":\"LPK\",\"photo\":\"GAMA.jpg\",\"tanggal_input\":\"2019-11-20 19:18:51\",\"id\":\"8\",\"username\":\"tes\",\"password\":\"28b662d883b6d76fd96e4ddc5e9ba780\",\"level\":\"User\",\"status\":\"Aktif\",\"created_date\":\"2019-11-10 14:45:30\",\"nama_pimpinan\":\"testtes\",\"no_telepon_pimpinan\":\"123\",\"nama_pj\":\"tes\",\"jabatan_pj\":\"tes\",\"no_telepon_pj\":\"123\"}]', NULL, 'ADMIN'),
+(135, '2019-12-05 07:50:43', 'Daftar : Test LPK', '{\"kode_user\":\"USER2\",\"nama\":\"Test LPK\",\"alamat\":\"aaa\",\"telepon\\t\":\"12398102102\",\"email\":\"aaa@gmail.com\",\"no_izin\":\"532523\",\"tanggal_izin\":\"2019-12-05\",\"jenis\":\"Pemerintah\",\"status_akreditas\":\"A\",\"no_akreditas\":\"32531\",\"ruang_lingkup\":\"adas\",\"tipe\":\"LPK\",\"photo\":\"1564449496262-user.png\"}', '1564449496262-user.png', 'USER2'),
+(136, '2019-12-05 07:51:01', 'Logout', NULL, NULL, 'ADMIN'),
+(137, '2019-12-05 07:51:10', 'Login', NULL, NULL, 'USER2'),
+(138, '2019-12-05 07:54:25', 'Update Laporan : Test LPK', '{\"kode_lapor\":\"LPR2\",\"nama\":\"Test LPK\",\"alamat\":\"aaa\",\"telepon\\t\":\"12398102102\",\"email\":\"aaa@gmail.com\",\"no_izin\":\"532523\",\"tanggal_izin\":\"2019-12-05\",\"jenis\":\"Pemerintah\",\"status_akreditas\":\"A\",\"no_akreditas\":\"32531\",\"ruang_lingkup\":\"adas\",\"program\":\"dasdada\",\"photo\":\"lowongan-kerja-pertamina-november-2019.jpg\",\"absensi\":\"Surat Dinas .docx\",\"kode_user\":\"USER2\"}', NULL, 'USER2'),
+(139, '2019-12-05 07:55:43', 'Update Laporan : Test LPK', '{\"kode_lapor\":\"LPR3\",\"nama\":\"Test LPK\",\"alamat\":\"aaa\",\"telepon\\t\":\"12398102102\",\"email\":\"aaa@gmail.com\",\"no_izin\":\"532523\",\"tanggal_izin\":\"2019-12-05\",\"jenis\":\"Pemerintah\",\"status_akreditas\":\"A\",\"no_akreditas\":\"32531\",\"ruang_lingkup\":\"adas\",\"program\":\"dasdada\",\"photo\":\"lowongan-kerja-FIX-2-1024x720.jpg\",\"absensi\":\"android-os.pdf\",\"kode_user\":\"USER2\"}', NULL, 'USER2'),
+(140, '2019-12-05 07:56:27', 'Logout', NULL, NULL, 'USER2'),
+(141, '2019-12-05 07:56:39', 'Login', NULL, NULL, 'ADMIN'),
+(142, '2019-12-05 12:52:52', 'Login', NULL, NULL, 'USER2'),
+(143, '2019-12-05 14:06:16', 'Logout', NULL, NULL, 'USER2'),
+(144, '2019-12-05 14:06:23', 'Login', NULL, NULL, 'ADMIN'),
+(145, '2019-12-05 14:15:07', 'Logout', NULL, NULL, 'ADMIN'),
+(146, '2019-12-05 14:17:22', 'Login', NULL, NULL, 'ADMIN'),
+(147, '2019-12-06 01:26:24', 'Login', NULL, NULL, 'ADMIN'),
+(148, '2019-12-06 02:27:41', 'Edit Berita/Events : asdasda', '<p>asfasdfagasdasdad</p>', 'lowongan-kerja-FIX-2-1024x720.jpg', '3'),
+(149, '2019-12-06 02:37:52', 'Edit Berita/Events : Test', '<p>123</p>', 'img (2).jpg', '2'),
+(150, '2019-12-06 02:39:42', 'Edit Berita/Events : Test', '<p>123</p>', 'road220058.jpg', '2'),
+(151, '2019-12-06 02:40:33', 'Edit Berita/Events : Test', '<p>123</p>', 'image-slider-2.jpg', '2'),
+(152, '2019-12-06 02:40:49', 'Edit Berita/Events : Test', '<p>Test</p>', 'lowongan-kerja-pertamina-november-2019.jpg', '1'),
+(153, '2019-12-06 02:41:13', 'Tambah Berita/Events : Berita 1', '<p>xxxxxxx</p>', 'selamat-hari-pahlawan.jpg', 'ADMIN'),
+(154, '2019-12-06 02:53:13', 'Ubah Slider : Test', ', Dengan ID Slider : 1', 'img (2).jpg', 'ADMIN'),
+(155, '2019-12-06 02:55:04', 'Ubah Slider : Test', ', Dengan ID Slider : 2', 'image-slider-2.jpg', 'ADMIN'),
+(156, '2019-12-06 03:40:28', 'Logout', NULL, NULL, 'ADMIN'),
+(157, '2019-12-06 05:49:37', 'Daftar Pelatihan : PLT2', '{\"nik\":\"311231\",\"kk\":\"213189\",\"no_ak1\":\"asd\",\"nama\":\"asjkd\",\"jenis_kelamin\":\"Laki-laki\",\"email\":\"aaa@gmail.com\",\"no_telepon\":\"12398102102\",\"pendidikan_terakhir\":\"SMK\",\"status_pekerjaan\":\"Belum Bekerja\",\"kode_alamat\":\"ALM8\",\"alamat\":\"aaa\",\"kelurahan\":\"SAWANGAN BARU\",\"kecamatan\":\"SAWANGAN\",\"tempat_lahir\":\"asdasd\",\"tanggal_lahir\":\"2019-12-06\"}', NULL, 'Umum'),
+(158, '2019-12-07 14:56:04', 'Login', NULL, NULL, 'ADMIN'),
+(159, '2019-12-07 14:57:13', 'Logout', NULL, NULL, 'ADMIN'),
+(160, '2019-12-07 15:01:34', 'Login', NULL, NULL, 'ADMIN'),
+(161, '2019-12-07 17:15:26', 'Logout', NULL, NULL, 'ADMIN'),
+(162, '2019-12-07 17:24:02', 'Login', NULL, NULL, 'ADMIN');
 
 -- --------------------------------------------------------
 
@@ -8197,7 +8276,9 @@ CREATE TABLE `table_laporan` (
 --
 
 INSERT INTO `table_laporan` (`id`, `tanggal_lapor`, `status`, `kode_user`, `kode_lapor`) VALUES
-(1, '2019-11-21', 'Belum', 'USER1', 'LPR1');
+(1, '2019-11-21', 'Belum', 'USER1', 'LPR1'),
+(2, '2019-12-05', 'Belum', 'USER2', 'LPR2'),
+(3, '2019-12-05', 'Belum', 'USER2', 'LPR3');
 
 -- --------------------------------------------------------
 
@@ -8228,7 +8309,9 @@ CREATE TABLE `table_lapor_detail` (
 --
 
 INSERT INTO `table_lapor_detail` (`kode_lapor`, `nama`, `alamat`, `telepon`, `email`, `no_izin`, `tanggal_izin`, `jenis`, `status_akreditas`, `no_akreditas`, `ruang_lingkup`, `program`, `photo`, `absensi`, `kode_user`) VALUES
-('LPR1', 'tes', 'tes', '123', 'testestes@gmail.com', '123', '2019-11-21', 'Pemerintah', 'tes', '123', 'tes', 'tes', 'foto.jpg', 'GAMA.jpg', 'USER1');
+('LPR1', 'tes', 'tes', '123', 'testestes@gmail.com', '123', '2019-11-21', 'Pemerintah', 'tes', '123', 'tes', 'tes', 'foto.jpg', 'GAMA.jpg', 'USER1'),
+('LPR2', 'Test LPK', 'aaa', '12398102102', 'aaa@gmail.com', '532523', '2019-12-05', 'Pemerintah', 'A', '32531', 'adas', 'dasdada', 'lowongan-kerja-pertamina-november-2019.jpg', 'Surat Dinas .docx', 'USER2'),
+('LPR3', 'Test LPK', 'aaa', '12398102102', 'aaa@gmail.com', '532523', '2019-12-05', 'Pemerintah', 'A', '32531', 'adas', 'dasdada', 'lowongan-kerja-FIX-2-1024x720.jpg', 'android-os.pdf', 'USER2');
 
 -- --------------------------------------------------------
 
@@ -8252,7 +8335,8 @@ CREATE TABLE `table_login` (
 
 INSERT INTO `table_login` (`id`, `username`, `password`, `level`, `status`, `created_date`, `kode_user`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Admin', 'Aktif', '2019-11-05 17:13:39', 'ADMIN'),
-(9, 'tes', '28b662d883b6d76fd96e4ddc5e9ba780', 'User', 'Aktif', '2019-11-10 07:45:30', 'USER1');
+(9, 'tes', '28b662d883b6d76fd96e4ddc5e9ba780', 'User', 'Suspend', '2019-11-10 07:45:30', 'USER1'),
+(10, '0042170158', '827ccb0eea8a706c4c34a16891f84e7b', 'User', 'Aktif', '2019-12-05 07:50:43', 'USER2');
 
 -- --------------------------------------------------------
 
@@ -8281,7 +8365,9 @@ CREATE TABLE `table_pelatihan` (
 --
 
 INSERT INTO `table_pelatihan` (`kode_pelatihan`, `nama`, `kuota`, `standar_kompetensi`, `keterangan`, `tanggal_mulai_daftar`, `tanggal_berakhir_daftar`, `tanggal_mulai_pelatihan`, `tanggal_berakhir_pelatihan`, `status`, `kode_jenis`, `kode_kategori`, `kode_user`) VALUES
-('PLT1', 'Tesdsaf', 100, 'Tes', 'Tes', '2019-01-01', '2019-12-06', '2019-01-01', '2019-01-01', 'Aktif', 'JENIS2', 'KTG2', 'ADMIN');
+('PLT1', 'Tesdsaf', 100, 'Tes', 'Tes', '2019-01-01', '2019-12-03', '2019-01-01', '2019-01-01', 'Aktif', 'JENIS2', 'KTG2', 'ADMIN'),
+('PLT2', 'sadasa', 100, 'Tes', 'Tes', '2019-01-01', '2019-12-06', '2019-01-01', '2019-01-01', 'Aktif', 'JENIS1', 'KTG1', 'ADMIN'),
+('PLT3', 'kjaskd', 100, 'Tes', 'Tes', '2019-01-01', '2019-12-06', '2019-01-01', '2019-01-01', 'Aktif', 'JENIS1', 'KTG1', 'ADMIN');
 
 -- --------------------------------------------------------
 
@@ -8305,7 +8391,10 @@ CREATE TABLE `table_pengurus` (
 
 INSERT INTO `table_pengurus` (`id`, `nama_pimpinan`, `no_telepon_pimpinan`, `nama_pj`, `jabatan_pj`, `no_telepon_pj`, `kode_user`) VALUES
 (8, 'testtes', '123', 'tes', 'tes', '123', 'USER1'),
-(10, 'tes', '123', 'tes', 'tes', '0895328976755', 'LPR1');
+(10, 'tes', '123', 'tes', 'tes', '0895328976755', 'LPR1'),
+(11, 'sad', '13412', 'asda', 'asdas', '1351331', 'USER2'),
+(12, 'sad', '13412', 'asda', 'asdas', '12398102102', 'LPR2'),
+(13, 'sad', '13412', 'asda', 'asdas', '12398102102', 'LPR3');
 
 -- --------------------------------------------------------
 
@@ -8340,7 +8429,8 @@ INSERT INTO `table_peserta` (`nik`, `kk`, `no_ak1`, `nama`, `jenis_kelamin`, `em
 ('123456', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Belum Bekerja', NULL, NULL, NULL, 'ALM4'),
 ('1234567', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Belum Bekerja', NULL, NULL, NULL, 'ALM5'),
 ('12345678', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Sudah Bekerja', 'testes', '123', 'testes', 'ALM6'),
-('123456789', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Sudah Bekerja', 'tes', '0895328976755', 'tes', 'ALM7');
+('123456789', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Sudah Bekerja', 'tes', '0895328976755', 'tes', 'ALM7'),
+('311231', '213189', 'asd', 'asjkd', 'Laki-laki', 'aaa@gmail.com', '12398102102', 'SMK', 'Belum Bekerja', NULL, NULL, NULL, 'ALM8');
 
 -- --------------------------------------------------------
 
@@ -8361,13 +8451,14 @@ CREATE TABLE `table_peserta_pelatihan` (
 --
 
 INSERT INTO `table_peserta_pelatihan` (`id`, `tanggal_daftar`, `status`, `kode_pelatihan`, `nik`) VALUES
-(2, '2019-11-15', 1, 'PLT1', '123'),
+(2, '2019-11-15', 1, 'PLT2', '123'),
 (3, '2019-11-15', 1, 'PLT1', '1234'),
-(4, '2019-11-15', 1, 'PLT1', '12345'),
-(5, '2019-11-15', 1, 'PLT1', '123456'),
-(6, '2019-11-15', 1, 'PLT1', '1234567'),
+(4, '2019-11-15', 1, 'PLT2', '12345'),
+(5, '2019-11-15', 0, 'PLT1', '123456'),
+(6, '2019-11-15', 1, 'PLT2', '1234567'),
 (7, '2019-11-15', 1, 'PLT1', '12345678'),
-(8, '2019-11-14', 1, 'PLT1', '123456789');
+(8, '2019-11-14', 0, 'PLT1', '123456789'),
+(9, '2019-12-06', 0, 'PLT2', '311231');
 
 -- --------------------------------------------------------
 
@@ -8389,8 +8480,8 @@ CREATE TABLE `table_slider` (
 --
 
 INSERT INTO `table_slider` (`id`, `tanggal`, `judul`, `detail`, `photo`, `kode_user`) VALUES
-(1, '2019-11-06 11:02:23', 'Test', 'Test', 'GAMA.jpg', 'ADMIN'),
-(2, '2019-11-06 11:03:31', 'Test', 'Test', 'EMBUN.jpg', 'ADMIN');
+(1, '2019-11-06 11:02:23', 'Test', '', 'img (2).jpg', 'ADMIN'),
+(2, '2019-11-06 11:03:31', 'Test', '', 'image-slider-2.jpg', 'ADMIN');
 
 -- --------------------------------------------------------
 
@@ -8420,7 +8511,8 @@ CREATE TABLE `table_user` (
 --
 
 INSERT INTO `table_user` (`kode_user`, `nama`, `alamat`, `telepon`, `email`, `no_izin`, `tanggal_izin`, `jenis`, `status_akreditas`, `no_akreditas`, `ruang_lingkup`, `tipe`, `photo`, `tanggal_input`) VALUES
-('USER1', 'tes', 'tes', '123', 'mumaraziz2014@gmail.com', '123', '2019-01-01', 'Pemerintah', 'tes', '123', 'tes', 'LPK', 'GAMA.jpg', '2019-11-20 12:18:51');
+('USER1', 'tes', 'tes', '123', 'calenger747@gmail.com', '123', '2019-01-01', 'Pemerintah', 'tes', '123', 'tes', 'LPK', 'GAMA.jpg', '2019-11-20 12:18:51'),
+('USER2', 'Test LPK', 'aaa', '12398102102', 'aaa@gmail.com', '532523', '2019-12-05', 'Pemerintah', 'A', '32531', 'adas', 'LPK', '1564449496262-user.png', '2019-12-05 07:50:43');
 
 -- --------------------------------------------------------
 
@@ -83556,7 +83648,7 @@ ALTER TABLE `table_user`
 -- AUTO_INCREMENT for table `table_anggota`
 --
 ALTER TABLE `table_anggota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT for table `table_berita`
@@ -83574,31 +83666,31 @@ ALTER TABLE `table_helpdesk`
 -- AUTO_INCREMENT for table `table_history`
 --
 ALTER TABLE `table_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT for table `table_laporan`
 --
 ALTER TABLE `table_laporan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `table_login`
 --
 ALTER TABLE `table_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `table_pengurus`
 --
 ALTER TABLE `table_pengurus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `table_peserta_pelatihan`
 --
 ALTER TABLE `table_peserta_pelatihan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `table_slider`

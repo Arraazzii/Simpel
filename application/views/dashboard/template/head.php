@@ -13,11 +13,13 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/dashboard/css/vendors.css" />
     <!-- app style -->
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/dashboard/css/style.css" />
-     <!-- plugins -->
+    <!-- plugins -->
     <script src="<?= base_url(); ?>assets/dashboard/js/vendors.js"></script>
     <!-- custom app -->
     <script src="<?= base_url(); ?>assets/dashboard/js/app.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script> window.setTimeout(function() { $(".alert-success").fadeTo(200, 0).slideUp(200, function(){ $(this).remove(); }); }, 2000); </script>
+    <script> window.setTimeout(function() { $(".alert-danger").fadeTo(200, 0).slideUp(200, function(){ $(this).remove(); }); }, 2000); </script>
 </head>
 
 <?php 

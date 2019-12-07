@@ -93,7 +93,7 @@ class M_Home extends CI_Model{
         $this->db->join('table_jenis b', 'b.kode_jenis = a.kode_jenis');
         $this->db->join('table_kategori c', 'c.kode_kategori = a.kode_kategori');
         $this->db->where('kode_pelatihan !=', $id);
-        $this->db->limit(5);
+        $this->db->limit(4);
         $query = $this->db->get();
         return $query->result();
     }
