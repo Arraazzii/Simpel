@@ -83,7 +83,7 @@ class M_Dashboard extends CI_Model{
   }
 
   public function dataPesertaPelatihan(){
-    $this->db->select('b.nik nik,b.nama, b.status_pekerjaan status, b.no_telepon hp, d.kelurahan kel, d.kecamatan kec, d.alamat alamat, c.nama nama_pelatihan, b.nama_perusahaan, b.alamat_perusahaan, b.no_telp_perusahaan');
+    $this->db->select('*, b.nama AS np');
     $this->db->from('table_peserta_pelatihan a');
     $this->db->join('table_peserta b', 'b.nik = a.nik');
     $this->db->join('table_pelatihan c', 'c.kode_pelatihan = a.kode_pelatihan');

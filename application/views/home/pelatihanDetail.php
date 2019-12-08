@@ -3,6 +3,11 @@
     <!-- Tab panes -->
     <div class="col-md-12 mt-5 row">
       <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <?=$this->session->userdata('notif')?>
+          </div>
+        </div>
         <div class="card">
           <div class="card-header d-flex align-items-center justify-content-between">
             <h3><b><?= $detail[0]->nama;  ?></b></h3>
@@ -90,7 +95,7 @@
           <h6 class="modal-title">Daftar Pelatihan <?= $detail[0]->nama;  ?></h6>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form action="<?= base_url('Home/daftarPelatihan');?>" method="POST">
+        <form action="<?= base_url('Home/daftarPelatihan');?>" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="id" value="<?= $detail[0]->kode_pelatihan;  ?>">
           <!-- Modal body -->
           <div class="modal-body">
@@ -162,6 +167,11 @@
                 <option value="Perguruan Tinggi">Perguruan Tinggi</option>
               </select>
             </div>
+            <div class="form-group">
+              <label>Foto</label>
+              <input type="file" name="foto" class="form-control foto" required="">
+              <p>Gambar JPG/PNG Max. 2Mb</p>
+            </div>
           </div>
           <!-- Modal footer -->
           <div class="modal-footer">
@@ -172,6 +182,23 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript">
+    $(".foto").change(function() {
+      if (this.files && this.files[0] && this.files[0].name.match(/\.(jpg|png|jpeg|PNG|JPG|JPEG)$/) ) {
+        if(this.files[0].size>2097152) {
+          $('.foto').val('');
+          alert('Batas Maximal Ukuran File 2MB !');
+        }
+        else {
+          var reader = new FileReader();
+          reader.readAsDataURL(this.files[0]);
+        }
+      } else{
+        $('.foto').val('');
+        alert('Hanya File jpg/png Yang Diizinkan !');
+      }
+    });
+  </script>
   <script type="text/javascript">
     $(document).ready(function() {
       onChangeProvinsi();
@@ -229,3 +256,5 @@
       });
     }
   </script>
+  <script> window.setTimeout(function() { $(".alert-success").fadeTo(200, 0).slideUp(200, function(){ $(this).remove(); }); }, 2000); </script>
+  <script> window.setTimeout(function() { $(".alert-danger").fadeTo(200, 0).slideUp(200, function(){ $(this).remove(); }); }, 2000); </script>

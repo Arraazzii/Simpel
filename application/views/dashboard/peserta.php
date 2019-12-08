@@ -35,10 +35,10 @@
                             foreach ($pesertaPelatihan as $row) { ?>
                                 <tr>
                                     <td><?= $no++; ?>.</td>
+                                    <td><?= $row->np; ?></td>
+                                    <td><?= $row->alamat; ?> <?= $row->kecamatan; ?> <?= $row->kelurahan; ?></td>
+                                    <td><?= $row->no_telepon; ?></td>
                                     <td><?= $row->nama; ?></td>
-                                    <td><?= $row->alamat; ?> <?= $row->kec; ?> <?= $row->kel; ?></td>
-                                    <td><?= $row->hp; ?></td>
-                                    <td><?= $row->nama_pelatihan; ?></td>
                                     <td>
                                         <?php if ($row->status == 'Sudah Bekerja') { ?>
                                             <span class="badge badge-success">Bekerja</span>
@@ -145,49 +145,47 @@ foreach ($pesertaPelatihan as $row) { ?>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal body -->
-                <form action="#" method="POST">
-                    <input type="hidden" name="id" value="<?= $row->nik; ?>">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Status Bekerja</label>
-                            <select class="form-control" name="status_pekerjaan" id="status_pekerjaan<?= $row->nik; ?>" >
-                                <option value="Sudah Bekerja" <?php if($row->status == 'Sudah Bekerja') {echo 'Selected';}?>>Sudah Bekerja</option>
-                                <option value="Belum Bekerja" <?php if($row->status == 'Belum Bekerja') {echo 'Selected';}?>>Belum Bekerja</option>
-                            </select>
-                        </div>
-                        <div id="popup<?= $row->nik; ?>">
-                            <div class="form-group">
-                                <label>Nama Perusahaan</label>
-                                <input type="text" name="nama" class="form-control" placeholder="Nama Perusahaan" value="<?= $row->nama_perusahaan; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label>Alamat Perushaan</label>
-                                <textarea class="form-control" name="alamat"><?= $row->alamat_perusahaan; ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>No. Telepon Perusahaan</label>
-                                <input type="text" name="telp" class="form-control" placeholder="No. Telepon Perusahaan" value="<?= $row->no_telp_perusahaan; ?>">
-                            </div>
-                        </div>
-                        <script type="text/javascript">
-                            <?php if($row->status == 'Belum Bekerja') { ?>
-                                $("#popup<?= $row->nik; ?>").hide();
-                            <?php } ?>
-                            $('#status_pekerjaan<?= $row->nik; ?>').on('change', function(){
-                                if($('#status_pekerjaan<?= $row->nik; ?>').val() == 'Sudah Bekerja') {
-                                    $("#popup<?= $row->nik; ?>").show(); 
-                                } else {
-                                    $("#popup<?= $row->nik; ?>").hide();
-                                }
-                            });
-                        </script>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table id="peserta<?= $row->id; ?>" class="table table-hover display" width="100%">
+                            <tr id="nik<?= $row->id ?>">
+                                <td width="30%">NIK</td>
+                                <td width="5%">:</td>
+                                <td width="65%"><?= $row->nik?></td>
+                            </tr>
+                            <tr id="nama<?= $row->id ?>">
+                                <td width="30%">Nama Peserta</td>
+                                <td width="5%">:</td>
+                                <td width="65%"><?= $row->nama?></td>
+                            </tr>
+                            <tr id="jenis<?= $row->id ?>">
+                                <td width="30%">Jenis Kelamin</td>
+                                <td width="5%">:</td>
+                                <td width="65%"><?= $row->jenis_kelamin?></td>
+                            </tr>
+                            <tr id="jenis<?= $row->id ?>">
+                                <td width="30%">Email</td>
+                                <td width="5%">:</td>
+                                <td width="65%"><?= $row->email?></td>
+                            </tr>
+                            <tr id="jenis<?= $row->id ?>">
+                                <td width="30%">No. Telepon</td>
+                                <td width="5%">:</td>
+                                <td width="65%"><?= $row->no_telepon?></td>
+                            </tr>
+                            <tr id="jenis<?= $row->id ?>">
+                                <td width="30%">Alamat</td>
+                                <td width="5%">:</td>
+                                <td width="65%"><?= $row->alamat; ?> <?= $row->kecamatan; ?> <?= $row->kelurahan; ?></td>
+                            </tr>
+                            <tr id="jenis<?= $row->id ?>">
+                                <td width="30%">Status Pekerjaan</td>
+                                <td width="5%">:</td>
+                                <td width="65%"><?= $row->status_pekerjaan?></td>
+                            </tr>
+                        </table>
                     </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <!-- <button type="submit" class="btn btn-success">Simpan</button> -->
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -257,13 +255,13 @@ foreach ($pesertaPelatihan as $row) { ?>
     $("#datatablePeserta").dataTable({
         "dom": 'Bfrtip',
         "buttons": [
-            {
-                extend: 'excelHtml5',
-                text: 'Export Excel',
-                exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5 ]
-                },
+        {
+            extend: 'excelHtml5',
+            text: 'Export Excel',
+            exportOptions: {
+                columns: [ 0, 1, 2, 3, 4, 5 ]
             },
+        },
         ],
         language: {
             "decimal":        "",
@@ -293,17 +291,17 @@ foreach ($pesertaPelatihan as $row) { ?>
             this.api().columns().every( function () {
                 var column = this;
                 var select = $('<select><option value=""></option></select>')
-                    .appendTo( $(column.footer()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
+                .appendTo( $(column.footer()).empty() )
+                .on( 'change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex(
+                        $(this).val()
                         );
- 
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
- 
+
+                    column
+                    .search( val ? '^'+val+'$' : '', true, false )
+                    .draw();
+                } );
+
                 column.data().unique().sort().each( function ( d, j ) {
                     select.append( '<option value="'+d+'">'+d+'</option>' )
                 } );

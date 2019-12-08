@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2019 at 06:27 PM
+-- Generation Time: Dec 08, 2019 at 08:17 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -7863,13 +7863,15 @@ CREATE TABLE `table_alamat` (
 
 INSERT INTO `table_alamat` (`kode_alamat`, `alamat`, `kelurahan`, `kecamatan`, `tempat_lahir`, `tanggal_lahir`) VALUES
 ('ALM1', 'Rumah', 'cisalak', '16452', 'Depok', '2019-11-08'),
+('ALM10', 'bbb', 'MAMPANG', 'PANCORAN MAS', 'asdasd', '2019-12-01'),
 ('ALM2', 'Rumah', 'cisalak', '16452', 'Depok', '2019-11-08'),
 ('ALM3', 'Rumah', 'cisalak', '16452', 'Depok', '2019-11-08'),
 ('ALM4', 'Rumah', 'cisalak', '16452', 'Depok', '2019-11-08'),
 ('ALM5', 'Rumah', 'cisalak', '16452', 'Depok', '2019-11-08'),
 ('ALM6', 'Rumah', 'cisalak', '16452', 'Depok', '2019-11-08'),
 ('ALM7', 'Rumah', 'cisalak', '16452', 'Depok', '2019-11-08'),
-('ALM8', 'aaa', 'SAWANGAN BARU', 'SAWANGAN', 'asdasd', '2019-12-06');
+('ALM8', 'aaa', 'SAWANGAN BARU', 'SAWANGAN', 'asdasd', '2019-12-06'),
+('ALM9', 'bbb', 'TAPOS', 'TAPOS', 'KABUPATEN SUMBA TENGAH', '2019-12-08');
 
 -- --------------------------------------------------------
 
@@ -8217,7 +8219,11 @@ INSERT INTO `table_history` (`id`, `waktu`, `aktivitas`, `detail`, `photo`, `kod
 (159, '2019-12-07 14:57:13', 'Logout', NULL, NULL, 'ADMIN'),
 (160, '2019-12-07 15:01:34', 'Login', NULL, NULL, 'ADMIN'),
 (161, '2019-12-07 17:15:26', 'Logout', NULL, NULL, 'ADMIN'),
-(162, '2019-12-07 17:24:02', 'Login', NULL, NULL, 'ADMIN');
+(162, '2019-12-07 17:24:02', 'Login', NULL, NULL, 'ADMIN'),
+(163, '2019-12-08 06:16:46', 'Login', NULL, NULL, 'ADMIN'),
+(164, '2019-12-08 06:44:23', 'Logout', NULL, NULL, 'ADMIN'),
+(165, '2019-12-08 06:53:40', 'Daftar Pelatihan : PLT3', '{\"nik\":\"098765432\",\"kk\":\"4567839876\",\"no_ak1\":\"452\",\"nama\":\"qwerty\",\"jenis_kelamin\":\"Perempuan\",\"email\":\"aaa@gmail.com\",\"no_telepon\":\"8128314121\",\"pendidikan_terakhir\":\"SMP\",\"status_pekerjaan\":\"Belum Bekerja\",\"kode_alamat\":\"ALM9\",\"foto_ktp\":\"1564449496262-user.png\",\"alamat\":\"bbb\",\"kelurahan\":\"TAPOS\",\"kecamatan\":\"TAPOS\",\"tempat_lahir\":\"KABUPATEN SUMBA TENGAH\",\"tanggal_lahir\":\"2019-12-08\"}', NULL, 'Umum'),
+(166, '2019-12-08 06:58:36', 'Daftar Pelatihan : PLT3', '{\"nik\":\"472362\",\"kk\":\"3281919\",\"no_ak1\":\"61\",\"nama\":\"tyuiop\",\"jenis_kelamin\":\"Perempuan\",\"email\":\"aaa@gmail.com\",\"no_telepon\":\"8128314121\",\"pendidikan_terakhir\":\"Perguruan Tinggi\",\"status_pekerjaan\":\"Belum Bekerja\",\"kode_alamat\":\"ALM10\",\"foto_ktp\":\"lowongan-kerja-pertamina-november-2019.jpg\",\"alamat\":\"bbb\",\"kelurahan\":\"MAMPANG\",\"kecamatan\":\"PANCORAN MAS\",\"tempat_lahir\":\"asdasd\",\"tanggal_lahir\":\"2019-12-01\"}', NULL, 'Umum');
 
 -- --------------------------------------------------------
 
@@ -8367,7 +8373,7 @@ CREATE TABLE `table_pelatihan` (
 INSERT INTO `table_pelatihan` (`kode_pelatihan`, `nama`, `kuota`, `standar_kompetensi`, `keterangan`, `tanggal_mulai_daftar`, `tanggal_berakhir_daftar`, `tanggal_mulai_pelatihan`, `tanggal_berakhir_pelatihan`, `status`, `kode_jenis`, `kode_kategori`, `kode_user`) VALUES
 ('PLT1', 'Tesdsaf', 100, 'Tes', 'Tes', '2019-01-01', '2019-12-03', '2019-01-01', '2019-01-01', 'Aktif', 'JENIS2', 'KTG2', 'ADMIN'),
 ('PLT2', 'sadasa', 100, 'Tes', 'Tes', '2019-01-01', '2019-12-06', '2019-01-01', '2019-01-01', 'Aktif', 'JENIS1', 'KTG1', 'ADMIN'),
-('PLT3', 'kjaskd', 100, 'Tes', 'Tes', '2019-01-01', '2019-12-06', '2019-01-01', '2019-01-01', 'Aktif', 'JENIS1', 'KTG1', 'ADMIN');
+('PLT3', 'kjaskd', 100, 'Tes', 'Tes', '2019-01-01', '2019-12-11', '2019-01-01', '2019-01-01', 'Aktif', 'JENIS1', 'KTG1', 'ADMIN');
 
 -- --------------------------------------------------------
 
@@ -8415,22 +8421,25 @@ CREATE TABLE `table_peserta` (
   `nama_perusahaan` varchar(255) DEFAULT NULL,
   `no_telp_perusahaan` varchar(20) DEFAULT NULL,
   `alamat_perusahaan` text,
-  `kode_alamat` varchar(11) NOT NULL
+  `kode_alamat` varchar(11) NOT NULL,
+  `foto_ktp` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_peserta`
 --
 
-INSERT INTO `table_peserta` (`nik`, `kk`, `no_ak1`, `nama`, `jenis_kelamin`, `email`, `no_telepon`, `pendidikan_terakhir`, `status_pekerjaan`, `nama_perusahaan`, `no_telp_perusahaan`, `alamat_perusahaan`, `kode_alamat`) VALUES
-('123', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Belum Bekerja', NULL, NULL, NULL, 'ALM1'),
-('1234', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Belum Bekerja', NULL, NULL, NULL, 'ALM2'),
-('12345', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Belum Bekerja', NULL, NULL, NULL, 'ALM3'),
-('123456', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Belum Bekerja', NULL, NULL, NULL, 'ALM4'),
-('1234567', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Belum Bekerja', NULL, NULL, NULL, 'ALM5'),
-('12345678', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Sudah Bekerja', 'testes', '123', 'testes', 'ALM6'),
-('123456789', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Sudah Bekerja', 'tes', '0895328976755', 'tes', 'ALM7'),
-('311231', '213189', 'asd', 'asjkd', 'Laki-laki', 'aaa@gmail.com', '12398102102', 'SMK', 'Belum Bekerja', NULL, NULL, NULL, 'ALM8');
+INSERT INTO `table_peserta` (`nik`, `kk`, `no_ak1`, `nama`, `jenis_kelamin`, `email`, `no_telepon`, `pendidikan_terakhir`, `status_pekerjaan`, `nama_perusahaan`, `no_telp_perusahaan`, `alamat_perusahaan`, `kode_alamat`, `foto_ktp`) VALUES
+('098765432', '4567839876', '452', 'qwerty', 'Perempuan', 'aaa@gmail.com', '8128314121', 'SMP', 'Belum Bekerja', NULL, NULL, NULL, 'ALM9', '1564449496262-user.png'),
+('123', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Belum Bekerja', NULL, NULL, NULL, 'ALM1', NULL),
+('1234', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Belum Bekerja', NULL, NULL, NULL, 'ALM2', NULL),
+('12345', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Belum Bekerja', NULL, NULL, NULL, 'ALM3', NULL),
+('123456', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Belum Bekerja', NULL, NULL, NULL, 'ALM4', NULL),
+('1234567', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Belum Bekerja', NULL, NULL, NULL, 'ALM5', NULL),
+('12345678', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Sudah Bekerja', 'testes', '123', 'testes', 'ALM6', NULL),
+('123456789', '123', '123', 'Umar', 'Laki-laki', '123@gmail.com', '0895328976755', 'SMP', 'Sudah Bekerja', 'tes', '0895328976755', 'tes', 'ALM7', NULL),
+('311231', '213189', 'asd', 'asjkd', 'Laki-laki', 'aaa@gmail.com', '12398102102', 'SMK', 'Belum Bekerja', NULL, NULL, NULL, 'ALM8', NULL),
+('472362', '3281919', '61', 'tyuiop', 'Perempuan', 'aaa@gmail.com', '8128314121', 'Perguruan Tinggi', 'Belum Bekerja', NULL, NULL, NULL, 'ALM10', 'lowongan-kerja-pertamina-november-2019.jpg');
 
 -- --------------------------------------------------------
 
@@ -8458,7 +8467,9 @@ INSERT INTO `table_peserta_pelatihan` (`id`, `tanggal_daftar`, `status`, `kode_p
 (6, '2019-11-15', 1, 'PLT2', '1234567'),
 (7, '2019-11-15', 1, 'PLT1', '12345678'),
 (8, '2019-11-14', 0, 'PLT1', '123456789'),
-(9, '2019-12-06', 0, 'PLT2', '311231');
+(9, '2019-12-06', 0, 'PLT2', '311231'),
+(10, '2019-12-08', 0, 'PLT3', '098765432'),
+(11, '2019-12-08', 0, 'PLT3', '472362');
 
 -- --------------------------------------------------------
 
@@ -83666,7 +83677,7 @@ ALTER TABLE `table_helpdesk`
 -- AUTO_INCREMENT for table `table_history`
 --
 ALTER TABLE `table_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
 
 --
 -- AUTO_INCREMENT for table `table_laporan`
@@ -83690,7 +83701,7 @@ ALTER TABLE `table_pengurus`
 -- AUTO_INCREMENT for table `table_peserta_pelatihan`
 --
 ALTER TABLE `table_peserta_pelatihan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `table_slider`

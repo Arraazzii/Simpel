@@ -105,4 +105,13 @@ class M_Home extends CI_Model{
         return $query->result();
     }
 
+    public function checkPeserta($cari){
+        $query = $this->db->query("SELECT * FROM table_peserta WHERE nik = '$cari'");
+        if ($query->result() != NULL) {
+            return $query->result();
+        } else {
+            return null;
+        }
+    }
+
 }

@@ -154,7 +154,8 @@ class Home extends CI_Controller {
 			'no_telepon' => $telepon,
 			'pendidikan_terakhir' => $pend,
 			'status_pekerjaan' => 'Belum Bekerja',
-			'kode_alamat' => $kode_alm
+			'kode_alamat' => $kode_alm,
+			'foto_ktp' => $_FILES['foto']['name'],
 		);
 
 		$dataAlamat = array(
@@ -191,12 +192,14 @@ class Home extends CI_Controller {
 				$this->session->set_flashdata('notif', '<div class="alert alert-danger" role="alert">Gagal Mendaftar! Tersisa '.$years_remaining.' Tahun '.$days_remaining.' Hari Lagi Untuk Mendaftar</div>');
 				redirect('Home/pelatihanDetail/'.$pelatihan.'', 'refresh');
 			} else {
+				move_uploaded_file($_FILES['foto']['tmp_name'], './assets/upload/foto_ktp/' . $_FILES['foto']['name']);
 				$this->db->insert('table_peserta_pelatihan', $dataPeserta);
 				$this->db->insert('table_history', $dataHistory);
 				$this->session->set_flashdata('notif', '<div class="alert alert-success" role="alert">Berhasil Dikirim!</div>');
 				redirect('Home/pelatihanDetail/'.$pelatihan.'', 'refresh');
 			}
 		} else {
+			move_uploaded_file($_FILES['foto']['tmp_name'], './assets/upload/foto_ktp/' . $_FILES['foto']['name']);
 			$this->db->insert('table_peserta', $data);
 			$this->db->insert('table_alamat', $dataAlamat);
 			$this->db->insert('table_history', $dataHistory);
@@ -304,5 +307,14 @@ class Home extends CI_Controller {
 		$this->session->set_flashdata('notif', '<div class="alert alert-success" role="alert">Berhasil Dikirim!</div>');
 		redirect('', 'refresh');
 	}
+
+	public function checkPeserta()
+    {
+        $nik = $this->input->post('cari');
+        $data = array(
+            'data' => $this->model->checkPeserta($nik),
+        );
+        echo json_encode($data);
+    }
 	
 }

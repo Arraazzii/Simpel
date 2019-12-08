@@ -96,7 +96,7 @@
 								<div id="umum">
 									<div class="form-group">
 										<label>NIK</label>
-										<input type="text" name="nik" class="form-control" placeholder="NIK">
+										<input type="text" name="nik" id="nik" class="form-control" placeholder="NIK">
 									</div>
 									<div class="form-group">
 										<label>Status Pekerjaan</label><br>
@@ -111,12 +111,12 @@
 									</div>
 								</div>
 								<div class="form-group">
-										<label>Nama <span id="lpk">LPK/BLKLN</span></label>
-										<input type="text" name="nama" class="form-control" placeholder="Nama">
+									<label>Nama <span id="lpk">LPK/BLKLN</span></label>
+									<input type="text" name="nama" id="nama" class="form-control nama" placeholder="Nama">
 								</div>
 								<div class="form-group">
 									<label>Email</label>
-									<input type="email" name="email" class="form-control" placeholder="example@mail.com">
+									<input type="email" name="email" id="email" class="form-control" placeholder="example@mail.com">
 								</div>
 								<div class="form-group">
 									<label>Masukan</label>
@@ -144,14 +144,49 @@
 	<script type="text/javascript">
 		$("#umum").hide();
 		$("#lpk").hide();
+		$("#nik").val('');
+		$("#nama").val('');
+		$("#email").val('');
 		$('input[type="radio"][name="tipe"]').on('click', function(){
 			if (this.value == 'Umum') {
+				$("#nik").val('');
+				$("#nama").val('');
+				$("#email").val('');
 				$("#umum").show();
+				$("#nama").addClass('nama');
 				$("#lpk").hide();
 			} else if (this.value == 'LPK/BLKLN') {
 				$("#umum").hide();
+				$("#nik").val('');
+				$("#nama").val('');
+				$("#email").val('');
 				$("#lpk").show();
+				$("#nama").removeClass('nama');
 			}
 		});
+	</script>
+	<script type="text/javascript">
+		$("#nik").blur(function(){
+			cariPeserta($("#nik").val());
+		});
+
+		function cariPeserta(cari, nama){
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url('Home/checkPeserta'); ?>",
+				data: {
+					cari : cari,
+
+				},
+				dataType: "JSON",
+				success: function(response) {
+					$.each(response.data, function(item, data){
+						$("#nik").val(data.nik);
+						$(".nama").val(data.nama);
+						$("#email").val(data.email);
+					});
+				}
+			});        
+		}
 	</script>
 	</html>
