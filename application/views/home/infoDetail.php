@@ -5,6 +5,7 @@
       <?php foreach ($detail as $detail) { ?>
       <div class="col-lg-8 col-md-7 col-sm-12 col-12">
         <img src="<?= base_url(); ?>assets/upload/berita/<?= $detail->photo; ?>" class="img-fluid">
+        <br>
         <span class="badge badge-success"><?php echo date("d F Y", strtotime($detail->tanggal)); ?></span>
         <span class="badge badge-warning"><?php echo $detail->tipe; ?></span>
         <h3><b><?php echo $detail->judul; ?></b></h3>
