@@ -259,12 +259,12 @@
 										<div class="d-flex align-items-center justify-content-between">
 											<div class="mr-1">
 												<!-- <h4 class="text-white mb-0">Alice Williams</h4>
-												<small class="text-white">Henry@example.com</small> -->
+													<small class="text-white">Henry@example.com</small> -->
+												</div>
+												<a href="#" class="text-white font-20 tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Logout" id="logout"> <i
+													class="zmdi zmdi-power"></i></a>
+												</div>
 											</div>
-											<a href="#" class="text-white font-20 tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Logout" id="logout"> <i
-												class="zmdi zmdi-power"></i></a>
-											</div>
-										</div>
 <!-- 										<div class="p-4">
 											<a class="dropdown-item d-flex nav-link" href="javascript:void(0)">
 												<i class="fa fa-user pr-2 text-success"></i> Profile</a>
@@ -330,7 +330,7 @@
 									</li>
 									<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "pelatihan") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>Dashboard/pelatihan" aria-expanded="false"><i class="nav-icon ti ti-pulse"></i><span class="nav-title">Data Pelatihan</span></a> </li>
 									<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "peserta") { echo 'class="active"';} ?>><a href="<?= base_url(); ?>Dashboard/peserta" aria-expanded="false"><i class="nav-icon ti ti-comments-smiley"></i><span class="nav-title">Data Peserta</span></a> </li>
-									<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "laporan") { echo 'class="active"';} ?>><a href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-clipboard"></i><span class="nav-title">Laporan</span></a>
+									<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "laporan") { echo 'class="active"';} ?>><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-clipboard"></i><span class="nav-title">Laporan</span></a>
 										<!-- <?= base_url(); ?>Dashboard/laporan  -->
 										<ul aria-expanded="false">
 											<li <?php if ($this->uri->segment(1) == "Dashboard" && $this->uri->segment(2) == "lpkblkln") { echo 'class="active"';} ?>><a href="javascript:void(0)" data-toggle="modal" data-target="#modalLaporanPeserta" aria-expanded="false"><span class="nav-title">Laporan Peserta</span></a> </li>
@@ -389,31 +389,41 @@
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
 									<h4 class="modal-title">Laporan Peserta</h4>
 								</div>
-								<div class="modal-body">
-									<form class="form-inline" method="POST">
+								<form  method="POST">
+									<div class="modal-body">
 										<div class="row">
 											<div class="col-sm-2">
-												<label for="email">Dari Tanggal </label>
+												<label for="email">Dari</label>
 											</div>
 											<div class="col-sm-4">
-												<input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;">
+												<input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;" required="">
 											</div>
 											<div class="col-sm-2">
 												<label for="pwd">Sampai</label>
 											</div>
 											<div class="col-sm-4">
-												<input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;">
+												<input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;" required="">
 											</div>
-										</div>          
-										<div class="text-center">
-											<button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanPeserta') ?>"><span id="mitraText">Export to PDF</span></button>
-											<button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanPesertaXls') ?>"><span id="mitraText">Export to XLS</span></button>
 										</div>
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								</div>
+										<div class="row mt-2">
+											<div class="col-sm-2">
+												<label for="email">Nama Pelatihan</label>
+											</div>
+											<div class="col-sm-10">
+												<select class="form-control" name="nama_pelatihan">
+													<option hidden value="">Silahkan Pilih</option>
+													<?php foreach ($pelatihan as $row) { ?>
+														<option value="<?= $row->kode_pelatihan; ?>"><?= $row->nama; ?></option>
+													<?php } ?>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanPeserta') ?>"><span id="mitraText">Export to PDF</span></button>
+										<button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanPesertaXls') ?>"><span id="mitraText">Export to XLS</span></button>
+									</div>
+								</form>
 							</div>
 
 						</div>
@@ -428,31 +438,53 @@
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
 									<h4 class="modal-title">Laporan Status Peserta</h4>
 								</div>
-								<div class="modal-body">
-									<form class="form-inline" method="POST">
+								<form method="POST">
+									<div class="modal-body">
 										<div class="row">
 											<div class="col-sm-2">
-												<label for="email">Dari Tanggal </label>
+												<label for="email">Dari </label>
 											</div>
 											<div class="col-sm-4">
-												<input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;">
+												<input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;" required="">
 											</div>
 											<div class="col-sm-2">
 												<label for="pwd">Sampai</label>
 											</div>
 											<div class="col-sm-4">
-												<input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;">
+												<input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;" required="">
 											</div>
-										</div>          
-										<div class="text-center">
-											<button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanStatusPeserta') ?>"><span id="mitraText">Export to PDF</span></button>
-											<button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanStatusPesertaXls') ?>"><span id="mitraText">Export to XLS</span></button>
 										</div>
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								</div>
+										<div class="row mt-2">
+											<div class="col-sm-2">
+												<label for="email">Nama Pelatihan</label>
+											</div>
+											<div class="col-sm-10">
+												<select class="form-control" name="nama_pelatihan">
+													<option hidden value="">Silahkan Pilih</option>
+													<?php foreach ($pelatihan as $row) { ?>
+														<option value="<?= $row->kode_pelatihan; ?>"><?= $row->nama; ?></option>
+													<?php } ?>
+												</select>
+											</div>
+										</div>
+										<div class="row mt-2">
+											<div class="col-sm-2">
+												<label for="email">Status Peserta</label>
+											</div>
+											<div class="col-sm-10">
+												<select class="form-control" name="status">
+													<option hidden value="">Silahkan Pilih</option>
+													<option value="Sudah Bekerja">Sudah Bekerja</option>
+													<option value="Belum Bekerja">Belum Bekerja</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanStatusPeserta') ?>"><span id="mitraText">Export to PDF</span></button>
+										<button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanStatusPesertaXls') ?>"><span id="mitraText">Export to XLS</span></button>
+									</div>
+								</form>
 							</div>
 
 						</div>
@@ -467,31 +499,28 @@
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
 									<h4 class="modal-title">Laporan LPK & BLKLN</h4>
 								</div>
-								<div class="modal-body">
-									<form class="form-inline" method="POST">
+								<form method="POST">
+									<div class="modal-body">
 										<div class="row">
 											<div class="col-sm-2">
-												<label for="email">Dari Tanggal </label>
+												<label for="email">Dari </label>
 											</div>
 											<div class="col-sm-4">
-												<input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;">
+												<input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;" required="">
 											</div>
 											<div class="col-sm-2">
 												<label for="pwd">Sampai</label>
 											</div>
 											<div class="col-sm-4">
-												<input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;">
+												<input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;" required="">
 											</div>
-										</div>          
-										<div class="text-center">
-											<button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanLpkBlkln') ?>"><span id="mitraText">Export to PDF</span></button>
-											<button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanLpkBlklnXls') ?>"><span id="mitraText">Export to XLS</span></button>
 										</div>
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								</div>
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-info mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanLpkBlkln') ?>"><span id="mitraText">Export to PDF</span></button>
+										<button type="submit" class="btn btn-success mt-4" id="simpan" formaction="<?= base_url('dashboard/laporanLpkBlklnXls') ?>"><span id="mitraText">Export to XLS</span></button>
+									</div>
+								</form>
 							</div>
 
 						</div>
@@ -507,19 +536,19 @@
 									<h4 class="modal-title">Laporan Rekapitulasi  Peserta Pelatihan</h4>
 								</div>
 								<div class="modal-body">
-									<form class="form-inline" method="POST">
+									<form  method="POST">
 										<div class="row">
 											<div class="col-sm-2">
-												<label for="email">Dari Tanggal </label>
+												<label for="email">Dari </label>
 											</div>
 											<div class="col-sm-4">
-												<input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;">
+												<input type="date" class="form-control" id="" name="tgl_awal" style="width:100%;" required="">
 											</div>
 											<div class="col-sm-2">
 												<label for="pwd">Sampai</label>
 											</div>
 											<div class="col-sm-4">
-												<input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;">
+												<input type="date" class="form-control" id="" name="tgl_akhir" style="width:100%;" required="">
 											</div>
 										</div>          
 										<div class="text-center">

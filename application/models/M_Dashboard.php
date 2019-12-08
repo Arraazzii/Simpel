@@ -9,8 +9,9 @@ class M_Dashboard extends CI_Model{
 
   public function dataLaporan(){
     $this->db->select('*');
-    $this->db->from('table_laporan a');
-    $this->db->join('table_user b', 'b.kode_user = a.kode_user');
+    $this->db->from('table_lapor_detail a');
+    $this->db->join('table_laporan d', 'd.kode_lapor = a.kode_lapor');
+    $this->db->join('table_pengurus c', 'c.kode_user = a.kode_user');
     $query = $this->db->get();
     return $query->result();
   }
@@ -134,11 +135,11 @@ class M_Dashboard extends CI_Model{
     return $query->num_rows();
   }
 
-  public function laporanPeserta($tgl_awal, $tgl_akhir)
+  public function laporanPeserta($tgl_awal, $tgl_akhir, $pelatihan)
   {
     $where = "";
     if (!empty($tgl_awal) && !empty($tgl_akhir)) {
-      $where .= " WHERE psrtp.tanggal_daftar BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
+      $where .= " WHERE psrtp.tanggal_daftar BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' AND plthn.kode_pelatihan = '{$pelatihan}'";
     }
 
     $sql = "SELECT 
@@ -166,11 +167,11 @@ class M_Dashboard extends CI_Model{
     return $prepared->result();
   }
 
-  public function laporanStatusPeserta($tgl_awal, $tgl_akhir)
+  public function laporanStatusPeserta($tgl_awal, $tgl_akhir, $pelatihan, $status)
   {
     $where = "";
     if (!empty($tgl_awal) && !empty($tgl_akhir)) {
-      $where .= " WHERE psrtp.tanggal_daftar BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' ";
+      $where .= " WHERE psrtp.tanggal_daftar BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' AND plthn.kode_pelatihan = '{$pelatihan}' AND psrt.status_pekerjaan = '{$status}'";
     }
 
     $sql = "SELECT 

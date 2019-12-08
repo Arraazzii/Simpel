@@ -20,10 +20,13 @@ class Dashboard extends CI_Controller {
 
 	private function load($title = '', $datapath = '')
 	{
+		$data = array(
+			'pelatihan' => $this->model->dataPelatihan()
+		);
 		$page = array(
 			"head" => $this->load->view('dashboard/template/head', array("title" => $title), true),
 			"footer" => $this->load->view('dashboard/template/footer', false, true),
-			"sidebar" => $this->load->view('dashboard/template/sidebar', false, true),
+			"sidebar" => $this->load->view('dashboard/template/sidebar', $data, true),
 		);
 		return $page;
 	}
@@ -834,9 +837,15 @@ class Dashboard extends CI_Controller {
 		$id = $this->input->post('id');
 		$ss = $this->session->userdata['kode'];
 		$status_kerja = $this->input->post('status_pekerjaan');
-		$nama = $this->input->post('nama');
-		$alamat = $this->input->post('alamat');
-		$telpon = $this->input->post('telp');
+		if ($status_kerja == 'Belum Bekerja') {
+			$nama = '';
+			$alamat = '';
+			$telpon = '';
+		} else {
+			$nama = $this->input->post('nama');
+			$alamat = $this->input->post('alamat');
+			$telpon = $this->input->post('telp');
+		}
 
 		$data = array(
 			'status_pekerjaan' => $status_kerja,
@@ -891,10 +900,11 @@ class Dashboard extends CI_Controller {
 	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
+		$pelatihan 	 		= $this->input->post("nama_pelatihan");
 		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
 		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
 
-		$dataLaporan = $this->model->laporanPeserta($tgl_awal, $tgl_akhir);
+		$dataLaporan = $this->model->laporanPeserta($tgl_awal, $tgl_akhir, $pelatihan);
 
 		$dataView = [
 			'dataLaporan' => $dataLaporan,
@@ -911,10 +921,12 @@ class Dashboard extends CI_Controller {
 	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
+		$pelatihan 	 		= $this->input->post("nama_pelatihan");
+		$status 	 		= $this->input->post("status");
 		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
 		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
 
-		$dataLaporan = $this->model->laporanStatusPeserta($tgl_awal, $tgl_akhir);
+		$dataLaporan = $this->model->laporanStatusPeserta($tgl_awal, $tgl_akhir, $pelatihan, $status);
 
 		$dataView = [
 			'dataLaporan' => $dataLaporan,
@@ -973,10 +985,11 @@ class Dashboard extends CI_Controller {
 	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
+		$pelatihan 	 		= $this->input->post("nama_pelatihan");
 		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
 		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
 
-		$dataLaporan = $this->model->laporanPeserta($tgl_awal, $tgl_akhir);
+		$dataLaporan = $this->model->laporanPeserta($tgl_awal, $tgl_akhir, $pelatihan);
 
 		$dirPath  = BASEPATH."../assets/template_excel/laporan_peserta.xls";
 		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($dirPath);
@@ -1073,10 +1086,12 @@ class Dashboard extends CI_Controller {
 	{
 		$tgl_awal 			= $this->input->post("tgl_awal");
 		$tgl_akhir 	 		= $this->input->post("tgl_akhir");
+		$pelatihan 	 		= $this->input->post("nama_pelatihan");
+		$status 	 		= $this->input->post("status");
 		// $tgl_awal       = $this->changeDateFormat($tgl_awal);
 		// $tgl_akhir      = $this->changeDateFormat($tgl_akhir);
 
-		$dataLaporan = $this->model->laporanStatusPeserta($tgl_awal, $tgl_akhir);
+		$dataLaporan = $this->model->laporanStatusPeserta($tgl_awal, $tgl_akhir, $pelatihan, $status);
 
 		$dirPath  = BASEPATH."../assets/template_excel/laporan_status_peserta.xls";
 		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($dirPath);
@@ -1383,7 +1398,7 @@ class Dashboard extends CI_Controller {
 			$sheet->setCellValue('L'.$tableIndex, $dataLaporan[$i]->BEJI);
 			$sheet->setCellValue('M'.$tableIndex, $dataLaporan[$i]->LIMO);
 			$sheet->setCellValue('N'.$tableIndex, $dataLaporan[$i]->CINERE);
-			$sheet->setCellValue('O'.$tableIndex, $dataLaporan[$i]->DST);
+			// $sheet->setCellValue('O'.$tableIndex, $dataLaporan[$i]->DST);
 
 			// $spreadsheet->getActiveSheet()->getStyle('A'.$tableIndex)->applyFromArray($styleText);
 			// $spreadsheet->getActiveSheet()->getStyle('B'.$tableIndex)->applyFromArray($styleNumber);
@@ -1402,7 +1417,7 @@ class Dashboard extends CI_Controller {
 			$total->BEJI += $dataLaporan[$i]->BEJI;
 			$total->LIMO += $dataLaporan[$i]->LIMO;
 			$total->CINERE += $dataLaporan[$i]->CINERE;
-			$total->DST += $dataLaporan[$i]->DST;
+			// $total->DST += $dataLaporan[$i]->DST;
 		}
 
 		$sheet->setCellValue('B11', $total->l);
@@ -1418,7 +1433,7 @@ class Dashboard extends CI_Controller {
 		$sheet->setCellValue('L11', $total->BEJI);
 		$sheet->setCellValue('M11', $total->LIMO);
 		$sheet->setCellValue('N11', $total->CINERE);
-		$sheet->setCellValue('O11', $total->DST);
+		// $sheet->setCellValue('O11', $total->DST);
 
 		// if (!empty($tgl_awal)) {
 		// 	$sheet->setCellValue('B2', date("d/m/Y", strtotime($tgl_awal)));

@@ -40,7 +40,7 @@
                                     <td><?= $row->no_telepon; ?></td>
                                     <td><?= $row->nama; ?></td>
                                     <td>
-                                        <?php if ($row->status == 'Sudah Bekerja') { ?>
+                                        <?php if ($row->status_pekerjaan == 'Sudah Bekerja') { ?>
                                             <span class="badge badge-success">Bekerja</span>
                                         <?php } else { ?>
                                             <span class="badge badge-warning">Belum Bekerja</span>
@@ -90,8 +90,8 @@ foreach ($pesertaPelatihan as $row) { ?>
                         <div class="form-group">
                             <label>Status Bekerja</label>
                             <select class="form-control" name="status_pekerjaan" id="status_pekerjaan<?= $row->nik; ?>">
-                                <option value="Sudah Bekerja" <?php if($row->status == 'Sudah Bekerja') {echo 'Selected';}?>>Sudah Bekerja</option>
-                                <option value="Belum Bekerja" <?php if($row->status == 'Belum Bekerja') {echo 'Selected';}?>>Belum Bekerja</option>
+                                <option value="Sudah Bekerja" <?php if($row->status_pekerjaan == 'Sudah Bekerja') {echo 'Selected';}?>>Sudah Bekerja</option>
+                                <option value="Belum Bekerja" <?php if($row->status_pekerjaan == 'Belum Bekerja') {echo 'Selected';}?>>Belum Bekerja</option>
                             </select>
                         </div>
                         <div id="popup<?= $row->nik; ?>">
@@ -109,7 +109,7 @@ foreach ($pesertaPelatihan as $row) { ?>
                             </div>
                         </div>
                         <script type="text/javascript">
-                            <?php if($row->status == 'Belum Bekerja') { ?>
+                            <?php if($row->status_pekerjaan == 'Belum Bekerja') { ?>
                                 $("#popup<?= $row->nik; ?>").hide();
                             <?php } ?>
                             $('#status_pekerjaan<?= $row->nik; ?>').on('change', function(){

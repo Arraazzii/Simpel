@@ -11,7 +11,7 @@
 </div>
 <!-- end row -->
 <!-- begin row -->
-<div class="row">
+<!-- <div class="row">
     <div class="col-sm-12">
         <div class="card card-statistics">
             <div class="row no-gutters">
@@ -57,5 +57,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- end container-fluid -->

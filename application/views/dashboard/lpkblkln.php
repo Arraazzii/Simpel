@@ -716,9 +716,9 @@ foreach ($lpkblkln as $row) {
                     },
                     success: function(data) {
                         swal("Success!", "Akun Berhasil Diaktifkan!", "success");
-                        // setTimeout(function(){
-                        //     window.location.reload();
-                        // }, 1000);
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1000);
                     }
                 });
             } else {

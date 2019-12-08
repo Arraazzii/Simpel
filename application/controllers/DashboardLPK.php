@@ -120,7 +120,7 @@ class DashboardLPK extends CI_Controller {
 		$this->db->where('kode_user', $kode);
 		$this->db->update('table_pengurus', $dataPengurus);
 		$this->session->set_flashdata('notif', '<script>toastr.success("Data Anda Telah Tersimpan!", "Success", {"timeOut": "2000","extendedTImeout": "0"});</script>');
-		redirect('DashboardLPK');
+		redirect('DashboardLPK/profil');
 	}
 
 	public function kegiatan()
@@ -159,7 +159,6 @@ class DashboardLPK extends CI_Controller {
 		$laporan = array(
 			'laporan' => $this->model->dataLaporan($kode),
 			'lpkblkln' => $this->model->dataLPK($kode),
-
 		);
 		$path = "";
 		$data = array(
@@ -185,12 +184,14 @@ class DashboardLPK extends CI_Controller {
 		$no_a 		= $this->input->post('no_akreditas');
 		$ruang 	 	= $this->input->post('ruang_lingkup');
 		$program 	= $this->input->post('program');
+
 		// Data Pimpinan
 		$nama_p 	= $this->input->post('nama_pimpinan');
 		$telp_p		= $this->input->post('no_telepon_pimpinan');
 		$nama_pj	= $this->input->post('nama_pj');
 		$jabatan 	= $this->input->post('jabatan_pj');
 		$telp_pj	= $this->input->post('no_telepon_pj');
+
 		// Data Anggota
 		$karyawan_l = $this->input->post('karyawan_laki');
 		$karyawan_p = $this->input->post('karyawan_perempuan');
@@ -206,6 +207,102 @@ class DashboardLPK extends CI_Controller {
 		$ak_p 		= $this->input->post('ak_perempuan');
 		$aw_l 		= $this->input->post('aw_laki');
 		$aw_p 		= $this->input->post('aw_perempuan');
+
+		//Data Pengembangan Pelatihan
+		$nama_program 				= $this->input->post('nama_program');
+		$inisiator_program 			= $this->input->post('inisiator_program');
+		$durasi_pelatihan_program 	= $this->input->post('durasi_pelatihan_program');
+		$standar_kompetensi_program = $this->input->post('standar_kompetensi_program');
+		$keterangan_program 		= $this->input->post('keterangan_program');
+
+
+		for ($i=0; $i < count($nama_program); $i++) 
+		{   
+			$data[$i]['nama_program'] = $nama_program[$i];
+			$data[$i]['inisiator_program'] = $inisiator_program[$i];
+			$data[$i]['durasi_pelatihan_program'] = $durasi_pelatihan_program[$i];
+			$data[$i]['standar_kompetensi_program'] = $standar_kompetensi_program[$i];
+			$data[$i]['keterangan_program'] = $keterangan_program[$i];
+			$data[$i]['kode_lapor'] = $kode;
+		}
+
+		$this->db->insert_batch('table_program', $data);
+
+		//Data Penyelenggaraan Pelatihan
+		$nama_program_penyelenggara 		= $this->input->post('nama_program_penyelenggara');
+		$jadwal_pelaksanaan_penyelenggara 	= $this->input->post('jadwal_pelaksanaan_penyelenggara');
+		$jumlah_peserta_penyelenggara 		= $this->input->post('jumlah_peserta_penyelenggara');
+		$jumlah_lulusan_penyelenggara 		= $this->input->post('jumlah_lulusan_penyelenggara');
+		$keterangan_penyelenggara 			= $this->input->post('keterangan_penyelenggara');
+
+
+		for ($i=0; $i < count($nama_program_penyelenggara); $i++) 
+		{   
+			$data1[$i]['nama_program_penyelenggara'] = $nama_program_penyelenggara[$i];
+			$data1[$i]['jadwal_pelaksanaan_penyelenggara'] = $jadwal_pelaksanaan_penyelenggara[$i];
+			$data1[$i]['jumlah_peserta_penyelenggara'] = $jumlah_peserta_penyelenggara[$i];
+			$data1[$i]['jumlah_lulusan_penyelenggara'] = $jumlah_lulusan_penyelenggara[$i];
+			$data1[$i]['keterangan_penyelenggara'] = $keterangan_penyelenggara[$i];
+			$data1[$i]['kode_lapor'] = $kode;
+		}
+
+		$this->db->insert_batch('table_penyelenggara', $data1);
+		
+		//Data Penyelenggaraan Uji Kompetensi
+		$nama_lsp 				= $this->input->post('nama_lsp');
+		$skema_sertifikasi_lsp 	= $this->input->post('skema_sertifikasi_lsp');
+		$jadwal_pelaksanaan_lsp = $this->input->post('jadwal_pelaksanaan_lsp');
+		$jumlah_peserta_lsp 	= $this->input->post('jumlah_peserta_lsp');
+		$keterangan_lsp 		= $this->input->post('keterangan_lsp');
+
+
+		for ($i=0; $i < count($nama_lsp); $i++) 
+		{   
+			$data2[$i]['nama_lsp'] = $nama_lsp[$i];
+			$data2[$i]['skema_sertifikasi_lsp'] = $skema_sertifikasi_lsp[$i];
+			$data2[$i]['jadwal_pelaksanaan_lsp'] = $jadwal_pelaksanaan_lsp[$i];
+			$data2[$i]['jumlah_peserta_lsp'] = $jumlah_peserta_lsp[$i];
+			$data2[$i]['keterangan_lsp'] = $keterangan_lsp[$i];
+			$data2[$i]['kode_lapor'] = $kode;
+		}
+
+		$this->db->insert_batch('table_lsp', $data2);
+
+		//Data Pengembangan Kelembagaan dan SDM
+		$nama_kegiatan_sdm 			= $this->input->post('nama_kegiatan_sdm');
+		$jadwal_sdm 				= $this->input->post('jadwal_sdm');
+		$lokasi_sdm 				= $this->input->post('lokasi_sdm');
+		$penyelenggara_sdm = $this->input->post('penyelenggara_sdm');
+		$keterangan_sdm 		= $this->input->post('keterangan_sdm');
+
+
+		for ($i=0; $i < count($nama_kegiatan_sdm); $i++) 
+		{   
+			$data3[$i]['nama_kegiatan_sdm'] = $nama_kegiatan_sdm[$i];
+			$data3[$i]['jadwal_sdm'] = $jadwal_sdm[$i];
+			$data3[$i]['lokasi_sdm'] = $lokasi_sdm[$i];
+			$data3[$i]['penyelenggara_sdm'] = $penyelenggara_sdm[$i];
+			$data3[$i]['keterangan_sdm'] = $keterangan_sdm[$i];
+			$data3[$i]['kode_lapor'] = $kode;
+		}
+
+		$this->db->insert_batch('table_sdm', $data3);
+
+		//Data Kemitraan
+		$nama_mitra 		= $this->input->post('nama_mitra');
+		$alamat_mitra 		= $this->input->post('alamat_mitra');
+		$bentuk_kemitraan 	= $this->input->post('bentuk_kemitraan');
+
+
+		for ($i=0; $i < count($nama_mitra); $i++) 
+		{   
+			$data4[$i]['nama_mitra'] = $nama_mitra[$i];
+			$data4[$i]['alamat_mitra'] = $alamat_mitra[$i];
+			$data4[$i]['bentuk_kemitraan'] = $bentuk_kemitraan[$i];
+			$data4[$i]['kode_lapor'] = $kode;
+		}
+
+		$this->db->insert_batch('table_mitra', $data4);
 
 		$data = array(
 			'kode_lapor' => $kode,
@@ -332,6 +429,7 @@ class DashboardLPK extends CI_Controller {
 			'kode_user' => $id,
 			'kode_lapor' => $kode
 		);
+
 
 		move_uploaded_file($_FILES['kegiatan']['tmp_name'], './assets/upload/laporan/' . $_FILES['kegiatan']['name']);
 		move_uploaded_file($_FILES['absensi']['tmp_name'], './assets/upload/laporan/' . $_FILES['absensi']['name']);

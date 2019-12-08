@@ -97,9 +97,9 @@
                             <td>
                               <strong>Jenis Pelatihaan </strong>
                             </td>
-                            <td>
+                            <!-- <td>
                               <strong>Status Pelatihan</strong>
-                            </td>
+                            </td> -->
                             <td>
                               <strong>Sudah/Belum Bekerja</strong>
                             </td>
@@ -125,7 +125,7 @@
                               <td><?= $laporan->no_telepon ?> </td>
                               <td><?= $laporan->pendidikan_terakhir ?> </td>
                               <td><?= $laporan->jenis ?> </td>
-                              <td><?= $laporan->status ?> </td>
+                              <!-- <td><?= $laporan->status ?> </td> -->
                               <td><?= $laporan->status_pekerjaan ?> </td>
                               <td><?= $laporan->keterangan ?> </td>
                               <td><?= $laporan->no_pencaker ?> </td>
